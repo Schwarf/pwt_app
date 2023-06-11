@@ -21,7 +21,6 @@ import androidx.compose.ui.node.modifierElementOf
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_activity)
         setContent {
             Personal_workout_trackerTheme {
                 // A surface container using the 'background' color from the theme
