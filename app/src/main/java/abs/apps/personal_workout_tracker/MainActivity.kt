@@ -11,18 +11,24 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import abs.apps.personal_workout_tracker.ui.theme.Personal_workout_trackerTheme
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.material3.Button
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
+import androidx.compose.ui.node.modifierElementOf
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.main_activity)
         setContent {
             Personal_workout_trackerTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    AddWorkoutButton()
                 }
             }
         }
@@ -35,6 +41,13 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         text = "Hello $name!",
         modifier = modifier
     )
+}
+
+@Composable
+fun AddWorkoutButton(){
+    Button(onClick = {}, modifier = Modifier.width(IntrinsicSize.Min).height(IntrinsicSize.Min) ){
+        Text(text = "Add workout")
+    }
 }
 
 @Preview(showBackground = true)
