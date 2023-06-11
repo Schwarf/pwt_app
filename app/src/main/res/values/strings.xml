@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">personal_workout_tracker</string>
+    <string name="add_workout">Add workout</string>
 </resources>
