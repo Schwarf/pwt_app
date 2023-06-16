@@ -46,7 +46,7 @@ class MainActivity : ComponentActivity() {
                         //WorkoutListScreen()
                         if(showWorkoutInputMask.value)
                         {
-                            WorkoutListScreen();
+                            WorkoutListScreen{showWorkoutInputMask.value = false};
                         }
                         else
                         {
@@ -73,13 +73,16 @@ fun AddButton(label: String, onClick: () -> Unit) {
 
 
 @Composable
-fun WorkoutListScreen()
+fun WorkoutListScreen(onReturn: () -> Unit)
 {
     val workoutList = remember { mutableStateListOf<String>()}
     Column(modifier = Modifier.padding(16.dp)){
         WorkoutList(workoutList)
         AddWorkoutInput{workoutName -> workoutList.add(workoutName)
         }
+    }
+    Button(onClick = onReturn, modifier = Modifier.padding(16.dp)){
+        Text(text = "Finish")
     }
 
 }
