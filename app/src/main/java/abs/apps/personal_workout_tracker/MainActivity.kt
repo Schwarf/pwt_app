@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 class MainActivity : ComponentActivity() {
+    private val showWorkoutInputMask = mutableStateOf(false);
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -42,8 +43,17 @@ class MainActivity : ComponentActivity() {
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        WorkoutListScreen()
-                        //AddButton("Add Workout")
+                        //WorkoutListScreen()
+                        if(showWorkoutInputMask.value)
+                        {
+                            WorkoutListScreen();
+                        }
+                        else
+                        {
+                            AddButton("Add Workout") {
+                            showWorkoutInputMask.value = true
+                        }
+                        }
                         //AddButton("Add Set")
                         //AddButton("Add Schedule")
                     }
@@ -55,8 +65,8 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun AddButton(label: String) {
-    Button(onClick = {}, modifier = Modifier.padding(90.dp)) {
+fun AddButton(label: String, onClick: () -> Unit) {
+    Button(onClick = onClick, modifier = Modifier.padding(90.dp)) {
         Text(text = label, fontSize = 20.sp)
     }
 }
