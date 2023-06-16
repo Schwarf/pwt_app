@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.sp
 
 class MainActivity : ComponentActivity() {
     private val showWorkoutInputMask = mutableStateOf(false);
+    private val listOfWorkouts = mutableStateListOf<String>();
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -46,7 +47,7 @@ class MainActivity : ComponentActivity() {
                         //WorkoutListScreen()
                         if(showWorkoutInputMask.value)
                         {
-                            WorkoutListScreen{showWorkoutInputMask.value = false};
+                            WorkoutListScreen(listOfWorkouts){showWorkoutInputMask.value = false};
                         }
                         else
                         {
@@ -72,13 +73,13 @@ fun AddButton(label: String, onClick: () -> Unit) {
 }
 
 
+
 @Composable
-fun WorkoutListScreen(onReturn: () -> Unit)
+fun WorkoutListScreen(listOfWorkouts: MutableList<String>,  onReturn: () -> Unit)
 {
-    val workoutList = remember { mutableStateListOf<String>()}
     Column(modifier = Modifier.padding(16.dp)){
-        WorkoutList(workoutList)
-        AddWorkoutInput{workoutName -> workoutList.add(workoutName)
+        WorkoutList(listOfWorkouts)
+        AddWorkoutItem{ workoutName -> listOfWorkouts.add(workoutName)
         }
     }
     Button(onClick = onReturn, modifier = Modifier.padding(16.dp)){
@@ -99,7 +100,7 @@ fun WorkoutList(workoutList: List<String>) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddWorkoutInput(onAddWorkout: (String) -> Unit) {
+fun AddWorkoutItem(onAddWorkout: (String) -> Unit) {
     // Local state to hold the input value
     val workoutNameState = remember { mutableStateOf("") }
 
