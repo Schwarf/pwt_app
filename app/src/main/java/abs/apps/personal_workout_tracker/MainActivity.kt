@@ -4,12 +4,17 @@ import abs.apps.personal_workout_tracker.ui.theme.Personal_workout_trackerTheme
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -45,15 +50,12 @@ class MainActivity : ComponentActivity() {
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         //WorkoutListScreen()
-                        if(showWorkoutInputMask.value)
-                        {
-                            WorkoutListScreen(listOfWorkouts){showWorkoutInputMask.value = false};
-                        }
-                        else
-                        {
+                        if (showWorkoutInputMask.value) {
+                            AddWorkoutScreen(listOfWorkouts) { showWorkoutInputMask.value = false };
+                        } else {
                             AddButton("Add Workout") {
-                            showWorkoutInputMask.value = true
-                        }
+                                showWorkoutInputMask.value = true
+                            }
                         }
                         //AddButton("Add Set")
                         //AddButton("Add Schedule")
@@ -72,17 +74,65 @@ fun AddButton(label: String, onClick: () -> Unit) {
     }
 }
 
+@Composable
+fun ChooseButton(label: String, onClick: () -> Unit) {
+    Button(onClick = onClick, modifier = Modifier.padding(90.dp)) {
+        Text(text = label, fontSize = 20.sp)
+    }
+}
+
+@Composable
+fun ChooseWorkoutScreen(
+    listOfWorkouts: List<String>, onWorkoutSelected: (String) -> Unit,
+    onItemSelectionCancelled: () -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    )
+    {
+        Text(text = "Select a workout: ")
+        Spacer(modifier = Modifier.height(16.dp))
+        LazyColumn {
+            items(listOfWorkouts) { item ->
+                Text(
+                    text = item,
+                    modifier = Modifier
+                        .clickable { onWorkoutSelected(item) }
+                        .padding(8.dp)
+                )
+            }
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween)
+        {
+            Button(onClick = onItemSelectionCancelled,
+            modifier= Modifier.padding(8.dp))
+            {
+                Text(text="Cancel")
+            }
+        }
+
+        Button(onClick = {if (onWorkoutSelected.toString().isNotEmpty()){} })
+    }
+
+
+}
+
+
 
 
 @Composable
-fun WorkoutListScreen(listOfWorkouts: MutableList<String>,  onReturn: () -> Unit)
-{
-    Column(modifier = Modifier.padding(16.dp)){
+fun AddWorkoutScreen(listOfWorkouts: MutableList<String>, onReturn: () -> Unit) {
+    Column(modifier = Modifier.padding(16.dp)) {
         WorkoutList(listOfWorkouts)
-        AddWorkoutItem{ workoutName -> listOfWorkouts.add(workoutName)
+        AddWorkoutItem { workoutName ->
+            listOfWorkouts.add(workoutName)
         }
     }
-    Button(onClick = onReturn, modifier = Modifier.padding(16.dp)){
+    Button(onClick = onReturn, modifier = Modifier.padding(16.dp)) {
         Text(text = "Finish")
     }
 
