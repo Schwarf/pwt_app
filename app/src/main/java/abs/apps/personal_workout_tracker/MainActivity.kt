@@ -55,6 +55,7 @@ class MainActivity : ComponentActivity() {
                         } else {
                             AddButton("Add Workout") {
                                 showWorkoutInputMask.value = true
+                                showWorkoutSelection.value = false
                             }
                         }
                         if (showWorkoutSelection.value) {
@@ -66,7 +67,7 @@ class MainActivity : ComponentActivity() {
                         } else {
                             AddButton("Open Item Selection") {
                                 showWorkoutSelection.value = true
-
+                                showWorkoutInputMask.value = false
                             }
                         }
                     }
