@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.sp
 class MainActivity : ComponentActivity() {
     private val showWorkoutInputMask = mutableStateOf(false);
     private val listOfWorkouts = mutableStateListOf<String>();
+    private val showWorkoutSelection = mutableStateOf(false)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -49,7 +50,6 @@ class MainActivity : ComponentActivity() {
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        //WorkoutListScreen()
                         if (showWorkoutInputMask.value) {
                             AddWorkoutScreen(listOfWorkouts) { showWorkoutInputMask.value = false };
                         } else {
@@ -57,15 +57,25 @@ class MainActivity : ComponentActivity() {
                                 showWorkoutInputMask.value = true
                             }
                         }
-                        //AddButton("Add Set")
-                        //AddButton("Add Schedule")
-                    }
+                        if (showWorkoutSelection.value) {
+                            ChooseWorkoutScreen(listOfWorkouts = listOfWorkouts,
+                                onWorkoutSelected = { selectedItem ->
+                                    showWorkoutSelection.value = false
+                                },
+                                onItemSelectionCancelled = { showWorkoutSelection.value = false })
+                        } else {
+                            AddButton("Open Item Selection") {
+                                showWorkoutSelection.value = true
 
+                            }
+                        }
+                    }
                 }
             }
         }
     }
 }
+
 
 @Composable
 fun AddButton(label: String, onClick: () -> Unit) {
@@ -86,6 +96,7 @@ fun ChooseWorkoutScreen(
     listOfWorkouts: List<String>, onWorkoutSelected: (String) -> Unit,
     onItemSelectionCancelled: () -> Unit
 ) {
+    val selectedWorkout = remember { mutableStateOf("") }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -95,11 +106,11 @@ fun ChooseWorkoutScreen(
         Text(text = "Select a workout: ")
         Spacer(modifier = Modifier.height(16.dp))
         LazyColumn {
-            items(listOfWorkouts) { item ->
+            items(listOfWorkouts) { workout ->
                 Text(
-                    text = item,
+                    text = workout,
                     modifier = Modifier
-                        .clickable { onWorkoutSelected(item) }
+                        .clickable { selectedWorkout.value = workout }
                         .padding(8.dp)
                 )
             }
@@ -108,20 +119,26 @@ fun ChooseWorkoutScreen(
 
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween)
         {
-            Button(onClick = onItemSelectionCancelled,
-            modifier= Modifier.padding(8.dp))
+            Button(
+                onClick = onItemSelectionCancelled,
+                modifier = Modifier.padding(8.dp)
+            )
             {
-                Text(text="Cancel")
+                Text(text = "Cancel")
             }
         }
 
-        Button(onClick = {if (onWorkoutSelected.toString().isNotEmpty()){} })
+        Button(
+            onClick = {
+                if (selectedWorkout.value.isNotEmpty()) {
+                    onWorkoutSelected(selectedWorkout.value)
+                }
+            },
+            modifier = Modifier.padding(8.dp)
+        ) { Text(text = "Confirm") }
     }
 
-
 }
-
-
 
 
 @Composable
