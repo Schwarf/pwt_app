@@ -2,6 +2,7 @@ package abs.apps.personal_workout_tracker
 
 import abs.apps.personal_workout_tracker.ui.theme.Personal_workout_trackerTheme
 import android.os.Bundle
+import androidx.preference.PreferenceDataStore
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.clickable
@@ -65,7 +66,7 @@ class MainActivity : ComponentActivity() {
                                 },
                                 onItemSelectionCancelled = { showWorkoutSelection.value = false })
                         } else {
-                            AddButton("Open Item Selection") {
+                            AddButton("Open Workout Selection") {
                                 showWorkoutSelection.value = true
                                 showWorkoutInputMask.value = false
                             }
@@ -141,6 +142,10 @@ fun ChooseWorkoutScreen(
 
 }
 
+class DataStore : PreferenceDataStore()
+{
+
+}
 
 @Composable
 fun AddWorkoutScreen(listOfWorkouts: MutableList<String>, onReturn: () -> Unit) {
