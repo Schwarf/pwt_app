@@ -93,6 +93,11 @@ fun ChooseButton(label: String, onClick: () -> Unit) {
     }
 }
 
+class WorkoutDataStore : PreferenceDataStore()
+{
+
+}
+
 @Composable
 fun ChooseWorkoutScreen(
     listOfWorkouts: List<String>, onWorkoutSelected: (String) -> Unit,
@@ -142,10 +147,6 @@ fun ChooseWorkoutScreen(
 
 }
 
-class DataStore : PreferenceDataStore()
-{
-
-}
 
 @Composable
 fun AddWorkoutScreen(listOfWorkouts: MutableList<String>, onReturn: () -> Unit) {
