@@ -32,6 +32,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+import abs.apps.personal_workout_tracker.Workouts
+
 class MainActivity : ComponentActivity() {
     private enum class Screen{
         DEFAULT_SCREEN,
@@ -39,7 +41,8 @@ class MainActivity : ComponentActivity() {
         WORKOUT_INPUT
     }
     private val currentScreen = mutableStateOf(Screen.DEFAULT_SCREEN)
-    private val listOfWorkouts = mutableStateListOf<WorkoutEntry>();
+    private val listOfWorkouts = mutableStateListOf<WorkoutEntry>()
+    private val workouts = Workouts()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -88,13 +91,6 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun AddButton(label: String, onClick: () -> Unit) {
-    Button(onClick = onClick, modifier = Modifier.padding(90.dp)) {
-        Text(text = label, fontSize = 20.sp)
-    }
-}
-
-@Composable
-fun ChooseButton(label: String, onClick: () -> Unit) {
     Button(onClick = onClick, modifier = Modifier.padding(90.dp)) {
         Text(text = label, fontSize = 20.sp)
     }
