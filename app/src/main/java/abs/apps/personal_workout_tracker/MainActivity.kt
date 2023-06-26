@@ -1,6 +1,7 @@
 package abs.apps.personal_workout_tracker
 
 import abs.apps.personal_workout_tracker.ui.theme.Personal_workout_trackerTheme
+import android.net.wifi.hotspot2.pps.Credential.SimCredential
 import android.os.Bundle
 import androidx.preference.PreferenceDataStore
 import androidx.activity.ComponentActivity
@@ -32,9 +33,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 class MainActivity : ComponentActivity() {
-    private val showWorkoutInputMask = mutableStateOf(false);
+    private enum class Screen{
+        DEFAULT_SCREEN,
+        WORKOUT_SELECTION,
+        WORKOUT_INPUT
+    }
+    private val currentScreen = mutableStateOf(Screen.DEFAULT_SCREEN)
     private val listOfWorkouts = mutableStateListOf<String>();
-    private val showWorkoutSelection = mutableStateOf(false)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -51,25 +56,26 @@ class MainActivity : ComponentActivity() {
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        if (showWorkoutInputMask.value) {
-                            AddWorkoutScreen(listOfWorkouts) { showWorkoutInputMask.value = false };
-                        } else {
+                        if (currentScreen.value == Screen.DEFAULT_SCREEN)
+                        {
                             AddButton("Add Workout") {
-                                showWorkoutInputMask.value = true
-                                showWorkoutSelection.value = false
+                                currentScreen.value = Screen.WORKOUT_INPUT
+                            }
+                            AddButton("Open Workout Selection") {
+                                currentScreen.value = Screen.WORKOUT_SELECTION
                             }
                         }
-                        if (showWorkoutSelection.value) {
+                        if(currentScreen.value == Screen.WORKOUT_INPUT)
+                        {
+                            AddWorkoutScreen(listOfWorkouts) { currentScreen.value = Screen.DEFAULT_SCREEN };
+                        }
+                        if(currentScreen.value == Screen.WORKOUT_SELECTION)
+                        {
                             ChooseWorkoutScreen(listOfWorkouts = listOfWorkouts,
                                 onWorkoutSelected = { selectedItem ->
-                                    showWorkoutSelection.value = false
+                                    currentScreen.value = Screen.DEFAULT_SCREEN
                                 },
-                                onItemSelectionCancelled = { showWorkoutSelection.value = false })
-                        } else {
-                            AddButton("Open Workout Selection") {
-                                showWorkoutSelection.value = true
-                                showWorkoutInputMask.value = false
-                            }
+                                onItemSelectionCancelled = { currentScreen.value = Screen.DEFAULT_SCREEN })
                         }
                     }
                 }
