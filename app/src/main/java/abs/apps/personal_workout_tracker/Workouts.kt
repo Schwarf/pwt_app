@@ -1,6 +1,5 @@
 package abs.apps.personal_workout_tracker
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -21,14 +21,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 class Workouts {
-    data class WorkoutEntry(val workout: String, val sets: Int, val repetitions: Int)
+    data class WorkoutEntry(var workout: String, var sets: Int, var repetitions: Int)
 
-    private val listOfWorkouts = mutableStateListOf<WorkoutEntry>();
-    private var editedWorkout: WorkoutEntry? = null
+    private val listOfWorkouts = mutableStateListOf<WorkoutEntry>()
 
     @Composable
     fun AddButton(label: String, onClick: () -> Unit) {
@@ -69,7 +69,7 @@ class Workouts {
             Text(text = "Select a workout: ")
             Spacer(modifier = Modifier.height(16.dp))
             LazyColumn {
-                item{WorkoutHeaderRow()}
+                item { WorkoutHeaderRow() }
                 items(listOfWorkouts) { workout ->
                     WorkoutEntryRow(workout = workout)
                 }
@@ -106,7 +106,7 @@ class Workouts {
     @Composable
     fun AddScreen(onReturn: () -> Unit) {
         Column(modifier = Modifier.padding(16.dp)) {
-            WorkoutList()
+            WorkoutList(onEditWorkout = {})
             AddItem { entry ->
                 listOfWorkouts.add(entry)
             }
@@ -118,12 +118,21 @@ class Workouts {
     }
 
     @Composable
-    fun WorkoutList() {
+    fun WorkoutList(onEditWorkout: (WorkoutEntry) -> Unit) {
 
         LazyColumn {
             // Display each workout in the list
             item { WorkoutHeaderRow() }
-            items(listOfWorkouts) { workout -> WorkoutEntryRow(workout = workout) }
+            items(listOfWorkouts) { workout ->
+                Button(
+                    onClick = { onEditWorkout(workout) },
+                    colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent, contentColor = Color.Blue),
+                    modifier = Modifier.fillMaxWidth()
+                )
+                {
+                    WorkoutEntryRow(workout = workout)
+                }
+            }
 
         }
     }
@@ -210,4 +219,59 @@ class Workouts {
         }
 
     }
+
+    @OptIn(ExperimentalMaterial3Api::class)
+    @Composable
+    fun EditItem(entry: Workouts.WorkoutEntry, onAddWorkout: (Workouts.WorkoutEntry) -> Unit) {
+        // Local state to hold the input value
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            // Input field for the workout name
+            TextField(
+                value = entry.workout,
+                onValueChange = { entry.workout = it },
+//                label = { Text("Workout") },
+                modifier = Modifier.weight(1f)
+            )
+            TextField(
+                value = entry.sets.toString(),
+                onValueChange = { newValue -> entry.sets = newValue.toIntOrNull() ?: 0 },
+//                label = { Text("Sets") },
+                modifier = Modifier.weight(1f)
+            )
+            TextField(
+                value = entry.repetitions.toString(),
+                onValueChange = { newValue -> entry.repetitions = newValue.toIntOrNull() ?: 0 },
+//                label = { Text("Repetitions") },
+                modifier = Modifier.weight(1f)
+            )
+
+
+        }
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            // Button to add the workout
+            Button(
+                onClick = {
+                    // Get the workout name from the input field
+
+                    if (entry.workout.isNotEmpty()) {
+                        // Add the workout name to the list
+                        onAddWorkout( entry)
+                    }
+
+                    // Clear the input field
+                },
+                modifier = Modifier.padding(start = 8.dp)
+            ) {
+                Text(text = "Change Workout")
+            }
+        }
+
+    }
+
 }
