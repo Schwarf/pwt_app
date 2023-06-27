@@ -28,11 +28,27 @@ class Workouts {
     data class WorkoutEntry(val workout: String, val sets: Int, val Repetitions: Int)
 
     private val listOfWorkouts = mutableStateListOf<WorkoutEntry>();
-
+    private var editedWorkout: WorkoutEntry? = null
     @Composable
     fun AddButton(label: String, onClick: () -> Unit) {
         Button(onClick = onClick, modifier = Modifier.padding(90.dp)) {
             Text(text = label, fontSize = 20.sp)
+        }
+    }
+
+    @Composable
+    fun EditButton(entry: Workouts.WorkoutEntry, onEditWorkout: (Workouts.WorkoutEntry) ->Unit)
+     {
+        Button(onClick = {onEditWorkout(entry)}) {
+            Text(text = "Edit", fontSize = 20.sp)
+        }
+    }
+
+    @Composable
+    fun DeleteButton(entry: Workouts.WorkoutEntry, onDeleteWorkout: (Workouts.WorkoutEntry) ->Unit)
+    {
+        Button(onClick = {onDeleteWorkout(entry)}) {
+            Text(text = "Delete", fontSize = 20.sp)
         }
     }
 
@@ -91,7 +107,7 @@ class Workouts {
     @Composable
     fun AddScreen( onReturn: () -> Unit) {
         Column(modifier = Modifier.padding(16.dp)) {
-            WorkoutList()
+            WorkoutList(onEditWorkout = { editedWorkout = it}, onDeleteWorkout = {})
             AddItem { entry ->
                 listOfWorkouts.add(entry)
             }
@@ -103,18 +119,23 @@ class Workouts {
     }
 
     @Composable
-    fun WorkoutList() {
+    fun WorkoutList(onEditWorkout: (Workouts.WorkoutEntry) -> Unit, onDeleteWorkout: (Workouts.WorkoutEntry) -> Unit) {
         Column {
             // Display each workout in the list
             listOfWorkouts.forEach { entry ->
-                Text(text = entry.workout)
+                Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically){
+                    Text(text = entry.workout)
+                    EditButton(entry = entry, onEditWorkout = onEditWorkout)
+                    DeleteButton(entry = entry, onDeleteWorkout = onDeleteWorkout)
+                }
+
             }
         }
     }
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    fun AddItem(onAddWorkout: (WorkoutEntry) -> Unit) {
+    fun AddItem(onAddWorkout: (Workouts.WorkoutEntry) -> Unit) {
         // Local state to hold the input value
         val workoutNameState = remember { mutableStateOf("") }
         val setsState = remember { mutableStateOf(0) }
@@ -157,7 +178,7 @@ class Workouts {
                     if(workoutName.isNotEmpty()) {
                         // Add the workout name to the list
                         onAddWorkout(
-                            WorkoutEntry(
+                            Workouts.WorkoutEntry(
                                 workoutNameState.value,
                                 setsState.value,
                                 repetitionState.value
