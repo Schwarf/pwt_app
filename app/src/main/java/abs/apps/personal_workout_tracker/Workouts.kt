@@ -69,13 +69,9 @@ class Workouts {
             Text(text = "Select a workout: ")
             Spacer(modifier = Modifier.height(16.dp))
             LazyColumn {
+                item{WorkoutHeaderRow()}
                 items(listOfWorkouts) { workout ->
-                    Text(
-                        text = workout.workout,
-                        modifier = Modifier
-                            .clickable { selectedWorkout.value = workout.workout }
-                            .padding(8.dp)
-                    )
+                    WorkoutEntryRow(workout = workout)
                 }
             }
             Spacer(modifier = Modifier.height(16.dp))
