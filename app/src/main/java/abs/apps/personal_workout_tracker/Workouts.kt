@@ -37,8 +37,7 @@ class Workouts {
     }
 
     @Composable
-    fun ChooseWorkoutScreen(
-        listOfWorkouts: List<WorkoutEntry>, onWorkoutSelected: (String) -> Unit,
+    fun ChooseScreen(onWorkoutSelected: (String) -> Unit,
         onItemSelectionCancelled: () -> Unit
     ) {
         val selectedWorkout = remember { mutableStateOf("") }
@@ -90,10 +89,10 @@ class Workouts {
 
 
     @Composable
-    fun AddWorkoutScreen(listOfWorkouts: MutableList<WorkoutEntry>, onReturn: () -> Unit) {
+    fun AddScreen( onReturn: () -> Unit) {
         Column(modifier = Modifier.padding(16.dp)) {
-            WorkoutList(listOfWorkouts)
-            AddWorkoutItem { entry ->
+            WorkoutList()
+            AddItem { entry ->
                 listOfWorkouts.add(entry)
             }
         }
@@ -104,10 +103,10 @@ class Workouts {
     }
 
     @Composable
-    fun WorkoutList(workoutList: List<WorkoutEntry>) {
+    fun WorkoutList() {
         Column {
             // Display each workout in the list
-            workoutList.forEach { entry ->
+            listOfWorkouts.forEach { entry ->
                 Text(text = entry.workout)
             }
         }
@@ -115,7 +114,7 @@ class Workouts {
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    fun AddWorkoutItem(onAddWorkout: (WorkoutEntry) -> Unit) {
+    fun AddItem(onAddWorkout: (WorkoutEntry) -> Unit) {
         // Local state to hold the input value
         val workoutNameState = remember { mutableStateOf("") }
         val setsState = remember { mutableStateOf(0) }
@@ -155,15 +154,16 @@ class Workouts {
                 onClick = {
                     // Get the workout name from the input field
                     val workoutName = workoutNameState.value
-
-                    // Add the workout name to the list
-                    onAddWorkout(
-                        WorkoutEntry(
-                            workoutNameState.value,
-                            setsState.value,
-                            repetitionState.value
+                    if(workoutName.isNotEmpty()) {
+                        // Add the workout name to the list
+                        onAddWorkout(
+                            WorkoutEntry(
+                                workoutNameState.value,
+                                setsState.value,
+                                repetitionState.value
+                            )
                         )
-                    )
+                    }
 
                     // Clear the input field
                     workoutNameState.value = ""
