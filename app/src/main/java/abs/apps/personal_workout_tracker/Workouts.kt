@@ -25,10 +25,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 class Workouts {
-    data class WorkoutEntry(val workout: String, val sets: Int, val Repetitions: Int)
+    data class WorkoutEntry(val workout: String, val sets: Int, val repetitions: Int)
 
     private val listOfWorkouts = mutableStateListOf<WorkoutEntry>();
     private var editedWorkout: WorkoutEntry? = null
+
     @Composable
     fun AddButton(label: String, onClick: () -> Unit) {
         Button(onClick = onClick, modifier = Modifier.padding(90.dp)) {
@@ -37,23 +38,25 @@ class Workouts {
     }
 
     @Composable
-    fun EditButton(entry: Workouts.WorkoutEntry, onEditWorkout: (Workouts.WorkoutEntry) ->Unit)
-     {
-        Button(onClick = {onEditWorkout(entry)}) {
+    fun EditButton(entry: Workouts.WorkoutEntry, onEditWorkout: (Workouts.WorkoutEntry) -> Unit) {
+        Button(onClick = { onEditWorkout(entry) }) {
             Text(text = "Edit", fontSize = 20.sp)
         }
     }
 
     @Composable
-    fun DeleteButton(entry: Workouts.WorkoutEntry, onDeleteWorkout: (Workouts.WorkoutEntry) ->Unit)
-    {
-        Button(onClick = {onDeleteWorkout(entry)}) {
+    fun DeleteButton(
+        entry: Workouts.WorkoutEntry,
+        onDeleteWorkout: (Workouts.WorkoutEntry) -> Unit
+    ) {
+        Button(onClick = { onDeleteWorkout(entry) }) {
             Text(text = "Delete", fontSize = 20.sp)
         }
     }
 
     @Composable
-    fun ChooseScreen(onWorkoutSelected: (String) -> Unit,
+    fun ChooseScreen(
+        onWorkoutSelected: (String) -> Unit,
         onItemSelectionCancelled: () -> Unit
     ) {
         val selectedWorkout = remember { mutableStateOf("") }
@@ -105,9 +108,9 @@ class Workouts {
 
 
     @Composable
-    fun AddScreen( onReturn: () -> Unit) {
+    fun AddScreen(onReturn: () -> Unit) {
         Column(modifier = Modifier.padding(16.dp)) {
-            WorkoutList(onEditWorkout = { editedWorkout = it}, onDeleteWorkout = {})
+            WorkoutList()
             AddItem { entry ->
                 listOfWorkouts.add(entry)
             }
@@ -119,17 +122,32 @@ class Workouts {
     }
 
     @Composable
-    fun WorkoutList(onEditWorkout: (Workouts.WorkoutEntry) -> Unit, onDeleteWorkout: (Workouts.WorkoutEntry) -> Unit) {
-        Column {
-            // Display each workout in the list
-            listOfWorkouts.forEach { entry ->
-                Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically){
-                    Text(text = entry.workout)
-                    EditButton(entry = entry, onEditWorkout = onEditWorkout)
-                    DeleteButton(entry = entry, onDeleteWorkout = onDeleteWorkout)
-                }
+    fun WorkoutList() {
 
-            }
+        LazyColumn {
+            // Display each workout in the list
+            item { WorkoutHeaderRow() }
+            items(listOfWorkouts) { workout -> WorkoutEntryRow(workout = workout) }
+
+        }
+    }
+
+
+    @Composable
+    fun WorkoutEntryRow(workout: Workouts.WorkoutEntry) {
+        Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+            Text(text = workout.workout, modifier = Modifier.weight(1f))
+            Text(text = workout.sets.toString(), modifier = Modifier.weight(1f))
+            Text(text = workout.repetitions.toString(), modifier = Modifier.weight(1f))
+        }
+    }
+
+    @Composable
+    fun WorkoutHeaderRow() {
+        Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+            Text(text = "Workout", modifier = Modifier.weight(1f))
+            Text(text = "Sets", modifier = Modifier.weight(1f))
+            Text(text = "Repetitions", modifier = Modifier.weight(1f))
         }
     }
 
@@ -148,19 +166,19 @@ class Workouts {
             TextField(
                 value = workoutNameState.value,
                 onValueChange = { workoutNameState.value = it },
-                label = { Text("Workout Name") },
+//                label = { Text("Workout") },
                 modifier = Modifier.weight(1f)
             )
             TextField(
                 value = setsState.value.toString(),
                 onValueChange = { newValue -> setsState.value = newValue.toIntOrNull() ?: 0 },
-                label = { Text("Sets") },
+//                label = { Text("Sets") },
                 modifier = Modifier.weight(1f)
             )
             TextField(
                 value = repetitionState.value.toString(),
                 onValueChange = { newValue -> repetitionState.value = newValue.toIntOrNull() ?: 0 },
-                label = { Text("Repetitions") },
+//                label = { Text("Repetitions") },
                 modifier = Modifier.weight(1f)
             )
 
@@ -175,7 +193,7 @@ class Workouts {
                 onClick = {
                     // Get the workout name from the input field
                     val workoutName = workoutNameState.value
-                    if(workoutName.isNotEmpty()) {
+                    if (workoutName.isNotEmpty()) {
                         // Add the workout name to the list
                         onAddWorkout(
                             Workouts.WorkoutEntry(
