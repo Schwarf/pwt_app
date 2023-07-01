@@ -269,7 +269,7 @@ class Workouts {
                 },
                 modifier = Modifier.padding(start = 8.dp)
             ) {
-                Text(text = "Change Workout")
+                Text(text = "Save Workout")
             }
             Button(
                 onClick = {
