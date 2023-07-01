@@ -236,26 +236,35 @@ class Workouts {
     @Composable
     fun EditItem(entry: Workouts.WorkoutEntry, onWorkoutEdited: (Workouts.WorkoutEntry) -> Unit) {
         // Local state to hold the input value
+        val editedWorkoutEntry = remember { mutableStateOf(entry.copy()) }
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
             // Input field for the workout name
             TextField(
-                value = entry.workout,
-                onValueChange = { entry.workout = it },
+                value = editedWorkoutEntry.value.workout,
+                onValueChange = {
+                    editedWorkoutEntry.value = editedWorkoutEntry.value.copy(workout = it)
+                },
 //                label = { Text("Workout") },
                 modifier = Modifier.weight(1f)
             )
             TextField(
-                value = entry.sets.toString(),
-                onValueChange = { newValue -> entry.sets = newValue.toIntOrNull() ?: 0 },
+                value = editedWorkoutEntry.value.sets.toString(),
+                onValueChange = { newValue ->
+                    editedWorkoutEntry.value =
+                        editedWorkoutEntry.value.copy(sets = newValue.toIntOrNull() ?: 0)
+                },
 //                label = { Text("Sets") },
                 modifier = Modifier.weight(1f)
             )
             TextField(
-                value = entry.repetitions.toString(),
-                onValueChange = { newValue -> entry.repetitions = newValue.toIntOrNull() ?: 0 },
+                value = editedWorkoutEntry.value.repetitions.toString(),
+                onValueChange = { newValue ->
+                    editedWorkoutEntry.value =
+                        editedWorkoutEntry.value.copy(repetitions = newValue.toIntOrNull() ?: 0)
+                },
 //                label = { Text("Repetitions") },
                 modifier = Modifier.weight(1f)
             )
@@ -269,14 +278,10 @@ class Workouts {
             // Button to add the workout
             Button(
                 onClick = {
-                    // Get the workout name from the input field
-
-                    if (entry.workout.isNotEmpty()) {
-                        // Add the workout name to the list
-                        onWorkoutEdited(entry)
+                    if (editedWorkoutEntry.value.workout.isNotEmpty()) {
+                        onWorkoutEdited(editedWorkoutEntry.value)
+                        listOfWorkouts[listOfWorkouts.indexOf(entry)] = editedWorkoutEntry.value
                     }
-
-                    // Clear the input field
                 },
                 modifier = Modifier.padding(start = 8.dp)
             ) {
