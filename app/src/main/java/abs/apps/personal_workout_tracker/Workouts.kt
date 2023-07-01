@@ -38,22 +38,6 @@ class Workouts {
         }
     }
 
-    @Composable
-    fun EditButton(entry: Workouts.WorkoutEntry, onEditWorkout: (Workouts.WorkoutEntry) -> Unit) {
-        Button(onClick = { onEditWorkout(entry) }) {
-            Text(text = "Edit", fontSize = 20.sp)
-        }
-    }
-
-    @Composable
-    fun DeleteButton(
-        entry: Workouts.WorkoutEntry,
-        onDeleteWorkout: (Workouts.WorkoutEntry) -> Unit
-    ) {
-        Button(onClick = { onDeleteWorkout(entry) }) {
-            Text(text = "Delete", fontSize = 20.sp)
-        }
-    }
 
     @Composable
     fun ChooseScreen(
@@ -151,7 +135,7 @@ class Workouts {
 
 
     @Composable
-    fun WorkoutEntryRow(workout: Workouts.WorkoutEntry) {
+    fun WorkoutEntryRow(workout: WorkoutEntry) {
         Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
             Text(text = workout.workout, modifier = Modifier.weight(1f))
             Text(text = workout.sets.toString(), modifier = Modifier.weight(1f))
@@ -170,7 +154,7 @@ class Workouts {
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    fun AddItem(onAddWorkout: (Workouts.WorkoutEntry) -> Unit) {
+    fun AddItem(onAddWorkout: (WorkoutEntry) -> Unit) {
         // Local state to hold the input value
         val workoutNameState = remember { mutableStateOf("") }
         val setsState = remember { mutableStateOf(0) }
@@ -213,7 +197,7 @@ class Workouts {
                     if (workoutName.isNotEmpty()) {
                         // Add the workout name to the list
                         onAddWorkout(
-                            Workouts.WorkoutEntry(
+                            WorkoutEntry(
                                 workoutNameState.value,
                                 setsState.value,
                                 repetitionState.value
@@ -234,7 +218,7 @@ class Workouts {
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    fun EditItem(entry: Workouts.WorkoutEntry, onWorkoutEdited: (Workouts.WorkoutEntry) -> Unit) {
+    fun EditItem(entry: WorkoutEntry, onWorkoutEdited: (WorkoutEntry) -> Unit) {
         // Local state to hold the input value
         val editedWorkoutEntry = remember { mutableStateOf(entry.copy()) }
         Row(
