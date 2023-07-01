@@ -271,6 +271,18 @@ class Workouts {
             ) {
                 Text(text = "Change Workout")
             }
+            Button(
+                onClick = {
+                    if (editedWorkoutEntry.value.workout.isNotEmpty()) {
+                        onWorkoutEdited(editedWorkoutEntry.value)
+                        listOfWorkouts.remove(editedWorkoutEntry.value)
+                    }
+                },
+                modifier = Modifier.padding(start = 8.dp)
+            ) {
+                Text(text = "Delete Workout")
+            }
+
         }
 
     }
