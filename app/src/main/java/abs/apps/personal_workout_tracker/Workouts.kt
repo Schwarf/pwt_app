@@ -29,6 +29,7 @@ class Workouts {
     data class WorkoutEntry(var workout: String, var sets: Int, var repetitions: Int)
 
     private val listOfWorkouts = mutableStateListOf<WorkoutEntry>()
+    private val selectedWorkoutEntry = mutableStateOf<WorkoutEntry?>(null)
 
     @Composable
     fun AddButton(label: String, onClick: () -> Unit) {
@@ -125,8 +126,11 @@ class Workouts {
             item { WorkoutHeaderRow() }
             items(listOfWorkouts) { workout ->
                 Button(
-                    onClick = { onEditWorkout(workout) },
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent, contentColor = Color.Blue),
+                    onClick = { selectedWorkoutEntry.value = workout },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color.Transparent,
+                        contentColor = Color.Blue
+                    ),
                     modifier = Modifier.fillMaxWidth()
                 )
                 {
@@ -134,6 +138,14 @@ class Workouts {
                 }
             }
 
+        }
+        val selectedEntry = selectedWorkoutEntry.value
+        if (selectedEntry != null) {
+            EditItem(entry = selectedEntry,
+                onWorkoutEdited = { editedEntry ->
+                    onEditWorkout(editedEntry)
+                    selectedWorkoutEntry.value = null
+                })
         }
     }
 
@@ -222,7 +234,7 @@ class Workouts {
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    fun EditItem(entry: Workouts.WorkoutEntry, onAddWorkout: (Workouts.WorkoutEntry) -> Unit) {
+    fun EditItem(entry: Workouts.WorkoutEntry, onWorkoutEdited: (Workouts.WorkoutEntry) -> Unit) {
         // Local state to hold the input value
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -261,7 +273,7 @@ class Workouts {
 
                     if (entry.workout.isNotEmpty()) {
                         // Add the workout name to the list
-                        onAddWorkout( entry)
+                        onWorkoutEdited(entry)
                     }
 
                     // Clear the input field
