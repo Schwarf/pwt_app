@@ -32,7 +32,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 class Workouts {
-    data class WorkoutEntry(var workout: String, var sets: Int, var repetitions: Int)
+    data class WorkoutEntry(
+        var workout: String,
+        var sets: Int,
+        var totalRepetitions: Int,
+        var maxRepetitionsInSets: Int
+    )
 
     private val listOfWorkouts = mutableStateListOf<WorkoutEntry>()
     private val selectedWorkoutEntry = mutableStateOf<WorkoutEntry?>(null)
@@ -145,7 +150,8 @@ class Workouts {
         Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
             Text(text = workout.workout, modifier = Modifier.weight(1f))
             Text(text = workout.sets.toString(), modifier = Modifier.weight(1f))
-            Text(text = workout.repetitions.toString(), modifier = Modifier.weight(1f))
+            Text(text = workout.totalRepetitions.toString(), modifier = Modifier.weight(1f))
+            Text(text = workout.maxRepetitionsInSets.toString(), modifier = Modifier.weight(1f))
         }
     }
 
@@ -154,7 +160,8 @@ class Workouts {
         Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
             Text(text = "Workout", modifier = Modifier.weight(1f))
             Text(text = "Sets", modifier = Modifier.weight(1f))
-            Text(text = "Total repetitions", modifier = Modifier.weight(1f))
+            Text(text = "Total reps", modifier = Modifier.weight(1f))
+            Text(text = "Max reps in one set", modifier = Modifier.weight(1f))
         }
     }
 
@@ -169,30 +176,38 @@ class Workouts {
     @Composable
     fun AddItem(onAddWorkout: (WorkoutEntry) -> Unit) {
         // Local state to hold the input value
-        val workoutNameState = remember { mutableStateOf("") }
-        val setsState = remember { mutableStateOf<Int?>(null) }
-        val repetitionState = remember { mutableStateOf<Int?>(null) }
+        val workoutName = remember { mutableStateOf("") }
+        val sets = remember { mutableStateOf<Int?>(null) }
+        val totalRepetitions = remember { mutableStateOf<Int?>(null) }
+        val maxRepetitionsInSets = remember { mutableStateOf<Int?>(null) }
+
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
             // Input field for the workout name
             TextField(
-                value = workoutNameState.value,
-                onValueChange = { workoutNameState.value = it },
+                value = workoutName.value,
+                onValueChange = { workoutName.value = it },
 //                label = { Text("Workout") },
                 modifier = Modifier.weight(1f)
             )
             DigitsOnlyTextField(
-                value = setsState.value,
-                onValueChange = { newValue -> setsState.value = newValue },
+                value = sets.value,
+                onValueChange = { newValue -> sets.value = newValue },
                 modifier = Modifier.weight(1f)
             )
             DigitsOnlyTextField(
-                value = repetitionState.value,
-                onValueChange = { newValue -> repetitionState.value = newValue },
+                value = totalRepetitions.value,
+                onValueChange = { newValue -> totalRepetitions.value = newValue },
                 modifier = Modifier.weight(1f)
             )
+            DigitsOnlyTextField(
+                value = maxRepetitionsInSets.value,
+                onValueChange = { newValue -> maxRepetitionsInSets.value = newValue },
+                modifier = Modifier.weight(1f)
+            )
+
         }
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -202,20 +217,24 @@ class Workouts {
             Button(
                 onClick = {
                     // Get the workout name from the input field
-                    val workoutName = workoutNameState.value
-                    if (workoutName.isNotEmpty()) {
+                    val workout = workoutName.value
+                    if (workout.isNotEmpty()) {
                         // Add the workout name to the list
                         onAddWorkout(
                             WorkoutEntry(
-                                workoutNameState.value,
-                                setsState.value ?: 0,
-                                repetitionState.value ?: 0
+                                workout,
+                                sets.value ?: 0,
+                                totalRepetitions.value ?: 0,
+                                maxRepetitionsInSets.value ?: 0
                             )
                         )
                     }
 
-                    // Clear the input field
-                    workoutNameState.value = ""
+                    // Clear the input fields
+                    workoutName.value = ""
+                    sets.value = 0
+                    totalRepetitions.value = 0
+                    maxRepetitionsInSets.value = 0
                 },
                 modifier = Modifier.padding(start = 8.dp)
             ) {
@@ -232,9 +251,9 @@ class Workouts {
         onValueChange: (Int?) -> Unit,
         modifier: Modifier = Modifier
     ) {
-        val displayValue = value?.toString()?:""
+        val displayValue = value?.toString() ?: ""
         TextField(
-            value = if(displayValue == "0") "" else displayValue,
+            value = if (displayValue == "0") "" else displayValue,
             onValueChange = { newValue ->
                 onValueChange(newValue.toIntOrNull())
             },
@@ -271,13 +290,22 @@ class Workouts {
                 modifier = Modifier.weight(1f)
             )
             DigitsOnlyTextField(
-                value = editedWorkoutEntry.value.repetitions,
+                value = editedWorkoutEntry.value.totalRepetitions,
                 onValueChange = { newValue ->
                     editedWorkoutEntry.value =
-                        editedWorkoutEntry.value.copy(repetitions = newValue ?: 0)
+                        editedWorkoutEntry.value.copy(totalRepetitions = newValue ?: 0)
                 },
                 modifier = Modifier.weight(1f)
             )
+            DigitsOnlyTextField(
+                value = editedWorkoutEntry.value.maxRepetitionsInSets,
+                onValueChange = { newValue ->
+                    editedWorkoutEntry.value =
+                        editedWorkoutEntry.value.copy(maxRepetitionsInSets = newValue ?: 0)
+                },
+                modifier = Modifier.weight(1f)
+            )
+
         }
 
         Row(
