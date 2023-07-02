@@ -8,12 +8,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -28,6 +30,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.OffsetMapping
 import androidx.compose.ui.text.input.TransformedText
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -148,20 +151,50 @@ class Workouts {
     @Composable
     fun WorkoutEntryRow(workout: WorkoutEntry) {
         Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-            Text(text = workout.workout, modifier = Modifier.weight(1f))
-            Text(text = workout.sets.toString(), modifier = Modifier.weight(1f))
-            Text(text = workout.totalRepetitions.toString(), modifier = Modifier.weight(1f))
-            Text(text = workout.maxRepetitionsInSets.toString(), modifier = Modifier.weight(1f))
+            Text(text = workout.workout, modifier = Modifier.weight(2f))
+            Text(
+                text = workout.sets.toString(),
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(start = 3.dp),
+                textAlign = TextAlign.End
+            )
+            Text(
+                text = workout.totalRepetitions.toString(),
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(start = 3.dp),
+                textAlign = TextAlign.End
+            )
+            Text(
+                text = workout.maxRepetitionsInSets.toString(),
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(start = 3.dp),
+                textAlign = TextAlign.End
+            )
         }
     }
 
     @Composable
     fun WorkoutHeaderRow() {
         Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-            Text(text = "Workout", modifier = Modifier.weight(1f))
-            Text(text = "Sets", modifier = Modifier.weight(1f))
-            Text(text = "Total reps", modifier = Modifier.weight(1f))
-            Text(text = "Max reps in one set", modifier = Modifier.weight(1f))
+            Text(text = "Workout", modifier = Modifier.weight(2f))
+            Text(
+                text = "Sets", textAlign = TextAlign.End, modifier = Modifier
+                    .weight(1f)
+                    .padding(start = 3.dp)
+            )
+            Text(
+                text = "Total reps", textAlign = TextAlign.End, modifier = Modifier
+                    .weight(1f)
+                    .padding(start = 3.dp)
+            )
+            Text(
+                text = "Max reps in one set", textAlign = TextAlign.End, modifier = Modifier
+                    .weight(1f)
+                    .padding(start = 3.dp)
+            )
         }
     }
 
@@ -189,23 +222,28 @@ class Workouts {
             TextField(
                 value = workoutName.value,
                 onValueChange = { workoutName.value = it },
-//                label = { Text("Workout") },
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(2f)
             )
             DigitsOnlyTextField(
                 value = sets.value,
                 onValueChange = { newValue -> sets.value = newValue },
-                modifier = Modifier.weight(1f)
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(start = 3.dp)
             )
             DigitsOnlyTextField(
                 value = totalRepetitions.value,
                 onValueChange = { newValue -> totalRepetitions.value = newValue },
-                modifier = Modifier.weight(1f)
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(start = 3.dp)
             )
             DigitsOnlyTextField(
                 value = maxRepetitionsInSets.value,
                 onValueChange = { newValue -> maxRepetitionsInSets.value = newValue },
-                modifier = Modifier.weight(1f)
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(start = 3.dp)
             )
 
         }
@@ -260,6 +298,7 @@ class Workouts {
             modifier = modifier,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             visualTransformation = FilteredDigitsTransformation,
+            textStyle = LocalTextStyle.current.copy(textAlign = TextAlign.End)
         )
     }
 
@@ -279,7 +318,9 @@ class Workouts {
                     editedWorkoutEntry.value = editedWorkoutEntry.value.copy(workout = it)
                 },
 //                label = { Text("Workout") },
-                modifier = Modifier.weight(1f),
+                modifier = Modifier
+                    .weight(2f)
+                    .padding(start = 3.dp),
             )
             DigitsOnlyTextField(
                 value = editedWorkoutEntry.value.sets,
@@ -287,7 +328,9 @@ class Workouts {
                     editedWorkoutEntry.value =
                         editedWorkoutEntry.value.copy(sets = newValue ?: 0)
                 },
-                modifier = Modifier.weight(1f)
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(start = 3.dp)
             )
             DigitsOnlyTextField(
                 value = editedWorkoutEntry.value.totalRepetitions,
@@ -295,7 +338,9 @@ class Workouts {
                     editedWorkoutEntry.value =
                         editedWorkoutEntry.value.copy(totalRepetitions = newValue ?: 0)
                 },
-                modifier = Modifier.weight(1f)
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(start = 3.dp)
             )
             DigitsOnlyTextField(
                 value = editedWorkoutEntry.value.maxRepetitionsInSets,
@@ -303,7 +348,9 @@ class Workouts {
                     editedWorkoutEntry.value =
                         editedWorkoutEntry.value.copy(maxRepetitionsInSets = newValue ?: 0)
                 },
-                modifier = Modifier.weight(1f)
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(start = 3.dp)
             )
 
         }
