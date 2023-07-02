@@ -24,7 +24,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.OffsetMapping
 import androidx.compose.ui.text.input.TransformedText
@@ -159,14 +158,12 @@ class Workouts {
         }
     }
 
-object FilteredDigitsTransformation : VisualTransformation
-{
-    override fun filter(text: AnnotatedString): TransformedText
-    {
-        val digitsOnly = text.text.filter{ it.isDigit()}
-        return TransformedText(AnnotatedString(digitsOnly), OffsetMapping.Identity)
+    object FilteredDigitsTransformation : VisualTransformation {
+        override fun filter(text: AnnotatedString): TransformedText {
+            val digitsOnly = text.text.filter { it.isDigit() }
+            return TransformedText(AnnotatedString(digitsOnly), OffsetMapping.Identity)
+        }
     }
-}
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
@@ -186,27 +183,16 @@ object FilteredDigitsTransformation : VisualTransformation
 //                label = { Text("Workout") },
                 modifier = Modifier.weight(1f)
             )
-            TextField(
-                value = setsState.value?.toString() ?: "",
-                onValueChange = { newValue -> setsState.value = newValue.toIntOrNull()},
-                modifier = Modifier.weight(1f),
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Number,
-                ),
-                visualTransformation = FilteredDigitsTransformation
+            DigitsOnlyTextField(
+                value = setsState.value,
+                onValueChange = { newValue -> setsState.value = newValue },
+                modifier = Modifier.weight(1f)
             )
-            TextField(
-                value = repetitionState.value?.toString() ?: "",
-                onValueChange = { newValue -> repetitionState.value = newValue.toIntOrNull()},
-//                label = { Text("Repetitions") },
-                modifier = Modifier.weight(1f),
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Number,
-                ),
-                visualTransformation = FilteredDigitsTransformation
+            DigitsOnlyTextField(
+                value = repetitionState.value,
+                onValueChange = { newValue -> repetitionState.value = newValue },
+                modifier = Modifier.weight(1f)
             )
-
-
         }
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -241,6 +227,25 @@ object FilteredDigitsTransformation : VisualTransformation
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
+    fun DigitsOnlyTextField(
+        value: Int?,
+        onValueChange: (Int?) -> Unit,
+        modifier: Modifier = Modifier
+    ) {
+        val displayValue = value?.toString()?:""
+        TextField(
+            value = if(displayValue == "0") "" else displayValue,
+            onValueChange = { newValue ->
+                onValueChange(newValue.toIntOrNull())
+            },
+            modifier = modifier,
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            visualTransformation = FilteredDigitsTransformation,
+        )
+    }
+
+    @OptIn(ExperimentalMaterial3Api::class)
+    @Composable
     fun EditItem(entry: WorkoutEntry, onWorkoutEdited: (WorkoutEntry) -> Unit) {
         // Local state to hold the input value
         val editedWorkoutEntry = remember { mutableStateOf(entry.copy()) }
@@ -255,29 +260,26 @@ object FilteredDigitsTransformation : VisualTransformation
                     editedWorkoutEntry.value = editedWorkoutEntry.value.copy(workout = it)
                 },
 //                label = { Text("Workout") },
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f),
             )
-            TextField(
-                value = editedWorkoutEntry.value.sets.toString(),
+            DigitsOnlyTextField(
+                value = editedWorkoutEntry.value.sets,
                 onValueChange = { newValue ->
                     editedWorkoutEntry.value =
-                        editedWorkoutEntry.value.copy(sets = newValue.toIntOrNull() ?: 0)
+                        editedWorkoutEntry.value.copy(sets = newValue ?: 0)
                 },
-//                label = { Text("Sets") },
                 modifier = Modifier.weight(1f)
             )
-            TextField(
-                value = editedWorkoutEntry.value.repetitions.toString(),
+            DigitsOnlyTextField(
+                value = editedWorkoutEntry.value.repetitions,
                 onValueChange = { newValue ->
                     editedWorkoutEntry.value =
-                        editedWorkoutEntry.value.copy(repetitions = newValue.toIntOrNull() ?: 0)
+                        editedWorkoutEntry.value.copy(repetitions = newValue ?: 0)
                 },
-//                label = { Text("Repetitions") },
                 modifier = Modifier.weight(1f)
             )
-
-
         }
+
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
@@ -305,9 +307,6 @@ object FilteredDigitsTransformation : VisualTransformation
             ) {
                 Text(text = "Delete Workout")
             }
-
         }
-
     }
-
 }
