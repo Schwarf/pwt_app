@@ -41,7 +41,7 @@ class MainActivity : ComponentActivity() {
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         if (currentScreen.value == Screen.WORKOUT_INPUT) {
-                            workouts.AddScreen { currentScreen.value = Screen.DEFAULT_SCREEN };
+                            workouts.AddScreen { currentScreen.value = Screen.DEFAULT_SCREEN }
                         }
                         if (currentScreen.value == Screen.WORKOUT_SELECTION) {
                             workouts.ChooseScreen(onWorkoutSelected = {
