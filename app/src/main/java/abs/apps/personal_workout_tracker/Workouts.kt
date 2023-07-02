@@ -23,8 +23,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.OffsetMapping
+import androidx.compose.ui.text.input.TransformedText
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -155,7 +159,14 @@ class Workouts {
         }
     }
 
-
+object FilteredDigitsTransformation : VisualTransformation
+{
+    override fun filter(text: AnnotatedString): TransformedText
+    {
+        val digitsOnly = text.text.filter{ it.isDigit()}
+        return TransformedText(AnnotatedString(digitsOnly), OffsetMapping.Identity)
+    }
+}
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
@@ -181,8 +192,8 @@ class Workouts {
                 modifier = Modifier.weight(1f),
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Number,
-                )
-                
+                ),
+                visualTransformation = FilteredDigitsTransformation
             )
             TextField(
                 value = repetitionState.value?.toString() ?: "",
@@ -191,7 +202,8 @@ class Workouts {
                 modifier = Modifier.weight(1f),
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Number,
-                )
+                ),
+                visualTransformation = FilteredDigitsTransformation
             )
 
 
