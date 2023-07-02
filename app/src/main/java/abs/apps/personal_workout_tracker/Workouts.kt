@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -22,6 +23,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -148,17 +151,19 @@ class Workouts {
         Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
             Text(text = "Workout", modifier = Modifier.weight(1f))
             Text(text = "Sets", modifier = Modifier.weight(1f))
-            Text(text = "Repetitions", modifier = Modifier.weight(1f))
+            Text(text = "Total repetitions", modifier = Modifier.weight(1f))
         }
     }
+
+
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun AddItem(onAddWorkout: (WorkoutEntry) -> Unit) {
         // Local state to hold the input value
         val workoutNameState = remember { mutableStateOf("") }
-        val setsState = remember { mutableStateOf(0) }
-        val repetitionState = remember { mutableStateOf(0) }
+        val setsState = remember { mutableStateOf<Int?>(null) }
+        val repetitionState = remember { mutableStateOf<Int?>(null) }
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
@@ -171,16 +176,22 @@ class Workouts {
                 modifier = Modifier.weight(1f)
             )
             TextField(
-                value = setsState.value.toString(),
-                onValueChange = { newValue -> setsState.value = newValue.toIntOrNull() ?: 0 },
-//                label = { Text("Sets") },
-                modifier = Modifier.weight(1f)
+                value = setsState.value?.toString() ?: "",
+                onValueChange = { newValue -> setsState.value = newValue.toIntOrNull()},
+                modifier = Modifier.weight(1f),
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Number,
+                )
+                
             )
             TextField(
-                value = repetitionState.value.toString(),
-                onValueChange = { newValue -> repetitionState.value = newValue.toIntOrNull() ?: 0 },
+                value = repetitionState.value?.toString() ?: "",
+                onValueChange = { newValue -> repetitionState.value = newValue.toIntOrNull()},
 //                label = { Text("Repetitions") },
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f),
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Number,
+                )
             )
 
 
@@ -199,8 +210,8 @@ class Workouts {
                         onAddWorkout(
                             WorkoutEntry(
                                 workoutNameState.value,
-                                setsState.value,
-                                repetitionState.value
+                                setsState.value ?: 0,
+                                repetitionState.value ?: 0
                             )
                         )
                     }
