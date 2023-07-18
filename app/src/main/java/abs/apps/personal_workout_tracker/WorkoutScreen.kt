@@ -31,7 +31,7 @@ import androidx.compose.ui.unit.sp
 
 
 @Composable
-fun WorkoutEntryRow(workout: Workout) {
+fun WorkoutEntryRow(workout: Workout, onEvent: (WorkoutEvent) -> Unit) {
     Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
         Text(text = workout.name, modifier = Modifier.weight(2f))
         Text(
@@ -55,6 +55,12 @@ fun WorkoutEntryRow(workout: Workout) {
                 .padding(start = 3.dp),
             textAlign = TextAlign.End
         )
+        IconButton(onClick = { onEvent(WorkoutEvent.DeleteWorkout(workout)) }) {
+            Icon(
+                imageVector = Icons.Default.Delete,
+                contentDescription = "Delete workout"
+            )
+        }
     }
 }
 
@@ -114,9 +120,9 @@ fun WorkoutScreen(
 
                     }
                 }
-                items(state.workouts){workout -> 
-                    WorkoutEntryRow(workout = workout)
-                    
+                items(state.workouts) { workout ->
+                    WorkoutEntryRow(workout = workout, onEvent = onEvent)
+
                 }
             },
             contentPadding = padding, modifier = Modifier.fillMaxSize(),
