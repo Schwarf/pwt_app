@@ -1,5 +1,6 @@
 package abs.apps.personal_workout_tracker
 
+import abs.apps.personal_workout_tracker.ui.screens_and_dialogs.WorkoutScreen
 import abs.apps.personal_workout_tracker.ui.theme.Personal_workout_trackerTheme
 import android.os.Bundle
 import androidx.activity.ComponentActivity

@@ -1,15 +1,13 @@
-package abs.apps.personal_workout_tracker
+package abs.apps.personal_workout_tracker.ui.screens_and_dialogs
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
+import abs.apps.personal_workout_tracker.Workout
+import abs.apps.personal_workout_tracker.WorkoutEvent
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 
 
 @OptIn(ExperimentalMaterial3Api::class)

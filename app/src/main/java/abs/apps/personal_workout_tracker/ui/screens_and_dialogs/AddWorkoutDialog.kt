@@ -1,5 +1,8 @@
-package abs.apps.personal_workout_tracker
+package abs.apps.personal_workout_tracker.ui.screens_and_dialogs
 
+import abs.apps.personal_workout_tracker.WorkoutEvent
+import abs.apps.personal_workout_tracker.WorkoutState
+import abs.apps.personal_workout_tracker.Workouts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.text.KeyboardOptions
