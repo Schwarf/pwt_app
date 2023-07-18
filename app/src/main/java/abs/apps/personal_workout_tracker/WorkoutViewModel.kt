@@ -78,6 +78,13 @@ class WorkoutViewModel(private val dao: WorkoutDao) : ViewModel() {
             WorkoutEvent.ShowAddDialog -> {
                 _state.update { it.copy(isAddingWorkout = true) }
             }
+
+            WorkoutEvent.HideChooseActionDialog -> _state.update {
+                it.copy(isChoosingAction = false)
+            }
+            WorkoutEvent.ShowChooseActionDialog -> _state.update {
+                it.copy(isChoosingAction = true)
+            }
         }
 
     }

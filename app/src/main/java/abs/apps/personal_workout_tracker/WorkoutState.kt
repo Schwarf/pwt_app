@@ -7,5 +7,6 @@ data class WorkoutState(
     val totalRepetitions: String = "",
     val maxRepetitionsInSet: String = "",
     val isAddingWorkout: Boolean = false,
+    val isChoosingAction: Boolean = false,
     val isEditingWorkout: Boolean = false
 )
