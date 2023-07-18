@@ -21,7 +21,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -30,40 +29,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
 
-@Composable
-fun WorkoutEntryRow(workout: Workout, onEvent: (WorkoutEvent) -> Unit) {
-    Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-        Text(text = workout.name, modifier = Modifier.weight(2f))
-        Text(
-            text = workout.sets,
-            modifier = Modifier
-                .weight(1f),
-            textAlign = TextAlign.Center
-        )
-        Text(
-            text = workout.totalRepetitions,
-            modifier = Modifier
-                .weight(1f),
-            textAlign = TextAlign.Center
-        )
-        Text(
-            text = workout.maxRepetitionsInSets,
-            modifier = Modifier
-                .weight(1f),
-            textAlign = TextAlign.Center
-        )
-        IconButton(
-            onClick = { onEvent(WorkoutEvent.DeleteWorkout(workout)) },
-            modifier = Modifier
-                .weight(1f)
-        ) {
-            Icon(
-                imageVector = Icons.Default.Delete,
-                contentDescription = "Delete workout"
-            )
-        }
-    }
-}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
