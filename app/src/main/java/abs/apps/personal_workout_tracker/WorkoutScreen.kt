@@ -60,7 +60,7 @@ fun WorkoutEntryRow(workout: Workout) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ContactScreen(
+fun WorkoutScreen(
     state: WorkoutState,
     onEvent: (WorkoutEvent) -> Unit
 ) {
@@ -115,7 +115,7 @@ fun ContactScreen(
                     }
                 }
                 items(state.workouts){workout -> 
-                    WorkoutEntryRow(workout = workout)    
+                    WorkoutEntryRow(workout = workout)
                     
                 }
             },

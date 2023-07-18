@@ -4,25 +4,49 @@ import abs.apps.personal_workout_tracker.ui.theme.Personal_workout_trackerTheme
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.activity.viewModels
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.room.Room
 
 class MainActivity : ComponentActivity() {
+
+    private val database by lazy {
+        Room.databaseBuilder(applicationContext, WorkoutDatabase::class.java, "workout.db").build()
+    }
+
+    private val viewModel by viewModels<WorkoutViewModel>(
+        factoryProducer = {
+            object : ViewModelProvider.Factory {
+                override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                    return WorkoutViewModel(database.dao) as T
+                }
+            }
+        }
+    )
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            Personal_workout_trackerTheme {
+                val state by viewModel.state.collectAsState()
+                WorkoutScreen(state = state, onEvent = viewModel::onEvent)
+
+
+            }
+        }
+    }
+}
+/*
     private enum class Screen {
         DEFAULT_SCREEN,
         WORKOUT_SELECTION,
         WORKOUT_INPUT
     }
 
-    private val currentScreen = mutableStateOf(Screen.DEFAULT_SCREEN)
+    private val currentScreen = mutableStateOf(MainActivity.Screen.DEFAULT_SCREEN)
     private val workouts = Workouts()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,23 +64,25 @@ class MainActivity : ComponentActivity() {
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        if (currentScreen.value == Screen.WORKOUT_INPUT) {
-                            workouts.AddScreen { currentScreen.value = Screen.DEFAULT_SCREEN }
+                        if (currentScreen.value == MainActivity.Screen.WORKOUT_INPUT) {
+                            workouts.AddScreen { currentScreen.value =
+                                MainActivity.Screen.DEFAULT_SCREEN
+                            }
                         }
-                        if (currentScreen.value == Screen.WORKOUT_SELECTION) {
+                        if (currentScreen.value == MainActivity.Screen.WORKOUT_SELECTION) {
                             workouts.ChooseScreen(onWorkoutSelected = {
-                                currentScreen.value = Screen.DEFAULT_SCREEN
+                                currentScreen.value = MainActivity.Screen.DEFAULT_SCREEN
                             },
                                 onItemSelectionCancelled = {
-                                    currentScreen.value = Screen.DEFAULT_SCREEN
+                                    currentScreen.value = MainActivity.Screen.DEFAULT_SCREEN
                                 })
                         }
-                        if (currentScreen.value == Screen.DEFAULT_SCREEN) {
+                        if (currentScreen.value == MainActivity.Screen.DEFAULT_SCREEN) {
                             workouts.AddButton("Add Workout") {
-                                currentScreen.value = Screen.WORKOUT_INPUT
+                                currentScreen.value = MainActivity.Screen.WORKOUT_INPUT
                             }
                             workouts.AddButton("Open Workout Selection") {
-                                currentScreen.value = Screen.WORKOUT_SELECTION
+                                currentScreen.value = MainActivity.Screen.WORKOUT_SELECTION
                             }
                         }
 
@@ -68,3 +94,4 @@ class MainActivity : ComponentActivity() {
 }
 
 
+*/
