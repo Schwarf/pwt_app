@@ -48,6 +48,10 @@ fun WorkoutScreen(
         if (state.isAddingWorkout) {
             AddWorkoutDialog(state = state, onEvent = onEvent)
         }
+        if (state.isChoosingAction) {
+            ChooseActionDialog(state = state, onEvent = onEvent)
+        }
+
         LazyColumn(
             content = {
                 item {
@@ -90,7 +94,7 @@ fun WorkoutScreen(
                 }
                 items(state.workouts) { workout ->
                     Button(
-                        onClick = { onEvent(WorkoutEvent.ShowAddDialog) },
+                        onClick = { onEvent(WorkoutEvent.ShowChooseActionDialog) },
                         colors = ButtonDefaults.buttonColors(
                             containerColor = Color.Transparent,
                             contentColor = Color.Blue

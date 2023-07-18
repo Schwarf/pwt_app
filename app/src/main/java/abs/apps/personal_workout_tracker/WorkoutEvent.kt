@@ -12,5 +12,7 @@ sealed interface WorkoutEvent
     object HideAddDialog: WorkoutEvent
     object ShowChooseActionDialog: WorkoutEvent
     object HideChooseActionDialog: WorkoutEvent
+    object ShowEditDialog: WorkoutEvent
+    object HideEditDialog: WorkoutEvent
 
 }
