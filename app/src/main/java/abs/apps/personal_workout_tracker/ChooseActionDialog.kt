@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChooseActionDialog(
-    state: WorkoutState,
+    workout: Workout,
     onEvent: (WorkoutEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -42,48 +42,8 @@ fun ChooseActionDialog(
         },
         title = { Text(text = "Choose Action") },
         text = {
-            Column(
-                verticalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                TextField(
-                    value = state.name,
-                    onValueChange = {
-                        onEvent(WorkoutEvent.SetName(it))
-                    },
-                    placeholder = {
-                        Text(text = "Name")
-                    }
-                )
-                TextField(
-                    value = state.sets.toString(),
-                    onValueChange = {
-                        onEvent(WorkoutEvent.SetSets(it))
-                    },
-                    placeholder = {
-                        Text(text = "Sets")
-                    }
-                )
-                TextField(
-                    value = state.totalRepetitions.toString(),
-                    onValueChange = {
-                        onEvent(WorkoutEvent.SetTotalRepetitions(it))
-                    },
-                    placeholder = {
-                        Text(text = "Total repetitions")
-                    }
-                )
-                TextField(
-                    value = state.maxRepetitionsInSet.toString(),
-                    onValueChange = {
-                        onEvent(WorkoutEvent.SetMaxRepetitionsInSet(it))
-                    },
-                    placeholder = {
-                        Text(text = "Max repetitions in set")
-                    }
-                )
-
-            }
-
+            WorkoutEntryRow(workout = workout , onEvent = onEvent, hasDeleteIcon = false)
+            
         }
     )
 }

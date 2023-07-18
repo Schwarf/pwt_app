@@ -21,6 +21,8 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -29,13 +31,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun WorkoutScreen(
     state: WorkoutState,
     onEvent: (WorkoutEvent) -> Unit
 ) {
+    val chosenWorkout = remember{mutableStateOf<Workout?>(null)}
     Scaffold(
         floatingActionButton =
         {
@@ -49,7 +51,7 @@ fun WorkoutScreen(
             AddWorkoutDialog(state = state, onEvent = onEvent)
         }
         if (state.isChoosingAction) {
-            ChooseActionDialog(state = state, onEvent = onEvent)
+            ChooseActionDialog(workout=chosenWorkout.value!!, onEvent = onEvent)
         }
 
         LazyColumn(
@@ -94,7 +96,10 @@ fun WorkoutScreen(
                 }
                 items(state.workouts) { workout ->
                     Button(
-                        onClick = { onEvent(WorkoutEvent.ShowChooseActionDialog) },
+                        onClick = {
+                            onEvent(WorkoutEvent.ShowChooseActionDialog)
+                            chosenWorkout.value = workout
+                        },
                         colors = ButtonDefaults.buttonColors(
                             containerColor = Color.Transparent,
                             contentColor = Color.Blue

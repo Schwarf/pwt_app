@@ -13,7 +13,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 
 @Composable
-fun WorkoutEntryRow(workout: Workout, onEvent: (WorkoutEvent) -> Unit) {
+fun WorkoutEntryRow(workout: Workout,
+                    onEvent: (WorkoutEvent) -> Unit,
+                    hasDeleteIcon: Boolean = true) {
     Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
         Text(text = workout.name, modifier = Modifier.weight(2f))
         Text(
@@ -34,15 +36,17 @@ fun WorkoutEntryRow(workout: Workout, onEvent: (WorkoutEvent) -> Unit) {
                 .weight(1f),
             textAlign = TextAlign.Center
         )
-        IconButton(
-            onClick = { onEvent(WorkoutEvent.DeleteWorkout(workout)) },
-            modifier = Modifier
-                .weight(1f)
-        ) {
-            Icon(
-                imageVector = Icons.Default.Delete,
-                contentDescription = "Delete workout"
-            )
+        if(hasDeleteIcon) {
+            IconButton(
+                onClick = { onEvent(WorkoutEvent.DeleteWorkout(workout)) },
+                modifier = Modifier
+                    .weight(1f)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Delete,
+                    contentDescription = "Delete workout"
+                )
+            }
         }
     }
 }
