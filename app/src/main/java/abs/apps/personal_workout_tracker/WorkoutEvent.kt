@@ -7,7 +7,7 @@ sealed interface WorkoutEvent
     data class SetSets(val sets: String): WorkoutEvent
     data class SetTotalRepetitions(val totalRepetitions: String): WorkoutEvent
     data class SetMaxRepetitionsInSet(val maxRepetitionsInSet: String): WorkoutEvent
-    object ShowDialog: WorkoutEvent
-    object HideDialog: WorkoutEvent
+    object ShowAddDialog: WorkoutEvent
+    object HideAddDialog: WorkoutEvent
     data class DeleteWorkout(val workout: Workout): WorkoutEvent
 }

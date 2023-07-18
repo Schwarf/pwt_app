@@ -74,7 +74,7 @@ fun WorkoutScreen(
     Scaffold(
         floatingActionButton =
         {
-            FloatingActionButton(onClick = { onEvent(WorkoutEvent.ShowDialog) }) {
+            FloatingActionButton(onClick = { onEvent(WorkoutEvent.ShowAddDialog) }) {
                 Icon(imageVector = Icons.Default.Add, contentDescription = "Add Workout")
             }
         },
@@ -125,7 +125,7 @@ fun WorkoutScreen(
                 }
                 items(state.workouts) { workout ->
                     Button(
-                        onClick = { onEvent(WorkoutEvent.ShowDialog) },
+                        onClick = { onEvent(WorkoutEvent.ShowAddDialog) },
                         colors = ButtonDefaults.buttonColors(
                             containerColor = Color.Transparent,
                             contentColor = Color.Blue

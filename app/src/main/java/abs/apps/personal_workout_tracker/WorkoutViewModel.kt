@@ -31,7 +31,7 @@ class WorkoutViewModel(private val dao: WorkoutDao) : ViewModel() {
                 }
             }
 
-            WorkoutEvent.HideDialog -> _state.update { it.copy(isAddingWorkout = false) }
+            WorkoutEvent.HideAddDialog -> _state.update { it.copy(isAddingWorkout = false) }
 
             WorkoutEvent.SaveWorkout -> {
                 val name = state.value.name
@@ -75,7 +75,7 @@ class WorkoutViewModel(private val dao: WorkoutDao) : ViewModel() {
                 _state.update { it.copy(totalRepetitions = event.totalRepetitions) }
             }
 
-            WorkoutEvent.ShowDialog -> {
+            WorkoutEvent.ShowAddDialog -> {
                 _state.update { it.copy(isAddingWorkout = true) }
             }
         }

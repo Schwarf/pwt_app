@@ -54,7 +54,7 @@ fun AddWorkoutDialog(
         },
         modifier = modifier,
         onDismissRequest = {
-            onEvent(WorkoutEvent.HideDialog)
+            onEvent(WorkoutEvent.HideAddDialog)
         },
         title = { Text(text = "Add Workout") },
         text = {
