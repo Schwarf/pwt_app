@@ -38,7 +38,7 @@ class WorkoutViewModel(private val dao: WorkoutDao) : ViewModel() {
                 val sets = state.value.sets
                 val totalRepetitions = state.value.totalRepetitions
                 val maxRepetitionsInSet = state.value.maxRepetitionsInSet
-                if (name.isBlank() || sets == 0 || maxRepetitionsInSet == 0 || totalRepetitions == 0) {
+                if (name.isBlank() || sets.isBlank() || maxRepetitionsInSet.isBlank() || totalRepetitions.isBlank()) {
                     return;
                 }
                 val workout = Workout(
@@ -52,9 +52,9 @@ class WorkoutViewModel(private val dao: WorkoutDao) : ViewModel() {
                     it.copy(
                         isAddingWorkout = false,
                         name = "",
-                        sets = 0,
-                        maxRepetitionsInSet = 0,
-                        totalRepetitions = 0
+                        sets = "",
+                        maxRepetitionsInSet = "",
+                        totalRepetitions = ""
                     )
                 }
             }

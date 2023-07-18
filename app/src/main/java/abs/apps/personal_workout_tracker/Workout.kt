@@ -6,9 +6,9 @@ import androidx.room.PrimaryKey
 @Entity
 data class Workout(
     var name: String,
-    var sets: Int,
-    var totalRepetitions: Int,
-    var maxRepetitionsInSets: Int,
+    var sets: String,
+    var totalRepetitions: String,
+    var maxRepetitionsInSets: String,
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0
 )

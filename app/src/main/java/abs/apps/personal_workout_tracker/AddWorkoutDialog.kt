@@ -73,7 +73,7 @@ fun AddWorkoutDialog(
                 TextField(
                     value = state.sets.toString(),
                     onValueChange = {
-                        onEvent(WorkoutEvent.SetSets(it.toInt()))
+                        onEvent(WorkoutEvent.SetSets(it))
                     },
                     placeholder = {
                         Text(text = "Sets")
@@ -82,7 +82,7 @@ fun AddWorkoutDialog(
                 TextField(
                     value = state.totalRepetitions.toString(),
                     onValueChange = {
-                        onEvent(WorkoutEvent.SetTotalRepetitions(it.toInt()))
+                        onEvent(WorkoutEvent.SetTotalRepetitions(it))
                     },
                     placeholder = {
                         Text(text = "Total repetitions")
@@ -91,7 +91,7 @@ fun AddWorkoutDialog(
                 TextField(
                     value = state.maxRepetitionsInSet.toString(),
                     onValueChange = {
-                        onEvent(WorkoutEvent.SetMaxRepetitionsInSet(it.toInt()))
+                        onEvent(WorkoutEvent.SetMaxRepetitionsInSet(it))
                     },
                     placeholder = {
                         Text(text = "Max repetitions in set")
