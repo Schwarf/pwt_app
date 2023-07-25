@@ -40,7 +40,7 @@ fun WorkoutScreen(
     state: WorkoutState,
     onEvent: (WorkoutEvent) -> Unit
 ) {
-    val chosenWorkout = remember{mutableStateOf<Workout?>(null)}
+    val chosenWorkout = remember { mutableStateOf<Workout?>(null) }
     Scaffold(
         floatingActionButton =
         {
@@ -54,7 +54,7 @@ fun WorkoutScreen(
             AddWorkoutDialog(state = state, onEvent = onEvent)
         }
         if (state.isChoosingAction) {
-            ChooseActionDialog(workout=chosenWorkout.value!!, onEvent = onEvent)
+            ChooseActionDialog(workout = chosenWorkout.value!!, onEvent = onEvent)
         }
 
         LazyColumn(

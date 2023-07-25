@@ -40,8 +40,8 @@ fun ChooseActionDialog(
         },
         title = { Text(text = "Choose Action") },
         text = {
-            WorkoutEntryRow(workout = workout , onEvent = onEvent, hasDeleteIcon = false)
-            
+            WorkoutEntryRow(workout = workout, onEvent = onEvent, hasDeleteIcon = false)
+
         }
     )
 }
