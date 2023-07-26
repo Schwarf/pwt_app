@@ -5,7 +5,6 @@ import abs.apps.personal_workout_tracker.Workout
 import abs.apps.personal_workout_tracker.WorkoutEvent
 import abs.apps.personal_workout_tracker.WorkoutState
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,13 +14,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -38,10 +33,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
@@ -105,80 +97,13 @@ fun HomeScreen(
                 )
             }
         },
-        //modifier = Modifier.padding(dimensionResource(R.dimen.padding_medium))
     ) { padding ->
-        if (state.isAddingWorkout) {
-            AddWorkoutDialog(state = state, onEvent = onEvent)
-        }
-        if (state.isChoosingAction) {
-            ChooseActionDialog(workout = chosenWorkout.value!!, onEvent = onEvent)
-        }
-
-        LazyColumn(
-            content = {
-                item {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .horizontalScroll(rememberScrollState()),
-                        verticalAlignment = CenterVertically
-                    ) {
-                        Text(
-                            text = stringResource(id = R.string.workout_name),
-                            modifier = Modifier.weight(1f)
-                        )
-                        Text(
-                            text = stringResource(id = R.string.workout_sets),
-                            textAlign = TextAlign.End,
-                            modifier = Modifier
-                                .weight(1f)
-                        )
-                        Text(
-                            text = stringResource(id = R.string.workout_totalReps),
-                            textAlign = TextAlign.End,
-                            modifier = Modifier
-                                .weight(1f)
-                        )
-                        Text(
-                            text = stringResource(id = R.string.workout_maxRepsInSets),
-                            textAlign = TextAlign.End,
-                            modifier = Modifier
-                                .weight(1f)
-                        )
-                        IconButton(
-                            onClick = {}, modifier = Modifier
-                                .alpha(0f)
-                                .weight(1f)
-                        )
-                        {
-                            Icon(
-                                imageVector = Icons.Default.Delete,
-                                contentDescription = stringResource(id = R.string.delete)
-                            )
-                        }
-                    }
-                }
-                items(state.workouts) { workout ->
-                    Button(
-                        onClick = {
-                            onEvent(WorkoutEvent.ShowChooseActionDialog)
-                            chosenWorkout.value = workout
-                        },
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = Color.Transparent,
-                            contentColor = Color.Blue
-                        ),
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                    {
-                        WorkoutEntryRow(workout = workout, onEvent = onEvent)
-                    }
-                }
-            },
-            contentPadding = padding,
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-
+        HomeBody(
+            itemList = state.workouts,
+            onItemClick = { _ -> {}},
+            modifier = modifier
+                .padding(padding)
+                .fillMaxSize()
         )
     }
 }
