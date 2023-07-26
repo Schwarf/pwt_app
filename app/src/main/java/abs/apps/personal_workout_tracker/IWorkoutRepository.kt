@@ -2,7 +2,7 @@ package abs.apps.personal_workout_tracker
 
 import kotlinx.coroutines.flow.Flow
 
-interface WorkoutRepository {
+interface IWorkoutRepository {
     /**
      * Retrieve all the items from the the given data source.
      */
