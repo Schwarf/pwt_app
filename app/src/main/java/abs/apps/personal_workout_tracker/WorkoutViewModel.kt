@@ -14,7 +14,7 @@ class WorkoutViewModel(private val dao: WorkoutDao) : ViewModel() {
     private val _state = MutableStateFlow(WorkoutState())
 
     private val _workouts =
-        dao.getWorkouts().stateIn(
+        dao.getAllWorkouts().stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(),
             initialValue = emptyList()
