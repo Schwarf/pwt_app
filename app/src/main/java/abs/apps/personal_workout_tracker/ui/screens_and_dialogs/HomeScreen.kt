@@ -36,7 +36,7 @@ import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun WorkoutScreen(
+fun HomeScreen(
     state: WorkoutState,
     onEvent: (WorkoutEvent) -> Unit
 ) {

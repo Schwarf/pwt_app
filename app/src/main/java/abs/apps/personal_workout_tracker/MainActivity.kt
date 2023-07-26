@@ -1,6 +1,6 @@
 package abs.apps.personal_workout_tracker
 
-import abs.apps.personal_workout_tracker.ui.screens_and_dialogs.WorkoutScreen
+import abs.apps.personal_workout_tracker.ui.screens_and_dialogs.HomeScreen
 import abs.apps.personal_workout_tracker.ui.theme.Personal_workout_trackerTheme
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -33,7 +33,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             Personal_workout_trackerTheme {
                 val state by viewModel.state.collectAsState()
-                WorkoutScreen(state = state, onEvent = viewModel::onEvent)
+                HomeScreen(state = state, onEvent = viewModel::onEvent)
 
 
             }
