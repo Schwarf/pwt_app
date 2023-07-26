@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
         factoryProducer = {
             object : ViewModelProvider.Factory {
                 override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                    return WorkoutViewModel(database.dao) as T
+                    return WorkoutViewModel(database.workoutDao) as T
                 }
             }
         }
