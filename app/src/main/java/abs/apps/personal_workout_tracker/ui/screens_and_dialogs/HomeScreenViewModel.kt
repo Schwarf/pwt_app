@@ -22,9 +22,6 @@ class HomeScreenViewModel(workoutRepository: IWorkoutRepository) : ViewModel() {
     }
 }
 
-
-
-
 /**
  * Ui State for HomeScreen
  */
