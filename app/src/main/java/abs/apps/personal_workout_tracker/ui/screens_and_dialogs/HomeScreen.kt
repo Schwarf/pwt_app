@@ -98,9 +98,16 @@ fun HomeScreen(
             }
         },
     ) { padding ->
+        if (state.isAddingWorkout) {
+            AddWorkoutDialog(state = state, onEvent = onEvent)
+        }
+        if (state.isChoosingAction) {
+            ChooseActionDialog(workout = chosenWorkout.value!!, onEvent = onEvent)
+        }
+
         HomeBody(
             itemList = state.workouts,
-            onItemClick = { _ -> {}},
+            onItemClick = { _ -> {} },
             modifier = modifier
                 .padding(padding)
                 .fillMaxSize()
@@ -166,19 +173,30 @@ private fun WorkoutItem(
                 )
                 Spacer(Modifier.weight(1f))
                 Text(
-                    text = workout.sets,
+                    text = stringResource(
+                        id = R.string.set_workout_maxRepsInSets,
+                        workout.maxRepetitionsInSets
+                    ),
                     style = MaterialTheme.typography.titleMedium
                 )
             }
-            Text(
-                text = workout.totalRepetitions,
-                style = MaterialTheme.typography.titleMedium
-            )
-            Text(
-                text = workout.maxRepetitionsInSets,
-                style = MaterialTheme.typography.titleMedium
-            )
+            Row(
+                modifier = Modifier.fillMaxWidth()
+            ) {
 
+                Text(
+                    text = stringResource(id = R.string.set_workout_sets, workout.sets),
+                    style = MaterialTheme.typography.titleMedium
+                )
+                Spacer(Modifier.weight(1f))
+                Text(
+                    text = stringResource(
+                        id = R.string.set_workout_totalReps,
+                        workout.totalRepetitions
+                    ),
+                    style = MaterialTheme.typography.titleMedium
+                )
+            }
         }
     }
 }
