@@ -1,5 +1,6 @@
 package abs.apps.personal_workout_tracker.ui.screens_and_dialogs
 
+import abs.apps.personal_workout_tracker.R
 import abs.apps.personal_workout_tracker.WorkoutEvent
 import abs.apps.personal_workout_tracker.WorkoutState
 import abs.apps.personal_workout_tracker.Workouts
@@ -14,6 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -52,14 +54,14 @@ fun AddWorkoutDialog(
                 onEvent(WorkoutEvent.SaveWorkout)
             })
             {
-                Text(text = "Save")
+                Text(text = stringResource(R.string.save_workout))
             }
         },
         modifier = modifier,
         onDismissRequest = {
             onEvent(WorkoutEvent.HideAddDialog)
         },
-        title = { Text(text = "Add Workout") },
+        title = { Text(text = stringResource(R.string.add_workout)) },
         text = {
             Column(
                 verticalArrangement = Arrangement.spacedBy(8.dp)
@@ -70,34 +72,34 @@ fun AddWorkoutDialog(
                         onEvent(WorkoutEvent.SetName(it))
                     },
                     placeholder = {
-                        Text(text = "Name")
+                        Text(text = stringResource(id = R.string.workout_name))
                     }
                 )
                 TextField(
-                    value = state.sets.toString(),
+                    value = state.sets,
                     onValueChange = {
                         onEvent(WorkoutEvent.SetSets(it))
                     },
                     placeholder = {
-                        Text(text = "Sets")
+                        Text(text = stringResource(id = R.string.workout_sets))
                     }
                 )
                 TextField(
-                    value = state.totalRepetitions.toString(),
+                    value = state.totalRepetitions,
                     onValueChange = {
                         onEvent(WorkoutEvent.SetTotalRepetitions(it))
                     },
                     placeholder = {
-                        Text(text = "Total repetitions")
+                        Text(text = stringResource(id = R.string.workout_totalReps))
                     }
                 )
                 TextField(
-                    value = state.maxRepetitionsInSet.toString(),
+                    value = state.maxRepetitionsInSet,
                     onValueChange = {
                         onEvent(WorkoutEvent.SetMaxRepetitionsInSet(it))
                     },
                     placeholder = {
-                        Text(text = "Max repetitions in set")
+                        Text(text = stringResource(id = R.string.workout_maxRepsInSets))
                     }
                 )
 

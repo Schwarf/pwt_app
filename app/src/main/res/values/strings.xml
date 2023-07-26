@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">personal_workout_tracker</string>
     <string name="add_workout">Add workout</string>
+    <string name="save_workout">Save </string>>
+    <string name="workout_name">Name </string>>
+    <string name="workout_sets">Sets </string>>
+    <string name="workout_totalReps">Total repetitions </string>>
+    <string name="workout_maxRepsInSets">Max repetitions in set </string>>
 </resources>
