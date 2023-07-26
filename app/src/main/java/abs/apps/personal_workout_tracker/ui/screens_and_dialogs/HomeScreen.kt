@@ -32,6 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
@@ -47,7 +48,7 @@ fun HomeScreen(
         floatingActionButton =
         {
             FloatingActionButton(onClick = { onEvent(WorkoutEvent.ShowAddDialog) }) {
-                Icon(imageVector = Icons.Default.Add, contentDescription = "Add Workout")
+                Icon(imageVector = Icons.Default.Add, contentDescription = stringResource(id = R.string.add_workout))
             }
         },
         modifier = Modifier.padding(dimensionResource(R.dimen.padding_medium))
@@ -69,19 +70,19 @@ fun HomeScreen(
                         verticalAlignment = CenterVertically
                     ) {
                         Text(
-                            text = "Workout",
+                            text = stringResource(id = R.string.workout_name),
                             modifier = Modifier.weight(1f)
                         )
                         Text(
-                            text = "Sets", textAlign = TextAlign.End, modifier = Modifier
+                            text = stringResource(id = R.string.workout_sets), textAlign = TextAlign.End, modifier = Modifier
                                 .weight(1f)
                         )
                         Text(
-                            text = "Total reps", textAlign = TextAlign.End, modifier = Modifier
+                            text = stringResource(id = R.string.workout_totalReps), textAlign = TextAlign.End, modifier = Modifier
                                 .weight(1f)
                         )
                         Text(
-                            text = "Max reps in one set",
+                            text = stringResource(id = R.string.workout_maxRepsInSets),
                             textAlign = TextAlign.End,
                             modifier = Modifier
                                 .weight(1f)
@@ -94,7 +95,7 @@ fun HomeScreen(
                         {
                             Icon(
                                 imageVector = Icons.Default.Delete,
-                                contentDescription = "Delete workout"
+                                contentDescription = stringResource(id = R.string.delete)
                             )
                         }
                     }
