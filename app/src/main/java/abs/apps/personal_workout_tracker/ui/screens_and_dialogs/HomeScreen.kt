@@ -4,6 +4,7 @@ import abs.apps.personal_workout_tracker.R
 import abs.apps.personal_workout_tracker.Workout
 import abs.apps.personal_workout_tracker.WorkoutEvent
 import abs.apps.personal_workout_tracker.WorkoutState
+import abs.apps.personal_workout_tracker.ui.navigation.NavigationDestination
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -40,33 +41,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
-/**
- * App bar to display title and conditionally display the back navigation.
- */
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun WorkoutTopAppBar(
-    title: String,
-    canNavigateBack: Boolean,
-    modifier: Modifier = Modifier,
-    scrollBehavior: TopAppBarScrollBehavior? = null,
-    navigateUp: () -> Unit = {}
-) {
-    CenterAlignedTopAppBar(
-        title = { Text(title) },
-        modifier = modifier,
-        scrollBehavior = scrollBehavior,
-        navigationIcon = {
-            if (canNavigateBack) {
-                IconButton(onClick = navigateUp) {
-                    Icon(
-                        imageVector = Icons.Filled.ArrowBack,
-                        contentDescription = stringResource(R.string.back_button)
-                    )
-                }
-            }
-        }
-    )
+
+object HomeDestination : NavigationDestination {
+    override val route = "home"
+    override val titleRes = R.string.app_name
 }
 
 
@@ -199,4 +177,33 @@ private fun WorkoutItem(
             }
         }
     }
+}
+
+/**
+ * App bar to display title and conditionally display the back navigation.
+ */
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun WorkoutTopAppBar(
+    title: String,
+    canNavigateBack: Boolean,
+    modifier: Modifier = Modifier,
+    scrollBehavior: TopAppBarScrollBehavior? = null,
+    navigateUp: () -> Unit = {}
+) {
+    CenterAlignedTopAppBar(
+        title = { Text(title) },
+        modifier = modifier,
+        scrollBehavior = scrollBehavior,
+        navigationIcon = {
+            if (canNavigateBack) {
+                IconButton(onClick = navigateUp) {
+                    Icon(
+                        imageVector = Icons.Filled.ArrowBack,
+                        contentDescription = stringResource(R.string.back_button)
+                    )
+                }
+            }
+        }
+    )
 }

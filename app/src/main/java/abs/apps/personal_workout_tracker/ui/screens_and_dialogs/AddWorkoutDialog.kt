@@ -3,6 +3,7 @@ package abs.apps.personal_workout_tracker.ui.screens_and_dialogs
 import abs.apps.personal_workout_tracker.R
 import abs.apps.personal_workout_tracker.WorkoutEvent
 import abs.apps.personal_workout_tracker.WorkoutState
+import abs.apps.personal_workout_tracker.ui.navigation.NavigationDestination
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.AlertDialog
@@ -14,6 +15,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+
+
+object WorkoutEntryDestination : NavigationDestination {
+    override val route = "item_entry"
+    override val titleRes = R.string.add_workout
+}
 
 
 @OptIn(ExperimentalMaterial3Api::class)
