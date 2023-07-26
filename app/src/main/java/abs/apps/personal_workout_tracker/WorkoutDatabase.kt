@@ -9,5 +9,5 @@ import androidx.room.RoomDatabase
     exportSchema = false
 )
 abstract class WorkoutDatabase : RoomDatabase() {
-    abstract val dao: WorkoutDao
+    abstract val dao: IWorkoutDao
 }

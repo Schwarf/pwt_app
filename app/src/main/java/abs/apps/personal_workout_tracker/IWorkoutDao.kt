@@ -7,7 +7,7 @@ import androidx.room.Upsert
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface WorkoutDao {
+interface IWorkoutDao {
     @Upsert
     suspend fun upsertWorkout(workout: Workout)
 

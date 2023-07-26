@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class WorkoutViewModel(private val dao: WorkoutDao) : ViewModel() {
+class WorkoutViewModel(private val dao: IWorkoutDao) : ViewModel() {
 
     private val _state = MutableStateFlow(WorkoutState())
 
