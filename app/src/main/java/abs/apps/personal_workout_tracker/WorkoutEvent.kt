@@ -1,5 +1,7 @@
 package abs.apps.personal_workout_tracker
 
+import abs.apps.personal_workout_tracker.data.Workout
+
 sealed interface WorkoutEvent {
     object SaveWorkout : WorkoutEvent //  defines a singleton
     data class SetName(val name: String) : WorkoutEvent

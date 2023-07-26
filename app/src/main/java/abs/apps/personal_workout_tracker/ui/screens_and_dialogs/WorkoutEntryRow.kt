@@ -1,6 +1,6 @@
 package abs.apps.personal_workout_tracker.ui.screens_and_dialogs
 
-import abs.apps.personal_workout_tracker.Workout
+import abs.apps.personal_workout_tracker.data.Workout
 import abs.apps.personal_workout_tracker.WorkoutEvent
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth

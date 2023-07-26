@@ -1,5 +1,7 @@
 package abs.apps.personal_workout_tracker
 
+import abs.apps.personal_workout_tracker.data.Workout
+
 data class WorkoutState(
     val workouts: List<Workout> = emptyList(),
     val name: String = "",

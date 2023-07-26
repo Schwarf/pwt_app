@@ -1,4 +1,4 @@
-package abs.apps.personal_workout_tracker
+package abs.apps.personal_workout_tracker.data
 
 import androidx.room.Dao
 import androidx.room.Delete
