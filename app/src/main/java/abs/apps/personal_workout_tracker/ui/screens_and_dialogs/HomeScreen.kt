@@ -1,5 +1,6 @@
 package abs.apps.personal_workout_tracker.ui.screens_and_dialogs
 
+import abs.apps.personal_workout_tracker.R
 import abs.apps.personal_workout_tracker.Workout
 import abs.apps.personal_workout_tracker.WorkoutEvent
 import abs.apps.personal_workout_tracker.WorkoutState
@@ -30,6 +31,7 @@ import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
@@ -48,7 +50,7 @@ fun HomeScreen(
                 Icon(imageVector = Icons.Default.Add, contentDescription = "Add Workout")
             }
         },
-        modifier = Modifier.padding(16.dp)
+        modifier = Modifier.padding(dimensionResource(R.dimen.padding_medium))
     ) { padding ->
         if (state.isAddingWorkout) {
             AddWorkoutDialog(state = state, onEvent = onEvent)
