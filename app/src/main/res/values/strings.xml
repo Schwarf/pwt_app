@@ -5,6 +5,7 @@
     <string name="cancel">Cancel </string>>
     <string name="delete">Delete </string>>
     <string name="edit">Edit </string>>
+    <string name="no_workout_description">Oops!\nNo workouts yet.\nTap + to add.</string>
     <string name="workout_name">Name </string>>
     <string name="workout_sets">Sets </string>>
     <string name="workout_totalReps">Total repetitions </string>>
