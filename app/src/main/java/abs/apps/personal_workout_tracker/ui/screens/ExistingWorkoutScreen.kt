@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -31,6 +33,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.lifecycle.viewmodel.compose.viewModel
+import kotlinx.coroutines.launch
 
 object ExistingWorkoutDestination : INavigationDestination {
     override val route = "existing_workout"
@@ -42,7 +45,6 @@ object ExistingWorkoutDestination : INavigationDestination {
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun ExistingWorkoutScreen(
-    navigateToEditItem: (Int) -> Unit,
     navigateBack: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: ExistingWorkoutViewModel = viewModel(factory = AppViewModelProvider.Factory)
@@ -58,22 +60,33 @@ fun ExistingWorkoutScreen(
             )
         },
         modifier = modifier
-        ){innerPadding -> {innerPadding}
+    ) { innerPadding ->
+        ExistingWorkoutBody(
+            existingWorkout = state, onDelete = {
+                coroutineScope.launch {
+                    viewModel.deleteWorkout()
+                    navigateBack()
+                }
+            },
+            modifier = Modifier
+                .padding(innerPadding)
+                .verticalScroll(rememberScrollState())
+        )
     }
 }
 
 @Composable
 private fun ExistingWorkoutBody(
-    existingWorkout : ExistingWorkout,
+    existingWorkout: ExistingWorkout,
     onDelete: () -> Unit,
     modifier: Modifier = Modifier
-){
+) {
     Column(
         modifier = modifier.padding(dimensionResource(id = R.dimen.padding_medium)),
         verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_medium))
-    ){
+    ) {
         var deleteConfirmationRequired by rememberSaveable { mutableStateOf(false) }
-        ExistingWorkoutDetails(existingWorkout = existingWorkout, )
+        ExistingWorkoutDetails(existingWorkout = existingWorkout)
         OutlinedButton(
             onClick = { deleteConfirmationRequired = true },
             shape = MaterialTheme.shapes.small,
@@ -99,8 +112,7 @@ private fun ExistingWorkoutBody(
 fun ExistingWorkoutDetails(
     existingWorkout: ExistingWorkout,
     modifier: Modifier = Modifier
-)
-{
+) {
     Card(
         modifier = modifier, colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer,
