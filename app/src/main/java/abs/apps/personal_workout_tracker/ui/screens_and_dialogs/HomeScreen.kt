@@ -2,9 +2,9 @@ package abs.apps.personal_workout_tracker.ui.screens_and_dialogs
 
 import abs.apps.personal_workout_tracker.R
 import abs.apps.personal_workout_tracker.data.Workout
-import abs.apps.personal_workout_tracker.WorkoutEvent
-import abs.apps.personal_workout_tracker.WorkoutState
-import abs.apps.personal_workout_tracker.ui.navigation.NavigationDestination
+import abs.apps.personal_workout_tracker.ui.AppViewModelProvider
+import abs.apps.personal_workout_tracker.ui.navigation.INavigationDestination
+import android.annotation.SuppressLint
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -31,8 +31,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -40,22 +40,24 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 
-object HomeDestination : NavigationDestination {
+object HomeDestination : INavigationDestination {
     override val route = "home"
     override val titleRes = R.string.app_name
 }
 
 
 @OptIn(ExperimentalMaterial3Api::class)
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun HomeScreen(
-    state: WorkoutState,
+    navigateToAddWorkout: () -> Unit,
     modifier: Modifier = Modifier,
-    onEvent: (WorkoutEvent) -> Unit
+    viewModel: HomeScreenViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
-    val chosenWorkout = remember { mutableStateOf<Workout?>(null) }
+    val state by viewModel.listOfWorkouts.collectAsState()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -68,7 +70,7 @@ fun HomeScreen(
         },
         floatingActionButton =
         {
-            FloatingActionButton(onClick = { onEvent(WorkoutEvent.ShowAddDialog) }) {
+            FloatingActionButton(onClick = navigateToAddWorkout) {
                 Icon(
                     imageVector = Icons.Default.Add,
                     contentDescription = stringResource(id = R.string.add_workout)
@@ -76,15 +78,9 @@ fun HomeScreen(
             }
         },
     ) { padding ->
-        if (state.isAddingWorkout) {
-            AddWorkoutDialog(state = state, onEvent = onEvent)
-        }
-        if (state.isChoosingAction) {
-            ChooseActionDialog(workout = chosenWorkout.value!!, onEvent = onEvent)
-        }
 
         HomeBody(
-            itemList = state.workouts,
+            workoutList = state.workoutList,
             onItemClick = { _ -> {} },
             modifier = modifier
                 .padding(padding)
@@ -95,13 +91,13 @@ fun HomeScreen(
 
 @Composable
 private fun HomeBody(
-    itemList: List<Workout>, onItemClick: (Int) -> Unit, modifier: Modifier = Modifier
+    workoutList: List<Workout>, onItemClick: (Int) -> Unit, modifier: Modifier = Modifier
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
     ) {
-        if (itemList.isEmpty()) {
+        if (workoutList.isEmpty()) {
             Text(
                 text = stringResource(R.string.no_workout_description),
                 textAlign = TextAlign.Center,
@@ -109,7 +105,7 @@ private fun HomeBody(
             )
         } else {
             WorkoutList(
-                itemList = itemList,
+                itemList = workoutList,
                 onItemClick = { onItemClick(it.id) },
                 modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.padding_small))
             )
