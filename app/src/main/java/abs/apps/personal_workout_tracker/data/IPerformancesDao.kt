@@ -18,5 +18,5 @@ interface IPerformancesDao {
     fun getAllPerformances(): Flow<List<Performance>>
 
     @Query("SELECT * FROM performances WHERE workoutId = :workoutId ORDER BY timestamp ASC")
-    fun getAllPerformancesForOneWorkout(workoutId: Int): Flow<List<Performance>>
+    fun getAllPerformancesForOneWorkout(workoutId: Int): Flow<Performance>
 }

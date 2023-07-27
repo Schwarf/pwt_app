@@ -11,7 +11,7 @@ interface IPerformanceRepository {
     /**
      * Retrieve an item from the given data source that matches with the [id].
      */
-    fun getAllPerformancesStreamForOneWorkout(workoutId: Int): Flow<List<Performance>>
+    fun getPerformancesStreamForOneWorkout(workoutId: Int): Flow<Performance>
 
     /**
      * Insert item in the data source

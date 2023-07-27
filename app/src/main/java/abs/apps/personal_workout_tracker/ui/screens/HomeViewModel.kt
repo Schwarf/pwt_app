@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 
 class HomeViewModel(workoutRepository: IWorkoutRepository) : ViewModel() {
-    val listOfWorkouts: StateFlow<ListOfWorkouts> =
+    val listOfWorkoutsState: StateFlow<ListOfWorkouts> =
         workoutRepository.getAllWorkoutsStream().map { ListOfWorkouts(it) }
             .stateIn(
                 scope = viewModelScope,

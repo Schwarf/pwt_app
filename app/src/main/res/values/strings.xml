@@ -13,6 +13,7 @@
     <string name="set_workout_sets">Sets: %s</string>>
     <string name="set_workout_totalReps">Total repetitions: %s </string>>
     <string name="set_workout_maxRepsInSets">Max repetitions in set: %s </string>>
+    <string name="workout_exists">What do you want to do with this workout?</string>
     <string name="required_fields">*required fields</string>>
 git    <string name="back_button">Back</string>
 </resources>
