@@ -35,7 +35,7 @@ fun WorkoutEntryRow(
             textAlign = TextAlign.Center
         )
         Text(
-            text = workout.maxRepetitionsInSets,
+            text = workout.maxRepetitionsInSet,
             modifier = Modifier
                 .weight(1f),
             textAlign = TextAlign.Center

@@ -51,7 +51,7 @@ class WorkoutViewModel(private val dao: IWorkoutDao) : ViewModel() {
                     name = name,
                     sets = sets,
                     totalRepetitions = totalRepetitions,
-                    maxRepetitionsInSets = maxRepetitionsInSet
+                    maxRepetitionsInSet = maxRepetitionsInSet
                 )
                 viewModelScope.launch { dao.upsertWorkout(workout = workout) }
                 _state.update {

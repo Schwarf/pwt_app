@@ -26,6 +26,9 @@ object WorkoutEntryDestination : INavigationDestination {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddWorkoutDialog(
+    navigateBack: () -> Unit,
+    onNavigateUp: () -> Unit,
+    canNavigateBack: Boolean = true,
     state: WorkoutState,
     onEvent: (WorkoutEvent) -> Unit,
     modifier: Modifier = Modifier

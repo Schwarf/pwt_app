@@ -149,7 +149,7 @@ private fun WorkoutItem(
                 Text(
                     text = stringResource(
                         id = R.string.set_workout_maxRepsInSets,
-                        workout.maxRepetitionsInSets
+                        workout.maxRepetitionsInSet
                     ),
                     style = MaterialTheme.typography.titleMedium
                 )
