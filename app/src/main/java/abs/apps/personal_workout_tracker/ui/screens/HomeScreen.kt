@@ -54,6 +54,7 @@ object HomeDestination : INavigationDestination {
 @Composable
 fun HomeScreen(
     navigateToAddWorkout: () -> Unit,
+    navigateToExistingWorkout: (Int) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
@@ -81,7 +82,7 @@ fun HomeScreen(
 
         HomeBody(
             workoutList = state.workoutList,
-            onItemClick = { _ -> {} },
+            onItemClick = navigateToExistingWorkout,
             modifier = modifier
                 .padding(padding)
                 .fillMaxSize()

@@ -12,10 +12,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
@@ -45,6 +49,7 @@ object ExistingWorkoutDestination : INavigationDestination {
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun ExistingWorkoutScreen(
+    navigateToExistingWorkout: (Int) -> Unit,
     navigateBack: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: ExistingWorkoutViewModel = viewModel(factory = AppViewModelProvider.Factory)
@@ -58,6 +63,19 @@ fun ExistingWorkoutScreen(
                 canNavigateBack = true,
                 navigateUp = navigateBack
             )
+        },
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = { navigateToExistingWorkout(state.workoutDetails.id) },
+                shape = MaterialTheme.shapes.medium,
+                modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_large))
+
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Edit,
+                    contentDescription = stringResource(R.string.edit_workout_title),
+                )
+            }
         },
         modifier = modifier
     ) { innerPadding ->

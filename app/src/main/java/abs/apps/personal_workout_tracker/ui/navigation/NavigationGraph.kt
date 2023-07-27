@@ -1,6 +1,8 @@
 package abs.apps.personal_workout_tracker.ui.navigation
 
 import abs.apps.personal_workout_tracker.ui.screens.AddWorkoutScreen
+import abs.apps.personal_workout_tracker.ui.screens.ExistingWorkoutDestination
+import abs.apps.personal_workout_tracker.ui.screens.ExistingWorkoutScreen
 import abs.apps.personal_workout_tracker.ui.screens.HomeDestination
 import abs.apps.personal_workout_tracker.ui.screens.HomeScreen
 import abs.apps.personal_workout_tracker.ui.screens.WorkoutEntryDestination
@@ -8,9 +10,11 @@ import android.annotation.SuppressLint
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 
 /**
  * Top level composable that represents screens for the application.
@@ -33,6 +37,9 @@ fun WorkoutTrackerNavHost(
     ) {
         composable(route = HomeDestination.route) {
             HomeScreen(
+                navigateToExistingWorkout = {
+                    navController.navigate("${ExistingWorkoutDestination.route}/${it}")
+                },
                 navigateToAddWorkout = { navController.navigate(WorkoutEntryDestination.route) }
             )
         }
@@ -42,5 +49,19 @@ fun WorkoutTrackerNavHost(
             AddWorkoutScreen(navigateBack = { navController.popBackStack() },
                 onNavigateUp = { navController.navigateUp() })
         }
+        composable(
+            route = ExistingWorkoutDestination.routeWithArgs,
+            arguments = listOf(navArgument(ExistingWorkoutDestination.workoutIdArg) {
+                type = NavType.IntType
+            })
+        )
+        {
+
+            ExistingWorkoutScreen(
+                navigateToExistingWorkout = { navController.navigate("${ExistingWorkoutDestination.route}/$it") },
+                navigateBack = { navController.popBackStack() })
+        }
+
+
     }
 }

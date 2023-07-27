@@ -3,6 +3,7 @@
     <string name="delete_question">Are you sure you want to delete?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="edit_workout_title">Edit Workout</string>
     <string name="app_name">personal_workout_tracker</string>
     <string name="add_workout">Add workout</string>
     <string name="save">Save </string>>
