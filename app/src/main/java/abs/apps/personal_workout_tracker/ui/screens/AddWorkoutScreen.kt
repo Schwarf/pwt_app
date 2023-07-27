@@ -134,7 +134,6 @@ fun WorkoutInputForm(
                 unfocusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
                 disabledContainerColor = MaterialTheme.colorScheme.secondaryContainer,
             ),
-            leadingIcon = { Text(Currency.getInstance(Locale.getDefault()).symbol) },
             modifier = Modifier.fillMaxWidth(),
             enabled = enabled,
             singleLine = true
@@ -142,7 +141,7 @@ fun WorkoutInputForm(
         OutlinedTextField(
             value = workoutDetails.totalRepetitions,
             onValueChange = { onWorkoutValueChange(workoutDetails.copy(totalRepetitions = it)) },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
             label = { Text(stringResource(R.string.workout_totalReps_required)) },
             colors = OutlinedTextFieldDefaults.colors(
                 focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
@@ -156,8 +155,8 @@ fun WorkoutInputForm(
         OutlinedTextField(
             value = workoutDetails.maxRepetitionsInSet,
             onValueChange = { onWorkoutValueChange(workoutDetails.copy(maxRepetitionsInSet = it)) },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-            label = { Text(stringResource(R.string.workout_totalReps_required)) },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
+            label = { Text(stringResource(R.string.workout_maxRepsInSets_required)) },
             colors = OutlinedTextFieldDefaults.colors(
                 focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
                 unfocusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
