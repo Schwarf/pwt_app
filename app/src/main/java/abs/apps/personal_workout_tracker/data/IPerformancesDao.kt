@@ -14,9 +14,9 @@ interface IPerformancesDao {
     @Delete
     suspend fun deletePerformance(performance: Performance)
 
-    @Query("SELECT * FROM performances ORDER BY timestamp ASC")
+    @Query("SELECT * FROM performances")
     fun getAllPerformances(): Flow<List<Performance>>
 
-    @Query("SELECT * FROM performances WHERE workoutId = :workoutId ORDER BY timestamp ASC")
+    @Query("SELECT * FROM performances WHERE workoutId = :workoutId")
     fun getAllPerformancesForOneWorkout(workoutId: Int): Flow<Performance>
 }

@@ -3,6 +3,7 @@ package abs.apps.personal_workout_tracker.data
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import java.util.Date
 
@@ -13,7 +14,8 @@ import java.util.Date
         parentColumns = ["id"],
         childColumns = ["workoutId"],
         onDelete = ForeignKey.CASCADE
-    )]
+    )],
+    indices = [Index(value = ["workoutId"])]
 )
 data class Performance(
     @PrimaryKey(autoGenerate = true)
@@ -22,8 +24,6 @@ data class Performance(
     val workoutId: Int,
     @ColumnInfo(name = "performedCounter")
     val performedCounter: Int,
-    @ColumnInfo(name = "timestamp")
-    val timestamp: Long,
 )
 
 

@@ -67,5 +67,4 @@ fun Performance.toPerformanceDetails(): PerformanceDetails = PerformanceDetails(
     id = id,
     workoutId = workoutId,
     performedCounter = performedCounter.toString(),
-    timestamp = timestamp
 )
