@@ -27,10 +27,19 @@ class ExistingWorkoutViewModel(
         workoutRepository.getWorkoutStream(workoutId).filterNotNull().flatMapLatest { workout ->
             performanceRepository.getPerformancesStreamForOneWorkout(workout.id)
                 .map { performance ->
-                    ExistingWorkout(
-                        workoutDetails = workout.toWorkoutDetails(),
-                        performanceDetails = performance.toPerformanceDetails()
-                    )
+                    if(performance != null)
+                    {
+                        ExistingWorkout(
+                            workoutDetails = workout.toWorkoutDetails(),
+                            performanceDetails = performance.toPerformanceDetails())
+
+                    }
+                    else{
+                        ExistingWorkout(
+                            workoutDetails = workout.toWorkoutDetails(),
+                            performanceDetails = PerformanceDetails()
+                        )
+                    }
                 }
         }.stateIn(
             scope = viewModelScope, started = SharingStarted.WhileSubscribed(
@@ -72,7 +81,7 @@ data class PerformanceDetails
     (
     val id: Int = 0,
     val workoutId: Int = 0,
-    val performedCounter: String = "",
+    val performedCounter: String = "0",
 )
 
 fun Performance.toPerformanceDetails(): PerformanceDetails = PerformanceDetails(
