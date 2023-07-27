@@ -12,6 +12,7 @@ import androidx.room.RoomDatabase
 )
 abstract class WorkoutDatabase : RoomDatabase() {
     abstract val workoutDao: IWorkoutDao
+    abstract val performanceDao: IPerformancesDao
     companion object{
         @Volatile
         private var Instance: WorkoutDatabase? = null
