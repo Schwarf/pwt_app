@@ -4,22 +4,27 @@ import kotlinx.coroutines.flow.Flow
 
 interface IPerformanceRepository {
     /**
-     * Retrieve all the items from the the given data source.
+     * Retrieve all the workouts from the the given data source.
      */
     fun getAllPerformancesStream(): Flow<List<Performance>>
 
     /**
-     * Retrieve an item from the given data source that matches with the [id].
+     * Retrieve an workout from the given data source that matches with the [id].
      */
     fun getPerformancesStreamForOneWorkout(workoutId: Int): Flow<Performance>
 
     /**
-     * Insert item in the data source
+     * Insert workout in the data source
      */
     suspend fun insertPerformance(performance: Performance)
 
     /**
-     * Delete item from the data source
+     * Update performance in the data source
+     */
+    suspend fun updatePerformance(performance: Performance)
+
+    /**
+     * Delete workout from the data source
      */
     suspend fun deletePerformance(performance: Performance)
 }

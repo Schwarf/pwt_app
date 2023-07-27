@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 
 class ExistingWorkoutViewModel(
     savedStateHandle: SavedStateHandle,
@@ -23,17 +24,30 @@ class ExistingWorkoutViewModel(
         checkNotNull(savedStateHandle[ExistingWorkoutDestination.workoutIdArg])
 
     val existingWorkoutsState: StateFlow<ExistingWorkout> =
-        workoutRepository.getWorkoutStream(workoutId).filterNotNull().flatMapLatest {
-            workout -> performanceRepository.getPerformancesStreamForOneWorkout(workout.id).map { performance ->
-            ExistingWorkout(
-                workoutDetails = workout.toWorkoutDetails(),
-                performanceDetails = performance.toPerformanceDetails()
-            )
-        }}.stateIn(
+        workoutRepository.getWorkoutStream(workoutId).filterNotNull().flatMapLatest { workout ->
+            performanceRepository.getPerformancesStreamForOneWorkout(workout.id)
+                .map { performance ->
+                    ExistingWorkout(
+                        workoutDetails = workout.toWorkoutDetails(),
+                        performanceDetails = performance.toPerformanceDetails()
+                    )
+                }
+        }.stateIn(
             scope = viewModelScope, started = SharingStarted.WhileSubscribed(
                 TIMEOUT_MILLIS
             ), initialValue = ExistingWorkout()
         )
+
+    fun addOnePerformance() {
+        viewModelScope.launch {
+            val currentPerformance = existingWorkoutsState.value.performanceDetails.toPerformance()
+            performanceRepository.updatePerformance(currentPerformance.copy(performedCounter = currentPerformance.performedCounter + 1))
+        }
+    }
+
+    suspend fun deleteWorkout() {
+        workoutRepository.deleteWorkout(existingWorkoutsState.value.workoutDetails.toWorkout())
+    }
 
     companion object {
         private const val TIMEOUT_MILLIS = 5_000L
@@ -59,12 +73,16 @@ data class PerformanceDetails
     val id: Int = 0,
     val workoutId: Int = 0,
     val performedCounter: String = "",
-    val timestamp: Long = 0
-
 )
 
 fun Performance.toPerformanceDetails(): PerformanceDetails = PerformanceDetails(
     id = id,
     workoutId = workoutId,
     performedCounter = performedCounter.toString(),
+)
+
+fun PerformanceDetails.toPerformance(): Performance = Performance(
+    id = id,
+    workoutId = workoutId,
+    performedCounter = performedCounter.toIntOrNull() ?: 0
 )
