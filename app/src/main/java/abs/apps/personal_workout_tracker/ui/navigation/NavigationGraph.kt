@@ -1,6 +1,6 @@
 package abs.apps.personal_workout_tracker.ui.navigation
 
-import abs.apps.personal_workout_tracker.ui.screens.AddWorkoutDialog
+import abs.apps.personal_workout_tracker.ui.screens.AddWorkoutScreen
 import abs.apps.personal_workout_tracker.ui.screens.HomeDestination
 import abs.apps.personal_workout_tracker.ui.screens.HomeScreen
 import abs.apps.personal_workout_tracker.ui.screens.WorkoutEntryDestination
@@ -39,7 +39,7 @@ fun WorkoutTrackerNavHost(
 
         composable(route = WorkoutEntryDestination.route)
         {
-            AddWorkoutDialog(navigateBack = { navController.popBackStack() },
+            AddWorkoutScreen(navigateBack = { navController.popBackStack() },
                 onNavigateUp = { navController.navigateUp() })
         }
     }

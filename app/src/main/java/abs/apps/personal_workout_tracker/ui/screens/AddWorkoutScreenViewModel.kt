@@ -7,7 +7,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 
-class AddWorkoutViewModel(private val workoutRepository: IWorkoutRepository) : ViewModel() {
+class AddWorkoutScreenViewModel(private val workoutRepository: IWorkoutRepository) : ViewModel() {
     var workoutEntryState by mutableStateOf(WorkoutEntry())
         private set
 

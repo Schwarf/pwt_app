@@ -36,11 +36,11 @@ object WorkoutEntryDestination : INavigationDestination {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddWorkoutDialog(
+fun AddWorkoutScreen(
     navigateBack: () -> Unit,
     onNavigateUp: () -> Unit,
     canNavigateBack: Boolean = true,
-    viewModel: AddWorkoutViewModel = viewModel(factory = AppViewModelProvider.Factory)
+    viewModel: AddWorkoutScreenViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
     val coroutineScope = rememberCoroutineScope()
     Scaffold(
