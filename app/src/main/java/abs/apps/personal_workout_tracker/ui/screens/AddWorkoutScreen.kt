@@ -25,8 +25,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.launch
-import java.util.Currency
-import java.util.Locale
 
 object WorkoutEntryDestination : INavigationDestination {
     override val route = "item_entry"
@@ -40,7 +38,7 @@ fun AddWorkoutScreen(
     navigateBack: () -> Unit,
     onNavigateUp: () -> Unit,
     canNavigateBack: Boolean = true,
-    viewModel: AddWorkoutScreenViewModel = viewModel(factory = AppViewModelProvider.Factory)
+    viewModel: AddWorkoutViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
     val coroutineScope = rememberCoroutineScope()
     Scaffold(

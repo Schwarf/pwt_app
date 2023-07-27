@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 
-class HomeScreenViewModel(workoutRepository: IWorkoutRepository) : ViewModel() {
+class HomeViewModel(workoutRepository: IWorkoutRepository) : ViewModel() {
     val listOfWorkouts: StateFlow<ListOfWorkouts> =
         workoutRepository.getAllWorkoutsStream().map { ListOfWorkouts(it) }
             .stateIn(
