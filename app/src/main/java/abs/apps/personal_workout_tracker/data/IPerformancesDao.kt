@@ -1,0 +1,22 @@
+package abs.apps.personal_workout_tracker.data
+
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Query
+import androidx.room.Upsert
+import kotlinx.coroutines.flow.Flow
+
+@Dao
+interface IPerformancesDao {
+    @Upsert
+    suspend fun upsertPerformance(performance: Performance)
+
+    @Delete
+    suspend fun deletePerformance(performance: Performance)
+
+    @Query("SELECT * FROM performances ORDER BY timestamp ASC")
+    fun getAllPerformances(): Flow<List<Performance>>
+
+    @Query("SELECT * FROM performances WHERE workoutId = workoutId ORDER BY timestamp ASC")
+    fun getAllPerformancesForOneWorkout(workoutId: Int): Flow<List<Performance>>
+}

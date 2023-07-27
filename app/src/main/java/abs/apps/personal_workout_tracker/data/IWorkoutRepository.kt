@@ -27,5 +27,4 @@ interface IWorkoutRepository {
      * Update item in the data source
      */
     suspend fun updateWorkout(workout: Workout)
-
 }
