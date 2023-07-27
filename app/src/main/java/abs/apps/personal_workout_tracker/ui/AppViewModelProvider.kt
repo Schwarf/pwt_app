@@ -1,6 +1,7 @@
 package abs.apps.personal_workout_tracker.ui
 
 import abs.apps.personal_workout_tracker.WorkoutTrackerApplication
+import abs.apps.personal_workout_tracker.ui.screens.AddWorkoutViewModel
 import abs.apps.personal_workout_tracker.ui.screens.HomeScreenViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.CreationExtras
@@ -13,6 +14,10 @@ object AppViewModelProvider {
         initializer {
             HomeScreenViewModel(workoutTrackerApplication().container.workoutRepository)
         }
+        initializer {
+            AddWorkoutViewModel(workoutTrackerApplication().container.workoutRepository)
+        }
+
     }
 }
 
