@@ -1,7 +1,7 @@
 package abs.apps.personal_workout_tracker.ui
 
 import abs.apps.personal_workout_tracker.WorkoutTrackerApplication
-import abs.apps.personal_workout_tracker.ui.screens_and_dialogs.HomeScreenViewModel
+import abs.apps.personal_workout_tracker.ui.screens.HomeScreenViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.lifecycle.viewmodel.initializer

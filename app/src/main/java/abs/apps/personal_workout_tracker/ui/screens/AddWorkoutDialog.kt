@@ -1,4 +1,4 @@
-package abs.apps.personal_workout_tracker.ui.screens_and_dialogs
+package abs.apps.personal_workout_tracker.ui.screens
 
 import abs.apps.personal_workout_tracker.R
 import abs.apps.personal_workout_tracker.WorkoutEvent

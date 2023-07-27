@@ -1,8 +1,8 @@
 package abs.apps.personal_workout_tracker.ui.navigation
 
-import abs.apps.personal_workout_tracker.ui.screens_and_dialogs.HomeDestination
-import abs.apps.personal_workout_tracker.ui.screens_and_dialogs.HomeScreen
-import abs.apps.personal_workout_tracker.ui.screens_and_dialogs.WorkoutEntryDestination
+import abs.apps.personal_workout_tracker.ui.screens.HomeDestination
+import abs.apps.personal_workout_tracker.ui.screens.HomeScreen
+import abs.apps.personal_workout_tracker.ui.screens.WorkoutEntryDestination
 import android.annotation.SuppressLint
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
