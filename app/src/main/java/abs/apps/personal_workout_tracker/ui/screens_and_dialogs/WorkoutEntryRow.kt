@@ -23,19 +23,19 @@ fun WorkoutEntryRow(
     Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
         Text(text = workout.name, modifier = Modifier.weight(2f))
         Text(
-            text = workout.sets,
+            text = workout.sets.toString(),
             modifier = Modifier
                 .weight(1f),
             textAlign = TextAlign.Center
         )
         Text(
-            text = workout.totalRepetitions,
+            text = workout.totalRepetitions.toString(),
             modifier = Modifier
                 .weight(1f),
             textAlign = TextAlign.Center
         )
         Text(
-            text = workout.maxRepetitionsInSet,
+            text = workout.maxRepetitionsInSet.toString(),
             modifier = Modifier
                 .weight(1f),
             textAlign = TextAlign.Center
