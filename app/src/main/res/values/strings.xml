@@ -10,6 +10,12 @@
     <string name="workout_sets_required">Sets*</string>>
     <string name="workout_totalReps_required">Total repetitions*</string>>
     <string name="workout_maxRepsInSets_required">Max repetitions in set*</string>>
+    <string name="workout_name">Name</string>>
+    <string name="workout_sets">Sets</string>>
+    <string name="workout_totalReps">Total repetitions</string>>
+    <string name="workout_maxRepsInSets">Max repetitions in set</string>>
+    <string name="performance_preformedCounter">Performed</string>>
+    <string name="set_workout_name">Name: %s</string>>
     <string name="set_workout_sets">Sets: %s</string>>
     <string name="set_workout_totalReps">Total repetitions: %s </string>>
     <string name="set_workout_maxRepsInSets">Max repetitions in set: %s </string>>
