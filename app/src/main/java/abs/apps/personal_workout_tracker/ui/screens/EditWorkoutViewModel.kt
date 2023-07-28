@@ -19,7 +19,7 @@ class EditWorkoutViewModel(
     var state by mutableStateOf(ValidatedWorkoutUI())
         private set
 
-    private val workoutId: Int = checkNotNull(savedStateHandle[EditWorkoutDestination.itemIdArg])
+    private val workoutId: Int = checkNotNull(savedStateHandle[EditWorkoutDestination.workoutIdArg])
 
     init {
         viewModelScope.launch {

@@ -2,6 +2,7 @@ package abs.apps.personal_workout_tracker.ui
 
 import abs.apps.personal_workout_tracker.WorkoutTrackerApplication
 import abs.apps.personal_workout_tracker.ui.screens.AddWorkoutViewModel
+import abs.apps.personal_workout_tracker.ui.screens.EditWorkoutViewModel
 import abs.apps.personal_workout_tracker.ui.screens.ExistingWorkoutViewModel
 import abs.apps.personal_workout_tracker.ui.screens.HomeViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -26,7 +27,12 @@ object AppViewModelProvider {
                 workoutTrackerApplication().container.performanceRepository
             )
         }
-
+        initializer {
+            EditWorkoutViewModel(
+                this.createSavedStateHandle(),
+                workoutTrackerApplication().container.workoutRepository,
+            )
+        }
     }
 }
 
