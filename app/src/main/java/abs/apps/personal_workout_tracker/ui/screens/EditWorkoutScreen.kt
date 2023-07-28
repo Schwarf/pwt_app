@@ -16,8 +16,8 @@ import kotlinx.coroutines.launch
 object EditWorkoutDestination : INavigationDestination {
     override val route = "workout_edit"
     override val titleRes = R.string.edit_workout_title
-    const val itemIdArg = "workoutId"
-    val routeWithArgs = "$route/{$itemIdArg}"
+    const val workoutIdArg = "workoutId"
+    val routeWithArgs = "$route/{$workoutIdArg}"
 }
 
 @OptIn(ExperimentalMaterial3Api::class)

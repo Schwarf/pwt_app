@@ -1,6 +1,8 @@
 package abs.apps.personal_workout_tracker.ui.navigation
 
 import abs.apps.personal_workout_tracker.ui.screens.AddWorkoutScreen
+import abs.apps.personal_workout_tracker.ui.screens.EditWorkoutDestination
+import abs.apps.personal_workout_tracker.ui.screens.EditWorkoutScreen
 import abs.apps.personal_workout_tracker.ui.screens.ExistingWorkoutDestination
 import abs.apps.personal_workout_tracker.ui.screens.ExistingWorkoutScreen
 import abs.apps.personal_workout_tracker.ui.screens.HomeDestination
@@ -57,12 +59,22 @@ fun WorkoutTrackerNavHost(
             })
         )
         {
-
             ExistingWorkoutScreen(
                 navigateToExistingWorkout = { navController.navigate("${ExistingWorkoutDestination.route}/$it") },
                 navigateBack = { navController.popBackStack() })
         }
 
+        composable(
+            route = EditWorkoutDestination.routeWithArgs,
+            arguments = listOf(navArgument(EditWorkoutDestination.workoutIdArg) {
+                type = NavType.IntType
+            })
+        )
+        {
+            EditWorkoutScreen(
+                navigateBack = { navController.popBackStack() },
+                onNavigateUp = { navController.navigateUp() })
+        }
 
     }
 }
