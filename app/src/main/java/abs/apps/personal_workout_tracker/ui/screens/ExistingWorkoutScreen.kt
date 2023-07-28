@@ -123,7 +123,7 @@ private fun ExistingWorkoutBody(
             onClick = onRemovePerformance,
             modifier = Modifier.fillMaxWidth(),
             shape = MaterialTheme.shapes.small,
-            enabled = existingWorkout.performanceDetails.performedCounter.toInt() > 0
+            enabled = existingWorkout.performanceUI.performedCounter.toInt() > 0
         ) {
             Text(stringResource(R.string.remove_performance))
         }
@@ -209,7 +209,7 @@ fun ExistingWorkoutDetails(
             )
             ExistingWorkoutRow(
                 labelResID = R.string.performance_preformedCounter,
-                value = existingWorkout.performanceDetails.performedCounter,
+                value = existingWorkout.performanceUI.performedCounter,
                 modifier = Modifier.padding(
                     horizontal = dimensionResource(
                         id = R.dimen
