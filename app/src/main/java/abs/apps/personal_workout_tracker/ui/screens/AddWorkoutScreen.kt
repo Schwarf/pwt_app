@@ -51,7 +51,7 @@ fun AddWorkoutScreen(
         }
     ) { innerPadding ->
         AddWorkoutBody(
-            workoutEntryState = viewModel.workoutEntryState,
+            validatedWorkoutUIState = viewModel.validatedWorkoutUIState,
             onWorkoutValueChange = viewModel::updateUiState,
             onSaveClick = {
                 coroutineScope.launch {
@@ -71,7 +71,7 @@ fun AddWorkoutScreen(
 
 @Composable
 fun AddWorkoutBody(
-    workoutEntryState: WorkoutEntry,
+    validatedWorkoutUIState: ValidatedWorkoutUI,
     onWorkoutValueChange: (WorkoutUI) -> Unit,
     onSaveClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -81,13 +81,13 @@ fun AddWorkoutBody(
         verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_large))
     ) {
         WorkoutInputForm(
-            workoutUI = workoutEntryState.workoutUI,
+            workoutUI = validatedWorkoutUIState.workoutUI,
             onWorkoutValueChange = onWorkoutValueChange,
             modifier = Modifier.fillMaxWidth()
         )
         Button(
             onClick = onSaveClick,
-            enabled = workoutEntryState.isEntryValid,
+            enabled = validatedWorkoutUIState.isValid,
             shape = MaterialTheme.shapes.small,
             modifier = Modifier.fillMaxWidth()
         )

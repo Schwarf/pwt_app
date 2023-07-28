@@ -102,7 +102,6 @@ data class PerformanceUI
     val workoutId: Int = 0,
     val performedCounter: String = "0",
     val isPerformanceValid: Boolean = false
-
 )
 
 fun Performance.toPerformanceUI(): PerformanceUI = PerformanceUI(
