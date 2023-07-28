@@ -62,6 +62,17 @@ class ExistingWorkoutViewModel(
         }
     }
 
+    fun removeOnePerformance() {
+        viewModelScope.launch {
+            if (existingWorkoutsState.value.performanceDetails.isPerformanceValid) {
+                val currentPerformance =
+                    existingWorkoutsState.value.performanceDetails.toPerformance()
+                performanceRepository.updatePerformance(currentPerformance.copy(performedCounter = currentPerformance.performedCounter - 1))
+            }
+        }
+    }
+
+
     suspend fun deleteWorkout() {
         workoutRepository.deleteWorkout(existingWorkoutsState.value.workoutDetails.toWorkout())
     }

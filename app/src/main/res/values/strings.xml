@@ -5,6 +5,7 @@
     <string name="no">No</string>
     <string name="edit_workout_title">Edit Workout</string>
     <string name="add_performance">Performed once More</string>
+    <string name="remove_performance">Remove one performance</string>
     <string name="app_name">personal_workout_tracker</string>
     <string name="add_workout">Add workout</string>
     <string name="save">Save </string>>

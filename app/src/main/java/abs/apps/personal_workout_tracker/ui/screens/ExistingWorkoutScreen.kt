@@ -83,6 +83,7 @@ fun ExistingWorkoutScreen(
         ExistingWorkoutBody(
             existingWorkout = state,
             onAddPerformance = { viewModel.addOnePerformance()},
+            onRemovePerformance = { viewModel.removeOnePerformance()},
             onDelete = {
                 coroutineScope.launch {
                     viewModel.deleteWorkout()
@@ -100,6 +101,7 @@ fun ExistingWorkoutScreen(
 private fun ExistingWorkoutBody(
     existingWorkout: ExistingWorkout,
     onAddPerformance: () -> Unit,
+    onRemovePerformance: () -> Unit,
     onDelete: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -117,6 +119,15 @@ private fun ExistingWorkoutBody(
         ) {
             Text(stringResource(R.string.add_performance))
         }
+        Button(
+            onClick = onRemovePerformance,
+            modifier = Modifier.fillMaxWidth(),
+            shape = MaterialTheme.shapes.small,
+            enabled = existingWorkout.performanceDetails.performedCounter.toInt() > 0
+        ) {
+            Text(stringResource(R.string.remove_performance))
+        }
+
 
         OutlinedButton(
             onClick = { deleteConfirmationRequired = true },
