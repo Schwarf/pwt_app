@@ -15,6 +15,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -80,7 +81,9 @@ fun ExistingWorkoutScreen(
         modifier = modifier
     ) { innerPadding ->
         ExistingWorkoutBody(
-            existingWorkout = state, onDelete = {
+            existingWorkout = state,
+            onAddPerformance = { viewModel.addOnePerformance()},
+            onDelete = {
                 coroutineScope.launch {
                     viewModel.deleteWorkout()
                     navigateBack()
@@ -96,6 +99,7 @@ fun ExistingWorkoutScreen(
 @Composable
 private fun ExistingWorkoutBody(
     existingWorkout: ExistingWorkout,
+    onAddPerformance: () -> Unit,
     onDelete: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -105,6 +109,15 @@ private fun ExistingWorkoutBody(
     ) {
         var deleteConfirmationRequired by rememberSaveable { mutableStateOf(false) }
         ExistingWorkoutDetails(existingWorkout = existingWorkout)
+        Button(
+            onClick = onAddPerformance,
+            modifier = Modifier.fillMaxWidth(),
+            shape = MaterialTheme.shapes.small,
+            enabled = true
+        ) {
+            Text(stringResource(R.string.add_performance))
+        }
+
         OutlinedButton(
             onClick = { deleteConfirmationRequired = true },
             shape = MaterialTheme.shapes.small,

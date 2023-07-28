@@ -27,14 +27,13 @@ class ExistingWorkoutViewModel(
         workoutRepository.getWorkoutStream(workoutId).filterNotNull().flatMapLatest { workout ->
             performanceRepository.getPerformancesStreamForOneWorkout(workout.id)
                 .map { performance ->
-                    if(performance != null)
-                    {
+                    if (performance != null) {
                         ExistingWorkout(
                             workoutDetails = workout.toWorkoutDetails(),
-                            performanceDetails = performance.toPerformanceDetails())
+                            performanceDetails = performance.toPerformanceDetails()
+                        )
 
-                    }
-                    else{
+                    } else {
                         ExistingWorkout(
                             workoutDetails = workout.toWorkoutDetails(),
                             performanceDetails = PerformanceDetails()
@@ -49,8 +48,17 @@ class ExistingWorkoutViewModel(
 
     fun addOnePerformance() {
         viewModelScope.launch {
-            val currentPerformance = existingWorkoutsState.value.performanceDetails.toPerformance()
-            performanceRepository.updatePerformance(currentPerformance.copy(performedCounter = currentPerformance.performedCounter + 1))
+            if (existingWorkoutsState.value.performanceDetails.isPerformanceValid) {
+                val currentPerformance =
+                    existingWorkoutsState.value.performanceDetails.toPerformance()
+                performanceRepository.updatePerformance(currentPerformance.copy(performedCounter = currentPerformance.performedCounter + 1))
+            } else {
+                val currentPerformance = Performance(
+                    workoutId = existingWorkoutsState.value.workoutDetails.id,
+                    performedCounter = 1
+                )
+                performanceRepository.insertPerformance(currentPerformance)
+            }
         }
     }
 
@@ -66,7 +74,7 @@ class ExistingWorkoutViewModel(
 
 data class ExistingWorkout(
     val workoutDetails: WorkoutDetails = WorkoutDetails(),
-    val performanceDetails: PerformanceDetails = PerformanceDetails()
+    val performanceDetails: PerformanceDetails = PerformanceDetails(),
 )
 
 fun Workout.toWorkoutDetails(): WorkoutDetails = WorkoutDetails(
@@ -82,12 +90,15 @@ data class PerformanceDetails
     val id: Int = 0,
     val workoutId: Int = 0,
     val performedCounter: String = "0",
+    val isPerformanceValid: Boolean = false
+
 )
 
 fun Performance.toPerformanceDetails(): PerformanceDetails = PerformanceDetails(
     id = id,
     workoutId = workoutId,
     performedCounter = performedCounter.toString(),
+    isPerformanceValid = true
 )
 
 fun PerformanceDetails.toPerformance(): Performance = Performance(
