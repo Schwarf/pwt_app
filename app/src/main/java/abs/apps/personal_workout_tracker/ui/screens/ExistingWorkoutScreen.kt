@@ -50,7 +50,7 @@ object ExistingWorkoutDestination : INavigationDestination {
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun ExistingWorkoutScreen(
-    navigateToExistingWorkout: (Int) -> Unit,
+    navigateToEditWorkout: (Int) -> Unit,
     navigateBack: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: ExistingWorkoutViewModel = viewModel(factory = AppViewModelProvider.Factory)
@@ -67,7 +67,7 @@ fun ExistingWorkoutScreen(
         },
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { navigateToExistingWorkout(state.workoutUI.id) },
+                onClick = { navigateToEditWorkout(state.workoutUI.id) },
                 shape = MaterialTheme.shapes.medium,
                 modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_large))
 

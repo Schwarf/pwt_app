@@ -60,7 +60,7 @@ fun WorkoutTrackerNavHost(
         )
         {
             ExistingWorkoutScreen(
-                navigateToExistingWorkout = { navController.navigate("${ExistingWorkoutDestination.route}/$it") },
+                navigateToEditWorkout = { navController.navigate("${EditWorkoutDestination.route}/$it") },
                 navigateBack = { navController.popBackStack() })
         }
 
