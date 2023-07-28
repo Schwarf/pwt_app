@@ -4,6 +4,7 @@ import abs.apps.personal_workout_tracker.R
 import abs.apps.personal_workout_tracker.data.Workout
 import abs.apps.personal_workout_tracker.ui.AppViewModelProvider
 import abs.apps.personal_workout_tracker.ui.navigation.INavigationDestination
+import abs.apps.personal_workout_tracker.ui.viewmodels.HomeViewModel
 import android.annotation.SuppressLint
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
