@@ -3,6 +3,7 @@ package abs.apps.personal_workout_tracker.ui.screens
 import abs.apps.personal_workout_tracker.R
 import abs.apps.personal_workout_tracker.ui.AppViewModelProvider
 import abs.apps.personal_workout_tracker.ui.navigation.INavigationDestination
+import abs.apps.personal_workout_tracker.ui.screens.helpers.AppTopBar
 import abs.apps.personal_workout_tracker.ui.viewmodels.ExistingWorkout
 import abs.apps.personal_workout_tracker.ui.viewmodels.ExistingWorkoutViewModel
 import androidx.annotation.StringRes
@@ -61,7 +62,7 @@ fun ExistingWorkoutScreen(
     val coroutineScope = rememberCoroutineScope()
     Scaffold(
         topBar = {
-            WorkoutTopAppBar(
+            AppTopBar(
                 title = stringResource(ExistingWorkoutDestination.titleRes),
                 canNavigateBack = true,
                 navigateUp = navigateBack
