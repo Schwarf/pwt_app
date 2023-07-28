@@ -146,19 +146,10 @@ private fun WorkoutItem(
                     text = workout.name,
                     style = MaterialTheme.typography.titleLarge,
                 )
-                Spacer(Modifier.weight(1f))
-                Text(
-                    text = stringResource(
-                        id = R.string.set_workout_maxRepsInSets,
-                        workout.maxRepetitionsInSet
-                    ),
-                    style = MaterialTheme.typography.titleMedium
-                )
             }
             Row(
                 modifier = Modifier.fillMaxWidth()
             ) {
-
                 Text(
                     text = stringResource(id = R.string.set_workout_sets, workout.sets),
                     style = MaterialTheme.typography.titleMedium
@@ -168,6 +159,17 @@ private fun WorkoutItem(
                     text = stringResource(
                         id = R.string.set_workout_totalReps,
                         workout.totalRepetitions
+                    ),
+                    style = MaterialTheme.typography.titleMedium
+                )
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(
+                    text = stringResource(
+                        id = R.string.set_workout_maxRepsInSets,
+                        workout.maxRepetitionsInSet
                     ),
                     style = MaterialTheme.typography.titleMedium
                 )
