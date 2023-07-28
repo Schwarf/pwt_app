@@ -4,10 +4,11 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="edit_workout_title">Edit Workout</string>
-    <string name="add_performance">Performed once More</string>
+    <string name="add_performance">Performed once more</string>
     <string name="remove_performance">Remove one performance</string>
-    <string name="app_name">personal_workout_tracker</string>
+    <string name="app_name">Schwarf\'s personal workout tracker</string>
     <string name="add_workout">Add workout</string>
+    <string name="update_workout">Update workout</string>
     <string name="edit_item_title">Edit Workout</string>
     <string name="save">Save </string>>
     <string name="cancel">Cancel </string>>

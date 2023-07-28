@@ -62,6 +62,7 @@ fun AddWorkoutScreen(
                     navigateBack()
                 }
             },
+            buttonDescription= stringResource(id = R.string.add_workout),
             modifier = Modifier
                 .padding(innerPadding)
                 .verticalScroll(rememberScrollState())
@@ -77,6 +78,7 @@ fun AddWorkoutBody(
     validatedWorkoutUIState: ValidatedWorkoutUI,
     onWorkoutValueChange: (WorkoutUI) -> Unit,
     onSaveClick: () -> Unit,
+    buttonDescription: String,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -95,7 +97,7 @@ fun AddWorkoutBody(
             modifier = Modifier.fillMaxWidth()
         )
         {
-            Text(text = stringResource(id = R.string.add_workout))
+            Text(text = buttonDescription)
         }
     }
 }

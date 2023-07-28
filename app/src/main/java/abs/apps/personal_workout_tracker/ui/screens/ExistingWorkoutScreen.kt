@@ -84,8 +84,8 @@ fun ExistingWorkoutScreen(
     ) { innerPadding ->
         ExistingWorkoutBody(
             existingWorkout = state,
-            onAddPerformance = { viewModel.addOnePerformance()},
-            onRemovePerformance = { viewModel.removeOnePerformance()},
+            onAddPerformance = { viewModel.addOnePerformance() },
+            onRemovePerformance = { viewModel.removeOnePerformance() },
             onDelete = {
                 coroutineScope.launch {
                     viewModel.deleteWorkout()

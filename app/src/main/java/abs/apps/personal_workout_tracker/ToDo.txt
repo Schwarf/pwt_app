@@ -1,4 +1,3 @@
 - Some details how the navigation to single workouts works evades me. Needs a detailed study.
 - Clean up the string resources.
 - Some code duplication could be avoided e.g. validateInput in Add- and EditWorkoutViewModel
-- Some

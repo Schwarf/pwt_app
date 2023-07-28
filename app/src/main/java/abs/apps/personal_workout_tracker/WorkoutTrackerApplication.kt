@@ -4,7 +4,7 @@ import abs.apps.personal_workout_tracker.data.AppContainer
 import abs.apps.personal_workout_tracker.data.AppDataContainer
 import android.app.Application
 
-class WorkoutTrackerApplication : Application(){
+class WorkoutTrackerApplication : Application() {
     /**
      * AppContainer instance used by the rest of classes to obtain dependencies
      */
