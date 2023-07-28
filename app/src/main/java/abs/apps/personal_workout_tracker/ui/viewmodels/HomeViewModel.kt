@@ -23,7 +23,4 @@ class HomeViewModel(workoutRepository: IWorkoutRepository) : ViewModel() {
     }
 }
 
-/**
- * Ui State for HomeScreen
- */
 data class ListOfWorkouts(val workoutList: List<Workout> = listOf())

@@ -40,7 +40,7 @@ fun EditWorkoutScreen(
         },
         modifier = modifier
     ) { innerPadding ->
-        AddWorkoutBody(
+        WorkoutInputBody(
             validatedWorkoutUIState = viewModel.state,
             onWorkoutValueChange = viewModel::updateUiState,
             onSaveClick = {

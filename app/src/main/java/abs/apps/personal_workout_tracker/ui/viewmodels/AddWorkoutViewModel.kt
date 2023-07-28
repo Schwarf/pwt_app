@@ -8,11 +8,11 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 
 class AddWorkoutViewModel(private val workoutRepository: IWorkoutRepository) : ViewModel() {
-    var validatedWorkoutUIState by mutableStateOf(ValidatedWorkoutUI())
+    var state by mutableStateOf(ValidatedWorkoutUI())
         private set
 
     fun updateUiState(workoutUI: WorkoutUI) {
-        validatedWorkoutUIState = ValidatedWorkoutUI(
+        state = ValidatedWorkoutUI(
             workoutUI = workoutUI,
             isValid = validateInput(workoutUI)
         )
@@ -20,12 +20,12 @@ class AddWorkoutViewModel(private val workoutRepository: IWorkoutRepository) : V
 
     suspend fun saveWorkout() {
         if (validateInput()) {
-            workoutRepository.insertWorkout(validatedWorkoutUIState.workoutUI.toWorkout())
+            workoutRepository.insertWorkout(state.workoutUI.toWorkout())
         }
     }
 
 
-    private fun validateInput(state: WorkoutUI = this.validatedWorkoutUIState.workoutUI): Boolean {
+    private fun validateInput(state: WorkoutUI = this.state.workoutUI): Boolean {
         return with(state) {
             name.isNotBlank() && sets.isNotBlank() && sets.all { it.isDigit() } &&
                     totalRepetitions.isNotBlank() && totalRepetitions.all { it.isDigit() } &&
