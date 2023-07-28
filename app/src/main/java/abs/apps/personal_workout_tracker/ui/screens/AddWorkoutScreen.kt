@@ -52,7 +52,7 @@ fun AddWorkoutScreen(
                     navigateBack()
                 }
             },
-            buttonDescription= stringResource(id = R.string.add_workout),
+            buttonDescription = stringResource(id = R.string.add_workout),
             modifier = Modifier
                 .padding(innerPadding)
                 .verticalScroll(rememberScrollState())
@@ -62,4 +62,3 @@ fun AddWorkoutScreen(
     }
 
 }
-

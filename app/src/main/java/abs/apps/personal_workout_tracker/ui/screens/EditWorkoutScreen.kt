@@ -51,7 +51,7 @@ fun EditWorkoutScreen(
                     navigateBack()
                 }
             },
-            buttonDescription= stringResource(id = R.string.update_workout),
+            buttonDescription = stringResource(id = R.string.update_workout),
             modifier = Modifier.padding(innerPadding)
         )
     }

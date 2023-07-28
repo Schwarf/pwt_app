@@ -1,11 +1,11 @@
 package abs.apps.personal_workout_tracker.data
 
+import abs.apps.personal_workout_tracker.ui.viewmodels.common.PerformanceUI
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import java.util.Date
 
 @Entity(
     tableName = "performances",
@@ -27,3 +27,9 @@ data class Performance(
 )
 
 
+fun Performance.toPerformanceUI(): PerformanceUI = PerformanceUI(
+    id = id,
+    workoutId = workoutId,
+    performedCounter = performedCounter.toString(),
+    isPerformanceValid = true
+)

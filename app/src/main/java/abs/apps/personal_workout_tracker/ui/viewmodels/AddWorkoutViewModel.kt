@@ -1,7 +1,8 @@
 package abs.apps.personal_workout_tracker.ui.viewmodels
 
 import abs.apps.personal_workout_tracker.data.IWorkoutRepository
-import abs.apps.personal_workout_tracker.data.Workout
+import abs.apps.personal_workout_tracker.ui.viewmodels.common.WorkoutUI
+import abs.apps.personal_workout_tracker.ui.viewmodels.common.toWorkout
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -34,29 +35,10 @@ class AddWorkoutViewModel(private val workoutRepository: IWorkoutRepository) : V
     }
 }
 
-fun WorkoutUI.toWorkout(): Workout = Workout(
-    id = id,
-    name = name,
-    sets = sets.toIntOrNull() ?: 0,
-    totalRepetitions = totalRepetitions.toIntOrNull() ?: 0,
-    maxRepetitionsInSet = maxRepetitionsInSet.toIntOrNull() ?: 0
-)
-
 data class ValidatedWorkoutUI(
     val workoutUI: WorkoutUI = WorkoutUI(),
     val isValid: Boolean = false
 )
 
-data class WorkoutUI(
-    val id: Int = 0,
-    val name: String = "",
-    val sets: String = "",
-    val totalRepetitions: String = "",
-    val maxRepetitionsInSet: String = ""
-)
 
-fun Workout.toValidatedWorkoutUI(isValid: Boolean = false): ValidatedWorkoutUI = ValidatedWorkoutUI(
-    workoutUI = this.toWorkoutUI(),
-    isValid = isValid
-)
 

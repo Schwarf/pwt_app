@@ -1,7 +1,10 @@
 package abs.apps.personal_workout_tracker.ui.viewmodels
 
 import abs.apps.personal_workout_tracker.data.IWorkoutRepository
+import abs.apps.personal_workout_tracker.data.toValidatedWorkoutUI
 import abs.apps.personal_workout_tracker.ui.screens.EditWorkoutDestination
+import abs.apps.personal_workout_tracker.ui.viewmodels.common.WorkoutUI
+import abs.apps.personal_workout_tracker.ui.viewmodels.common.toWorkout
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue

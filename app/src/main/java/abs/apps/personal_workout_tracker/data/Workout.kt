@@ -1,5 +1,7 @@
 package abs.apps.personal_workout_tracker.data
 
+import abs.apps.personal_workout_tracker.ui.viewmodels.ValidatedWorkoutUI
+import abs.apps.personal_workout_tracker.ui.viewmodels.common.WorkoutUI
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -16,4 +18,17 @@ data class Workout(
     var maxRepetitionsInSet: Int,
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0
+)
+
+fun Workout.toValidatedWorkoutUI(isValid: Boolean = false): ValidatedWorkoutUI = ValidatedWorkoutUI(
+    workoutUI = this.toWorkoutUI(),
+    isValid = isValid
+)
+
+fun Workout.toWorkoutUI(): WorkoutUI = WorkoutUI(
+    id = id,
+    name = name,
+    sets = sets.toString(),
+    totalRepetitions = totalRepetitions.toString(),
+    maxRepetitionsInSet = maxRepetitionsInSet.toString()
 )

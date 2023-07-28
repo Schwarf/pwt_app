@@ -3,8 +3,13 @@ package abs.apps.personal_workout_tracker.ui.viewmodels
 import abs.apps.personal_workout_tracker.data.IPerformanceRepository
 import abs.apps.personal_workout_tracker.data.IWorkoutRepository
 import abs.apps.personal_workout_tracker.data.Performance
-import abs.apps.personal_workout_tracker.data.Workout
+import abs.apps.personal_workout_tracker.data.toPerformanceUI
+import abs.apps.personal_workout_tracker.data.toWorkoutUI
 import abs.apps.personal_workout_tracker.ui.screens.ExistingWorkoutDestination
+import abs.apps.personal_workout_tracker.ui.viewmodels.common.PerformanceUI
+import abs.apps.personal_workout_tracker.ui.viewmodels.common.WorkoutUI
+import abs.apps.personal_workout_tracker.ui.viewmodels.common.toPerformance
+import abs.apps.personal_workout_tracker.ui.viewmodels.common.toWorkout
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -36,8 +41,7 @@ class ExistingWorkoutViewModel(
 
                     } else {
                         ExistingWorkout(
-                            workoutUI = workout.toWorkoutUI(),
-                            performanceUI = PerformanceUI()
+                            workoutUI = workout.toWorkoutUI(), performanceUI = PerformanceUI()
                         )
                     }
                 }
@@ -50,13 +54,11 @@ class ExistingWorkoutViewModel(
     fun addOnePerformance() {
         viewModelScope.launch {
             if (existingWorkoutsState.value.performanceUI.isPerformanceValid) {
-                val currentPerformance =
-                    existingWorkoutsState.value.performanceUI.toPerformance()
+                val currentPerformance = existingWorkoutsState.value.performanceUI.toPerformance()
                 performanceRepository.updatePerformance(currentPerformance.copy(performedCounter = currentPerformance.performedCounter + 1))
             } else {
                 val currentPerformance = Performance(
-                    workoutId = existingWorkoutsState.value.workoutUI.id,
-                    performedCounter = 1
+                    workoutId = existingWorkoutsState.value.workoutUI.id, performedCounter = 1
                 )
                 performanceRepository.insertPerformance(currentPerformance)
             }
@@ -66,8 +68,7 @@ class ExistingWorkoutViewModel(
     fun removeOnePerformance() {
         viewModelScope.launch {
             if (existingWorkoutsState.value.performanceUI.isPerformanceValid) {
-                val currentPerformance =
-                    existingWorkoutsState.value.performanceUI.toPerformance()
+                val currentPerformance = existingWorkoutsState.value.performanceUI.toPerformance()
                 performanceRepository.updatePerformance(currentPerformance.copy(performedCounter = currentPerformance.performedCounter - 1))
             }
         }
@@ -89,31 +90,3 @@ data class ExistingWorkout(
     val performanceUI: PerformanceUI = PerformanceUI(),
 )
 
-fun Workout.toWorkoutUI(): WorkoutUI = WorkoutUI(
-    id = id,
-    name = name,
-    sets = sets.toString(),
-    totalRepetitions = totalRepetitions.toString(),
-    maxRepetitionsInSet = maxRepetitionsInSet.toString()
-)
-
-data class PerformanceUI
-    (
-    val id: Int = 0,
-    val workoutId: Int = 0,
-    val performedCounter: String = "0",
-    val isPerformanceValid: Boolean = false
-)
-
-fun Performance.toPerformanceUI(): PerformanceUI = PerformanceUI(
-    id = id,
-    workoutId = workoutId,
-    performedCounter = performedCounter.toString(),
-    isPerformanceValid = true
-)
-
-fun PerformanceUI.toPerformance(): Performance = Performance(
-    id = id,
-    workoutId = workoutId,
-    performedCounter = performedCounter.toIntOrNull() ?: 0
-)
