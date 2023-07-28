@@ -11,21 +11,21 @@ class AddWorkoutViewModel(private val workoutRepository: IWorkoutRepository) : V
     var workoutEntryState by mutableStateOf(WorkoutEntry())
         private set
 
-    fun updateUiState(workoutDetails: WorkoutDetails) {
+    fun updateUiState(workoutUI: WorkoutUI) {
         workoutEntryState = WorkoutEntry(
-            workoutDetails = workoutDetails,
-            isEntryValid = validateInput(workoutDetails)
+            workoutUI = workoutUI,
+            isEntryValid = validateInput(workoutUI)
         )
     }
 
     suspend fun saveWorkout() {
         if (validateInput()) {
-            workoutRepository.insertWorkout(workoutEntryState.workoutDetails.toWorkout())
+            workoutRepository.insertWorkout(workoutEntryState.workoutUI.toWorkout())
         }
     }
 
 
-    private fun validateInput(state: WorkoutDetails = this.workoutEntryState.workoutDetails): Boolean {
+    private fun validateInput(state: WorkoutUI = this.workoutEntryState.workoutUI): Boolean {
         return with(state) {
             name.isNotBlank() && sets.isNotBlank() && sets.all { it.isDigit() } &&
                     totalRepetitions.isNotBlank() && totalRepetitions.all { it.isDigit() } &&
@@ -35,7 +35,7 @@ class AddWorkoutViewModel(private val workoutRepository: IWorkoutRepository) : V
     }
 }
 
-fun WorkoutDetails.toWorkout(): Workout = Workout(
+fun WorkoutUI.toWorkout(): Workout = Workout(
     id = id,
     name = name,
     sets = sets.toIntOrNull() ?: 0,
@@ -44,11 +44,11 @@ fun WorkoutDetails.toWorkout(): Workout = Workout(
 )
 
 data class WorkoutEntry(
-    val workoutDetails: WorkoutDetails = WorkoutDetails(),
+    val workoutUI: WorkoutUI = WorkoutUI(),
     val isEntryValid: Boolean = false
 )
 
-data class WorkoutDetails(
+data class WorkoutUI(
     val id: Int = 0,
     val name: String = "",
     val sets: String = "",

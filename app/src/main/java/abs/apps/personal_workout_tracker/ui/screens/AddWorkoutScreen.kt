@@ -72,7 +72,7 @@ fun AddWorkoutScreen(
 @Composable
 fun AddWorkoutBody(
     workoutEntryState: WorkoutEntry,
-    onWorkoutValueChange: (WorkoutDetails) -> Unit,
+    onWorkoutValueChange: (WorkoutUI) -> Unit,
     onSaveClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -81,7 +81,7 @@ fun AddWorkoutBody(
         verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_large))
     ) {
         WorkoutInputForm(
-            workoutDetails = workoutEntryState.workoutDetails,
+            workoutUI = workoutEntryState.workoutUI,
             onWorkoutValueChange = onWorkoutValueChange,
             modifier = Modifier.fillMaxWidth()
         )
@@ -100,9 +100,9 @@ fun AddWorkoutBody(
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun WorkoutInputForm(
-    workoutDetails: WorkoutDetails,
+    workoutUI: WorkoutUI,
     modifier: Modifier = Modifier,
-    onWorkoutValueChange: (WorkoutDetails) -> Unit = {},
+    onWorkoutValueChange: (WorkoutUI) -> Unit = {},
     enabled: Boolean = true
 ) {
     Column(
@@ -110,8 +110,8 @@ fun WorkoutInputForm(
         verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_medium))
     ) {
         OutlinedTextField(
-            value = workoutDetails.name,
-            onValueChange = { onWorkoutValueChange(workoutDetails.copy(name = it)) },
+            value = workoutUI.name,
+            onValueChange = { onWorkoutValueChange(workoutUI.copy(name = it)) },
             label = { Text(stringResource(R.string.workout_name_required)) },
             colors = OutlinedTextFieldDefaults.colors(
                 focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
@@ -123,8 +123,8 @@ fun WorkoutInputForm(
             singleLine = true
         )
         OutlinedTextField(
-            value = workoutDetails.sets,
-            onValueChange = { onWorkoutValueChange(workoutDetails.copy(sets = it)) },
+            value = workoutUI.sets,
+            onValueChange = { onWorkoutValueChange(workoutUI.copy(sets = it)) },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
             label = { Text(stringResource(R.string.workout_sets_required)) },
             colors = OutlinedTextFieldDefaults.colors(
@@ -137,8 +137,8 @@ fun WorkoutInputForm(
             singleLine = true
         )
         OutlinedTextField(
-            value = workoutDetails.totalRepetitions,
-            onValueChange = { onWorkoutValueChange(workoutDetails.copy(totalRepetitions = it)) },
+            value = workoutUI.totalRepetitions,
+            onValueChange = { onWorkoutValueChange(workoutUI.copy(totalRepetitions = it)) },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
             label = { Text(stringResource(R.string.workout_totalReps_required)) },
             colors = OutlinedTextFieldDefaults.colors(
@@ -151,8 +151,8 @@ fun WorkoutInputForm(
             singleLine = true
         )
         OutlinedTextField(
-            value = workoutDetails.maxRepetitionsInSet,
-            onValueChange = { onWorkoutValueChange(workoutDetails.copy(maxRepetitionsInSet = it)) },
+            value = workoutUI.maxRepetitionsInSet,
+            onValueChange = { onWorkoutValueChange(workoutUI.copy(maxRepetitionsInSet = it)) },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
             label = { Text(stringResource(R.string.workout_maxRepsInSets_required)) },
             colors = OutlinedTextFieldDefaults.colors(

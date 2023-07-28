@@ -29,13 +29,13 @@ class ExistingWorkoutViewModel(
                 .map { performance ->
                     if (performance != null) {
                         ExistingWorkout(
-                            workoutDetails = workout.toWorkoutDetails(),
+                            workoutUI = workout.toWorkoutDetails(),
                             performanceDetails = performance.toPerformanceDetails()
                         )
 
                     } else {
                         ExistingWorkout(
-                            workoutDetails = workout.toWorkoutDetails(),
+                            workoutUI = workout.toWorkoutDetails(),
                             performanceDetails = PerformanceDetails()
                         )
                     }
@@ -54,7 +54,7 @@ class ExistingWorkoutViewModel(
                 performanceRepository.updatePerformance(currentPerformance.copy(performedCounter = currentPerformance.performedCounter + 1))
             } else {
                 val currentPerformance = Performance(
-                    workoutId = existingWorkoutsState.value.workoutDetails.id,
+                    workoutId = existingWorkoutsState.value.workoutUI.id,
                     performedCounter = 1
                 )
                 performanceRepository.insertPerformance(currentPerformance)
@@ -74,7 +74,7 @@ class ExistingWorkoutViewModel(
 
 
     suspend fun deleteWorkout() {
-        workoutRepository.deleteWorkout(existingWorkoutsState.value.workoutDetails.toWorkout())
+        workoutRepository.deleteWorkout(existingWorkoutsState.value.workoutUI.toWorkout())
     }
 
     companion object {
@@ -84,11 +84,11 @@ class ExistingWorkoutViewModel(
 }
 
 data class ExistingWorkout(
-    val workoutDetails: WorkoutDetails = WorkoutDetails(),
+    val workoutUI: WorkoutUI = WorkoutUI(),
     val performanceDetails: PerformanceDetails = PerformanceDetails(),
 )
 
-fun Workout.toWorkoutDetails(): WorkoutDetails = WorkoutDetails(
+fun Workout.toWorkoutDetails(): WorkoutUI = WorkoutUI(
     id = id,
     name = name,
     sets = sets.toString(),

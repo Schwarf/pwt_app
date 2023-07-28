@@ -67,7 +67,7 @@ fun ExistingWorkoutScreen(
         },
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { navigateToExistingWorkout(state.workoutDetails.id) },
+                onClick = { navigateToExistingWorkout(state.workoutUI.id) },
                 shape = MaterialTheme.shapes.medium,
                 modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_large))
 
@@ -169,7 +169,7 @@ fun ExistingWorkoutDetails(
         ) {
             ExistingWorkoutRow(
                 labelResID = R.string.workout_name,
-                value = existingWorkout.workoutDetails.name,
+                value = existingWorkout.workoutUI.name,
                 modifier = Modifier.padding(
                     horizontal = dimensionResource(
                         id = R.dimen
@@ -179,7 +179,7 @@ fun ExistingWorkoutDetails(
             )
             ExistingWorkoutRow(
                 labelResID = R.string.workout_sets,
-                value = existingWorkout.workoutDetails.sets,
+                value = existingWorkout.workoutUI.sets,
                 modifier = Modifier.padding(
                     horizontal = dimensionResource(
                         id = R.dimen
@@ -189,7 +189,7 @@ fun ExistingWorkoutDetails(
             )
             ExistingWorkoutRow(
                 labelResID = R.string.workout_totalReps,
-                value = existingWorkout.workoutDetails.totalRepetitions,
+                value = existingWorkout.workoutUI.totalRepetitions,
                 modifier = Modifier.padding(
                     horizontal = dimensionResource(
                         id = R.dimen
@@ -199,7 +199,7 @@ fun ExistingWorkoutDetails(
             )
             ExistingWorkoutRow(
                 labelResID = R.string.workout_maxRepsInSets,
-                value = existingWorkout.workoutDetails.maxRepetitionsInSet,
+                value = existingWorkout.workoutUI.maxRepetitionsInSet,
                 modifier = Modifier.padding(
                     horizontal = dimensionResource(
                         id = R.dimen
