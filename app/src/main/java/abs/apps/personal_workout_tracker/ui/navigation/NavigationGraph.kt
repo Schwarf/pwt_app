@@ -49,6 +49,7 @@ fun WorkoutTrackerNavHost(
             AddWorkoutScreen(navigateBack = { navController.popBackStack() },
                 onNavigateUp = { navController.navigateUp() })
         }
+
         composable(
             route = ExistingWorkoutDestination.routeWithArgs,
             arguments = listOf(navArgument(ExistingWorkoutDestination.workoutIdArg) {

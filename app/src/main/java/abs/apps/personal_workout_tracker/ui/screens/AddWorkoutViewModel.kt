@@ -31,7 +31,6 @@ class AddWorkoutViewModel(private val workoutRepository: IWorkoutRepository) : V
                     totalRepetitions.isNotBlank() && totalRepetitions.all { it.isDigit() } &&
                     maxRepetitionsInSet.isNotBlank() && maxRepetitionsInSet.all { it.isDigit() }
         }
-
     }
 }
 
@@ -55,3 +54,9 @@ data class WorkoutUI(
     val totalRepetitions: String = "",
     val maxRepetitionsInSet: String = ""
 )
+
+fun Workout.toValidatedWorkoutUI(isValid: Boolean = false): ValidatedWorkoutUI = ValidatedWorkoutUI(
+    workoutUI = this.toWorkoutUI(),
+    isValid = isValid
+)
+

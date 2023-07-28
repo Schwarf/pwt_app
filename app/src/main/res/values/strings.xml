@@ -8,6 +8,7 @@
     <string name="remove_performance">Remove one performance</string>
     <string name="app_name">personal_workout_tracker</string>
     <string name="add_workout">Add workout</string>
+    <string name="edit_item_title">Edit Workout</string>
     <string name="save">Save </string>>
     <string name="cancel">Cancel </string>>
     <string name="delete">Delete </string>>
@@ -28,5 +29,5 @@
     <string name="set_workout_maxRepsInSets">Max repetitions in one set: %s </string>>
     <string name="workout_exists">What do you want to do with this workout?</string>
     <string name="required_fields">*required fields</string>>
-git    <string name="back_button">Back</string>
+    <string name="back_button">Back</string>
 </resources>
