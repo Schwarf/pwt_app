@@ -1,8 +1,8 @@
 package abs.apps.personal_workout_tracker.ui.viewmodels
 
 import abs.apps.personal_workout_tracker.data.repositories.IWorkoutRepository
-import abs.apps.personal_workout_tracker.ui.viewmodels.common.WorkoutUI
-import abs.apps.personal_workout_tracker.ui.viewmodels.common.toWorkout
+import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.WorkoutUI
+import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.toWorkout
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue

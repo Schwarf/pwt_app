@@ -6,10 +6,10 @@ import abs.apps.personal_workout_tracker.data.database.Performance
 import abs.apps.personal_workout_tracker.data.database.toPerformanceUI
 import abs.apps.personal_workout_tracker.data.database.toWorkoutUI
 import abs.apps.personal_workout_tracker.ui.screens.ExistingWorkoutDestination
-import abs.apps.personal_workout_tracker.ui.viewmodels.common.PerformanceUI
-import abs.apps.personal_workout_tracker.ui.viewmodels.common.WorkoutUI
-import abs.apps.personal_workout_tracker.ui.viewmodels.common.toPerformance
-import abs.apps.personal_workout_tracker.ui.viewmodels.common.toWorkout
+import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.PerformanceUI
+import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.WorkoutUI
+import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.toPerformance
+import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.toWorkout
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

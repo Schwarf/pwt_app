@@ -1,6 +1,6 @@
 package abs.apps.personal_workout_tracker.data.database
 
-import abs.apps.personal_workout_tracker.ui.viewmodels.common.PerformanceUI
+import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.PerformanceUI
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey

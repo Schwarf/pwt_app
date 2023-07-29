@@ -5,6 +5,10 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 
 @Entity(
     tableName = "timestamps",
@@ -25,3 +29,9 @@ data class Timestamp(
     @ColumnInfo(name = "timestamp")
     val timestamp: Long,
 )
+
+
+fun Long.toLocalDateTimeString(): String {
+    return LocalDateTime.ofInstant(Instant.ofEpochSecond(this), ZoneId.systemDefault())
+        .format(DateTimeFormatter.ofPattern("yyyy-HH-dd HH:mm::ss"))
+}
