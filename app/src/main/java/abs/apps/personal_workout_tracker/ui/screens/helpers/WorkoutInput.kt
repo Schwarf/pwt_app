@@ -42,8 +42,7 @@ fun WorkoutInputBody(
             enabled = validatedWorkoutUIState.isValid,
             shape = MaterialTheme.shapes.small,
             modifier = Modifier.fillMaxWidth()
-        )
-        {
+        ) {
             Text(text = buttonDescription)
         }
     }
@@ -76,7 +75,7 @@ fun WorkoutInputForm(
         )
         OutlinedTextField(
             value = workoutUI.sets,
-            onValueChange = { onWorkoutValueChange(workoutUI.copy(sets = it)) },
+            onValueChange = { onWorkoutValueChange(workoutUI.copy(sets = removeNonDigits(it))) },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
             label = { Text(stringResource(R.string.workout_sets_required)) },
             colors = OutlinedTextFieldDefaults.colors(
@@ -90,7 +89,15 @@ fun WorkoutInputForm(
         )
         OutlinedTextField(
             value = workoutUI.totalRepetitions,
-            onValueChange = { onWorkoutValueChange(workoutUI.copy(totalRepetitions = it)) },
+            onValueChange = {
+                onWorkoutValueChange(
+                    workoutUI.copy(
+                        totalRepetitions = removeNonDigits(
+                            it
+                        )
+                    )
+                )
+            },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
             label = { Text(stringResource(R.string.workout_totalReps_required)) },
             colors = OutlinedTextFieldDefaults.colors(
@@ -104,7 +111,15 @@ fun WorkoutInputForm(
         )
         OutlinedTextField(
             value = workoutUI.maxRepetitionsInSet,
-            onValueChange = { onWorkoutValueChange(workoutUI.copy(maxRepetitionsInSet = it)) },
+            onValueChange = {
+                onWorkoutValueChange(
+                    workoutUI.copy(
+                        maxRepetitionsInSet = removeNonDigits(
+                            it
+                        )
+                    )
+                )
+            },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
             label = { Text(stringResource(R.string.workout_maxRepsInSets_required)) },
             colors = OutlinedTextFieldDefaults.colors(
