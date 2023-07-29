@@ -7,7 +7,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(
-    entities = [Workout::class, Performance::class],
+    entities = [Workout::class, Performance::class, Timestamps::class],
     version = 1,
     exportSchema = false
 )
