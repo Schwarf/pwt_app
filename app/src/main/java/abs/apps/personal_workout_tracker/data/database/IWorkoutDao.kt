@@ -19,5 +19,4 @@ interface IWorkoutDao {
 
     @Query("SELECT * from workouts WHERE id = :id")
     fun getWorkout(id: Int): Flow<Workout>
-
 }
