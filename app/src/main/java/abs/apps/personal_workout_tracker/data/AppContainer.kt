@@ -1,6 +1,6 @@
 package abs.apps.personal_workout_tracker.data
 
-import abs.apps.personal_workout_tracker.data.database.IWorkoutRepository
+import abs.apps.personal_workout_tracker.data.repositories.IWorkoutRepository
 import abs.apps.personal_workout_tracker.data.database.TrackerDatabase
 import abs.apps.personal_workout_tracker.data.repositories.DatabasePerformanceRepository
 import abs.apps.personal_workout_tracker.data.repositories.DatabaseWorkoutRepository
