@@ -17,7 +17,7 @@ import androidx.room.PrimaryKey
     indices = [Index(value = ["workoutId"])]
 )
 
-data class Timestamps(
+data class Timestamp(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     @ColumnInfo(name = "workoutId")
