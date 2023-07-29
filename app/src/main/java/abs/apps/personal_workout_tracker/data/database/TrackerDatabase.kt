@@ -6,13 +6,14 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(
-    entities = [Workout::class, Performance::class, Timestamps::class],
+    entities = [Workout::class, Performance::class, Timestamp::class],
     version = 1,
     exportSchema = false
 )
 abstract class TrackerDatabase : RoomDatabase() {
     abstract val workoutDao: IWorkoutDao
     abstract val performanceDao: IPerformancesDao
+    abstract val timestampDao: ITimestampDao
 
     companion object {
         @Volatile
