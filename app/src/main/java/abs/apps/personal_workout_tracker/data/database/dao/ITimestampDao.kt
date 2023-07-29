@@ -20,4 +20,7 @@ interface ITimestampDao {
 
     @Query("SELECT * FROM timestamps WHERE workoutId = :workoutId")
     fun getAllTimestampsForOneWorkout(workoutId: Int): Flow<List<Timestamp>>
+
+    @Query("SELECT * FROM timestamps WHERE workoutId = :workoutId ORDER BY timestamp DESC LIMIT 1")
+    fun getLatestTimestampForOneWorkout(workoutId: Int): Flow<Timestamp>
 }

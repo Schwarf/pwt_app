@@ -8,8 +8,8 @@ interface ITimestampRepository {
 
     fun getTimestampsStreamForOneWorkout(workoutId: Int): Flow<List<Timestamp>>
 
+    fun getLatestTimestampStreamForOneWorkout(workoutId: Int): Flow<Timestamp>
     suspend fun upsertTimestamp(timestamp: Timestamp)
 
     suspend fun deleteTimestamp(timestamp: Timestamp)
-
 }

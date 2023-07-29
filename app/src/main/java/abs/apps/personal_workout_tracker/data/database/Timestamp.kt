@@ -1,5 +1,6 @@
 package abs.apps.personal_workout_tracker.data.database
 
+import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.TimestampUI
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
@@ -30,8 +31,12 @@ data class Timestamp(
     val timestamp: Long,
 )
 
+fun Timestamp.toTimestampUI(): TimestampUI = TimestampUI(
+    id = id,
+    workoutId = workoutId,
+    dateTimeString = LocalDateTime.ofInstant(
+        Instant.ofEpochSecond(timestamp), ZoneId.systemDefault()
+    ).format(DateTimeFormatter.ofPattern("yyyy-HH-dd HH:mm::ss"))
+)
 
-fun Long.toLocalDateTimeString(): String {
-    return LocalDateTime.ofInstant(Instant.ofEpochSecond(this), ZoneId.systemDefault())
-        .format(DateTimeFormatter.ofPattern("yyyy-HH-dd HH:mm::ss"))
-}
+
