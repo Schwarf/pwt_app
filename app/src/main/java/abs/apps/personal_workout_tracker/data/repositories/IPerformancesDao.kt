@@ -1,5 +1,6 @@
-package abs.apps.personal_workout_tracker.data
+package abs.apps.personal_workout_tracker.data.repositories
 
+import abs.apps.personal_workout_tracker.data.database.Performance
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Query

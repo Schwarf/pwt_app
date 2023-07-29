@@ -1,5 +1,6 @@
-package abs.apps.personal_workout_tracker.data
+package abs.apps.personal_workout_tracker.data.database
 
+import abs.apps.personal_workout_tracker.data.repositories.IPerformancesDao
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
@@ -10,17 +11,17 @@ import androidx.room.RoomDatabase
     version = 1,
     exportSchema = false
 )
-abstract class WorkoutDatabase : RoomDatabase() {
+abstract class TrackerDatabase : RoomDatabase() {
     abstract val workoutDao: IWorkoutDao
     abstract val performanceDao: IPerformancesDao
 
     companion object {
         @Volatile
-        private var Instance: WorkoutDatabase? = null
-        fun getDatabase(context: Context): WorkoutDatabase {
+        private var Instance: TrackerDatabase? = null
+        fun getDatabase(context: Context): TrackerDatabase {
             // if the Instance is not null, return it, otherwise create a new database instance.
             return Instance ?: synchronized(this) {
-                Room.databaseBuilder(context, WorkoutDatabase::class.java, "workout.db")
+                Room.databaseBuilder(context, TrackerDatabase::class.java, "workout.db")
                     /**
                      * Setting this option in your app's database builder means that Room
                      * permanently deletes all data from the tables in your database when it

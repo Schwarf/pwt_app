@@ -1,7 +1,7 @@
 package abs.apps.personal_workout_tracker.ui.screens
 
 import abs.apps.personal_workout_tracker.R
-import abs.apps.personal_workout_tracker.data.Workout
+import abs.apps.personal_workout_tracker.data.database.Workout
 import abs.apps.personal_workout_tracker.ui.AppViewModelProvider
 import abs.apps.personal_workout_tracker.ui.navigation.INavigationDestination
 import abs.apps.personal_workout_tracker.ui.screens.helpers.AppTopBar

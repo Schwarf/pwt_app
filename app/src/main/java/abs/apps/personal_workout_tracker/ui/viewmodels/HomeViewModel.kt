@@ -1,7 +1,7 @@
 package abs.apps.personal_workout_tracker.ui.viewmodels
 
-import abs.apps.personal_workout_tracker.data.IWorkoutRepository
-import abs.apps.personal_workout_tracker.data.Workout
+import abs.apps.personal_workout_tracker.data.database.IWorkoutRepository
+import abs.apps.personal_workout_tracker.data.database.Workout
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.SharingStarted

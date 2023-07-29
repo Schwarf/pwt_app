@@ -1,6 +1,6 @@
 package abs.apps.personal_workout_tracker.ui.viewmodels.common
 
-import abs.apps.personal_workout_tracker.data.Workout
+import abs.apps.personal_workout_tracker.data.database.Workout
 
 data class WorkoutUI(
     val id: Int = 0,

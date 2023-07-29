@@ -1,7 +1,7 @@
 package abs.apps.personal_workout_tracker.ui.viewmodels
 
-import abs.apps.personal_workout_tracker.data.IWorkoutRepository
-import abs.apps.personal_workout_tracker.data.toValidatedWorkoutUI
+import abs.apps.personal_workout_tracker.data.database.IWorkoutRepository
+import abs.apps.personal_workout_tracker.data.database.toValidatedWorkoutUI
 import abs.apps.personal_workout_tracker.ui.screens.EditWorkoutDestination
 import abs.apps.personal_workout_tracker.ui.viewmodels.common.WorkoutUI
 import abs.apps.personal_workout_tracker.ui.viewmodels.common.toWorkout

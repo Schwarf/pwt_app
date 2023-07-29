@@ -1,6 +1,6 @@
 package abs.apps.personal_workout_tracker.ui.viewmodels.common
 
-import abs.apps.personal_workout_tracker.data.Performance
+import abs.apps.personal_workout_tracker.data.database.Performance
 
 
 data class PerformanceUI
