@@ -7,10 +7,8 @@ class DatabaseWorkoutRepository(private val workoutDao: IWorkoutDao) : IWorkoutR
 
     override fun getWorkoutStream(id: Int): Flow<Workout?> = workoutDao.getWorkout(id)
 
-    override suspend fun insertWorkout(workout: Workout) = workoutDao.upsertWorkout(workout)
+    override suspend fun upsertWorkout(workout: Workout) = workoutDao.upsertWorkout(workout)
 
     override suspend fun deleteWorkout(workout: Workout) = workoutDao.deleteWorkout(workout)
-
-    override suspend fun updateWorkout(workout: Workout) = workoutDao.upsertWorkout(workout)
 
 }

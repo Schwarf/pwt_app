@@ -55,12 +55,12 @@ class ExistingWorkoutViewModel(
         viewModelScope.launch {
             if (existingWorkoutsState.value.performanceUI.isPerformanceValid) {
                 val currentPerformance = existingWorkoutsState.value.performanceUI.toPerformance()
-                performanceRepository.updatePerformance(currentPerformance.copy(performedCounter = currentPerformance.performedCounter + 1))
+                performanceRepository.upsertPerformance(currentPerformance.copy(performedCounter = currentPerformance.performedCounter + 1))
             } else {
                 val currentPerformance = Performance(
                     workoutId = existingWorkoutsState.value.workoutUI.id, performedCounter = 1
                 )
-                performanceRepository.insertPerformance(currentPerformance)
+                performanceRepository.upsertPerformance(currentPerformance)
             }
         }
     }
@@ -69,7 +69,7 @@ class ExistingWorkoutViewModel(
         viewModelScope.launch {
             if (existingWorkoutsState.value.performanceUI.isPerformanceValid) {
                 val currentPerformance = existingWorkoutsState.value.performanceUI.toPerformance()
-                performanceRepository.updatePerformance(currentPerformance.copy(performedCounter = currentPerformance.performedCounter - 1))
+                performanceRepository.upsertPerformance(currentPerformance.copy(performedCounter = currentPerformance.performedCounter - 1))
             }
         }
     }

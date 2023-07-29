@@ -36,7 +36,7 @@ class EditWorkoutViewModel(
 
     suspend fun updateWorkout() {
         if (validateInput(state.workoutUI)) {
-            workoutRepository.updateWorkout(state.workoutUI.toWorkout())
+            workoutRepository.upsertWorkout(state.workoutUI.toWorkout())
         }
     }
 

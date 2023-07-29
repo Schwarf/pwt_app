@@ -14,14 +14,9 @@ interface IPerformanceRepository {
     fun getPerformancesStreamForOneWorkout(workoutId: Int): Flow<Performance>
 
     /**
-     * Insert workout in the data source
-     */
-    suspend fun insertPerformance(performance: Performance)
-
-    /**
      * Update performance in the data source
      */
-    suspend fun updatePerformance(performance: Performance)
+    suspend fun upsertPerformance(performance: Performance)
 
     /**
      * Delete workout from the data source

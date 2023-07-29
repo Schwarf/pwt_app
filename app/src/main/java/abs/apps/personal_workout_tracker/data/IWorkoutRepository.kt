@@ -16,15 +16,10 @@ interface IWorkoutRepository {
     /**
      * Insert item in the data source
      */
-    suspend fun insertWorkout(workout: Workout)
+    suspend fun upsertWorkout(workout: Workout)
 
     /**
      * Delete item from the data source
      */
     suspend fun deleteWorkout(workout: Workout)
-
-    /**
-     * Update item in the data source
-     */
-    suspend fun updateWorkout(workout: Workout)
 }

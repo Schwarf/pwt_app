@@ -21,7 +21,7 @@ class AddWorkoutViewModel(private val workoutRepository: IWorkoutRepository) : V
 
     suspend fun saveWorkout() {
         if (validateInput()) {
-            workoutRepository.insertWorkout(state.workoutUI.toWorkout())
+            workoutRepository.upsertWorkout(state.workoutUI.toWorkout())
         }
     }
 
