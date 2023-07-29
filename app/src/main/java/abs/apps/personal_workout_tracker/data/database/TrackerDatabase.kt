@@ -1,5 +1,8 @@
 package abs.apps.personal_workout_tracker.data.database
 
+import abs.apps.personal_workout_tracker.data.database.dao.IPerformancesDao
+import abs.apps.personal_workout_tracker.data.database.dao.ITimestampDao
+import abs.apps.personal_workout_tracker.data.database.dao.IWorkoutDao
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room

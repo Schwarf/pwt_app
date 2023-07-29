@@ -1,6 +1,6 @@
 package abs.apps.personal_workout_tracker.data.repositories
 
-import abs.apps.personal_workout_tracker.data.database.ITimestampDao
+import abs.apps.personal_workout_tracker.data.database.dao.ITimestampDao
 import abs.apps.personal_workout_tracker.data.database.Timestamp
 import kotlinx.coroutines.flow.Flow
 

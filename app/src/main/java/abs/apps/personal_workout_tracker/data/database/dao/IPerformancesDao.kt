@@ -1,4 +1,4 @@
-package abs.apps.personal_workout_tracker.data.database
+package abs.apps.personal_workout_tracker.data.database.dao
 
 import abs.apps.personal_workout_tracker.data.database.Performance
 import androidx.room.Dao

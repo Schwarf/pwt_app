@@ -1,6 +1,6 @@
 package abs.apps.personal_workout_tracker.data.repositories
 
-import abs.apps.personal_workout_tracker.data.database.IPerformancesDao
+import abs.apps.personal_workout_tracker.data.database.dao.IPerformancesDao
 import abs.apps.personal_workout_tracker.data.database.Performance
 import kotlinx.coroutines.flow.Flow
 
