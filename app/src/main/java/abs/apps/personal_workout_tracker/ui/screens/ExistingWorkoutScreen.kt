@@ -39,9 +39,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.launch
 
@@ -115,6 +113,7 @@ private fun ExistingWorkoutBody(
         verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_medium))
     ) {
         var deleteConfirmationRequired by rememberSaveable { mutableStateOf(false) }
+        var removePerformanceConfirmationRequired by rememberSaveable { mutableStateOf(false) }
         ExistingWorkoutDetails(existingWorkout = existingWorkout)
         Button(
             onClick = onAddPerformance,
@@ -125,7 +124,7 @@ private fun ExistingWorkoutBody(
             Text(stringResource(R.string.add_performance))
         }
         Button(
-            onClick = onRemovePerformance,
+            onClick = { removePerformanceConfirmationRequired = true },
             modifier = Modifier.fillMaxWidth(),
             shape = MaterialTheme.shapes.small,
             enabled = existingWorkout.performanceUI.performedCounter.toInt() > 0
@@ -148,9 +147,23 @@ private fun ExistingWorkoutBody(
                     onDelete()
                 },
                 onDeleteCancel = { deleteConfirmationRequired = false },
+                deleteQuestionResID = R.string.delete_question,
                 modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_medium))
             )
         }
+
+        if (removePerformanceConfirmationRequired) {
+            DeleteConfirmationDialog(
+                onDeleteConfirm = {
+                    removePerformanceConfirmationRequired = false
+                    onRemovePerformance()
+                },
+                onDeleteCancel = { removePerformanceConfirmationRequired = false },
+                deleteQuestionResID = R.string.remove_performance_question,
+                modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_medium))
+            )
+        }
+
 
     }
 }
@@ -212,7 +225,8 @@ fun ExistingWorkoutDetails(
                     )
                 )
             )
-            val latest: String = " (latest: "+ existingWorkout.timestampUI.dateTimeString+")"
+            val lastPerformanceDateTime: String =
+                " (last: " + existingWorkout.timestampUI.dateTimeString + ")"
             ExistingWorkoutRow(
                 labelResID = R.string.performance_preformedCounter,
                 value = existingWorkout.performanceUI.performedCounter,
@@ -222,7 +236,7 @@ fun ExistingWorkoutDetails(
                             .padding_medium
                     )
                 ),
-                extraDescription = latest
+                extraDescription = lastPerformanceDateTime
             )
 
         }
@@ -232,11 +246,13 @@ fun ExistingWorkoutDetails(
 
 @Composable
 private fun DeleteConfirmationDialog(
-    onDeleteConfirm: () -> Unit, onDeleteCancel: () -> Unit, modifier: Modifier = Modifier
-) {
+    onDeleteConfirm: () -> Unit, onDeleteCancel: () -> Unit, @StringRes deleteQuestionResID: Int,
+    modifier: Modifier = Modifier,
+
+    ) {
     AlertDialog(onDismissRequest = { /* Do nothing */ },
         title = { Text(stringResource(R.string.attention)) },
-        text = { Text(stringResource(R.string.delete_question)) },
+        text = { Text(stringResource(deleteQuestionResID)) },
         modifier = modifier,
         dismissButton = {
             TextButton(onClick = onDeleteCancel) {
@@ -254,12 +270,12 @@ private fun DeleteConfirmationDialog(
 @Composable
 private fun ExistingWorkoutRow(
     @StringRes labelResID: Int, value: String, modifier: Modifier = Modifier,
-    extraDescription: String=""
+    extraDescription: String = ""
 ) {
     Row(modifier = modifier) {
         Text(text = stringResource(labelResID))
         if (extraDescription.isNotBlank()) {
-            Text(text = extraDescription, style= MaterialTheme.typography.labelSmall)
+            Text(text = extraDescription, style = MaterialTheme.typography.labelSmall)
         }
         Spacer(modifier = Modifier.weight(1f))
         Text(text = value, fontWeight = FontWeight.Bold)
