@@ -14,6 +14,7 @@ import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.PerformanceUI
 import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.TimestampUI
 import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.WorkoutUI
 import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.toPerformance
+import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.toTimestamp
 import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.toWorkout
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -21,12 +22,13 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import java.time.LocalDateTime
+import java.time.ZoneId
 
 class ExistingWorkoutViewModel(
     savedStateHandle: SavedStateHandle,
@@ -55,7 +57,10 @@ class ExistingWorkoutViewModel(
             }
     }
 
-    private fun mapPerformanceToExistingWorkout(workout: Workout, performance: Performance?): Flow<ExistingWorkout> {
+    private fun mapPerformanceToExistingWorkout(
+        workout: Workout,
+        performance: Performance?
+    ): Flow<ExistingWorkout> {
         return timestampRepository.getLatestTimestampStreamForOneWorkout(workout.id)
             .map { timestamp ->
                 mapTimestampToExistingWorkout(workout, performance, timestamp)
@@ -105,7 +110,28 @@ class ExistingWorkoutViewModel(
                 )
                 performanceRepository.upsertPerformance(currentPerformance)
             }
+            if (existingWorkoutsState.value.timestampUI.isDateTimeValid) {
+                val currentTimestamp = existingWorkoutsState.value.timestampUI.toTimestamp()
+                timestampRepository.upsertTimestamp(
+                    currentTimestamp.copy(
+                        timestamp = LocalDateTime.now().atZone(
+                            ZoneId.systemDefault()
+                        ).toEpochSecond()
+                    )
+                )
+            } else {
+                val currentTimestamp = Timestamp(
+                    workoutId = existingWorkoutsState.value.workoutUI.id,
+                    timestamp = LocalDateTime.now().atZone(
+                        ZoneId.systemDefault()
+                    ).toEpochSecond()
+                )
+                timestampRepository.upsertTimestamp(currentTimestamp)
+            }
+
+
         }
+
     }
 
     fun removeOnePerformance() {
@@ -113,6 +139,7 @@ class ExistingWorkoutViewModel(
             if (existingWorkoutsState.value.performanceUI.isPerformanceValid) {
                 val currentPerformance = existingWorkoutsState.value.performanceUI.toPerformance()
                 performanceRepository.upsertPerformance(currentPerformance.copy(performedCounter = currentPerformance.performedCounter - 1))
+                timestampRepository.deleteTimestamp(existingWorkoutsState.value.timestampUI.toTimestamp())
             }
         }
     }

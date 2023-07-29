@@ -39,7 +39,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.launch
 
@@ -210,6 +212,7 @@ fun ExistingWorkoutDetails(
                     )
                 )
             )
+            val latest: String = " (latest: "+ existingWorkout.timestampUI.dateTimeString+")"
             ExistingWorkoutRow(
                 labelResID = R.string.performance_preformedCounter,
                 value = existingWorkout.performanceUI.performedCounter,
@@ -218,7 +221,8 @@ fun ExistingWorkoutDetails(
                         id = R.dimen
                             .padding_medium
                     )
-                )
+                ),
+                extraDescription = latest
             )
 
         }
@@ -249,10 +253,14 @@ private fun DeleteConfirmationDialog(
 
 @Composable
 private fun ExistingWorkoutRow(
-    @StringRes labelResID: Int, value: String, modifier: Modifier = Modifier
+    @StringRes labelResID: Int, value: String, modifier: Modifier = Modifier,
+    extraDescription: String=""
 ) {
     Row(modifier = modifier) {
         Text(text = stringResource(labelResID))
+        if (extraDescription.isNotBlank()) {
+            Text(text = extraDescription, style= MaterialTheme.typography.labelSmall)
+        }
         Spacer(modifier = Modifier.weight(1f))
         Text(text = value, fontWeight = FontWeight.Bold)
     }
