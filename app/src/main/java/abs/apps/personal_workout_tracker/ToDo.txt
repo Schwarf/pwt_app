@@ -1,13 +1,17 @@
+- Check how to access Room database-view during debugging ...
 - Some details how the navigation to single workouts works evades me. Needs a detailed study.
 - Clean up the string resources.
 - Some code duplication could be avoided e.g. validateInput in Add- and EditWorkoutViewModel
+- EditWorkoutScreen Add button that allows edited workout to add "as new" instead of update
 
-
-- Missing features:
-  - Internationalization ?!?
-  - Date & time
-      - Add timestamps (date and time) to each performance in data-layer
-      - Show last performance (date-time added) in ExistingWorkoutScreen
-      - Add button that shows list of all performances for one workout
-      - Is it possible to show performance list in calendar?
-  - After that other features
+- Possible features:
+  - Review use cases and data layer:
+    - Introduce "Session" that has multiple workouts???
+    - Show all workouts or a "Session" of one day (calendar access)???
+    - Separate workout name from sets, totalReps and maxReps???
+    - Merge performances to sets, totalReps and maxReps???
+    - Allow to define "breaks" between sets that automatically go to stopwatch
+  - Connect ROOM database with Desktop MS SQL database using RESTful API and sync user data.
+  - Internationalization
+  - Add button that shows list of all performances for one workout
+  - Is it possible to show performance list in calendar?
