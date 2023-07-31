@@ -127,7 +127,7 @@ private fun ExistingWorkoutBody(
             onClick = { removePerformanceConfirmationRequired = true },
             modifier = Modifier.fillMaxWidth(),
             shape = MaterialTheme.shapes.small,
-            enabled = existingWorkout.performanceUI.performedCounter.toInt() > 0
+            enabled = existingWorkout.workoutUI.performances.toInt() > 0
         ) {
             Text(stringResource(R.string.remove_performance))
         }
@@ -229,7 +229,7 @@ fun ExistingWorkoutDetails(
                 " (last: " + existingWorkout.timestampUI.dateTimeString + ")"
             ExistingWorkoutRow(
                 labelResID = R.string.performance_preformedCounter,
-                value = existingWorkout.performanceUI.performedCounter,
+                value = existingWorkout.workoutUI.performances,
                 modifier = Modifier.padding(
                     horizontal = dimensionResource(
                         id = R.dimen

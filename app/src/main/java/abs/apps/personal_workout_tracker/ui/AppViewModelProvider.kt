@@ -24,7 +24,6 @@ object AppViewModelProvider {
             ExistingWorkoutViewModel(
                 this.createSavedStateHandle(),
                 workoutTrackerApplication().container.workoutRepository,
-                workoutTrackerApplication().container.performanceRepository,
                 workoutTrackerApplication().container.timestampRepository
             )
         }

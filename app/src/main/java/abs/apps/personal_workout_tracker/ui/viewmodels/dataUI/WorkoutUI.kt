@@ -7,7 +7,8 @@ data class WorkoutUI(
     val name: String = "",
     val sets: String = "",
     val totalRepetitions: String = "",
-    val maxRepetitionsInSet: String = ""
+    val maxRepetitionsInSet: String = "",
+    val performances: String=""
 )
 
 
@@ -16,5 +17,6 @@ fun WorkoutUI.toWorkout(): Workout = Workout(
     name = name,
     sets = sets.toIntOrNull() ?: 0,
     totalRepetitions = totalRepetitions.toIntOrNull() ?: 0,
-    maxRepetitionsInSet = maxRepetitionsInSet.toIntOrNull() ?: 0
+    maxRepetitionsInSet = maxRepetitionsInSet.toIntOrNull() ?: 0,
+    performances = performances.toIntOrNull() ?: 0,
 )

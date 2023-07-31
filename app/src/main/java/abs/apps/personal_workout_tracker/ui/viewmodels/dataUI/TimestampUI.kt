@@ -1,6 +1,5 @@
 package abs.apps.personal_workout_tracker.ui.viewmodels.dataUI
 
-import abs.apps.personal_workout_tracker.data.database.Performance
 import abs.apps.personal_workout_tracker.data.database.Timestamp
 import java.time.LocalDateTime
 import java.time.ZoneId

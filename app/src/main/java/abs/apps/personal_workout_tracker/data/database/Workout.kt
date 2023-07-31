@@ -16,6 +16,8 @@ data class Workout(
     var totalRepetitions: Int,
     @ColumnInfo(name = "maxRepetitionsInSet")
     var maxRepetitionsInSet: Int,
+    @ColumnInfo(name = "performances")
+    var performances: Int,
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0
 )
@@ -30,5 +32,6 @@ fun Workout.toWorkoutUI(): WorkoutUI = WorkoutUI(
     name = name,
     sets = sets.toString(),
     totalRepetitions = totalRepetitions.toString(),
-    maxRepetitionsInSet = maxRepetitionsInSet.toString()
+    maxRepetitionsInSet = maxRepetitionsInSet.toString(),
+    performances = performances.toString()
 )
