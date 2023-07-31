@@ -31,6 +31,7 @@ class AddWorkoutViewModel(private val workoutRepository: IWorkoutRepository) : V
             name.isNotBlank() && sets.isNotBlank() && sets.all { it.isDigit() } &&
                     totalRepetitions.isNotBlank() && totalRepetitions.all { it.isDigit() } &&
                     maxRepetitionsInSet.isNotBlank() && maxRepetitionsInSet.all { it.isDigit() }
+
         }
     }
 }

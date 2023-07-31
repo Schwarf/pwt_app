@@ -1,7 +1,6 @@
 package abs.apps.personal_workout_tracker.ui.viewmodels
 
 import abs.apps.personal_workout_tracker.data.database.Timestamp
-import abs.apps.personal_workout_tracker.data.database.Workout
 import abs.apps.personal_workout_tracker.data.database.toTimestampUI
 import abs.apps.personal_workout_tracker.data.database.toWorkoutUI
 import abs.apps.personal_workout_tracker.data.repositories.ITimestampRepository
@@ -14,7 +13,7 @@ import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.toWorkout
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.filterNotNull
@@ -33,37 +32,29 @@ class ExistingWorkoutViewModel(
     private val workoutId: Int =
         checkNotNull(savedStateHandle[ExistingWorkoutDestination.workoutIdArg])
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     val existingWorkoutsState: StateFlow<ExistingWorkout> =
-        workoutRepository.getWorkoutStream(workoutId)
-            .filterNotNull()
-            .flatMapLatest { workout ->
-                mapTimestampToExistingWorkout(workout)
-            }.stateIn(
-                scope = viewModelScope,
-                started = SharingStarted.WhileSubscribed(TIMEOUT_MILLIS),
-                initialValue = ExistingWorkout()
-            )
-
-
-    private fun mapTimestampToExistingWorkout(
-        workout: Workout,
-    ): Flow<ExistingWorkout> {
-        return timestampRepository.getLatestTimestampStreamForOneWorkout(workout.id)
-            .map { timestamp ->
-                if (timestamp != null) {
+        workoutRepository.getWorkoutStream(workoutId).filterNotNull().flatMapLatest { workout ->
+            timestampRepository.getLatestTimestampStreamForOneWorkout(workout.id)
+                .map { timestamp ->
+                    if(timestamp != null)
                     ExistingWorkout(
                         workoutUI = workout.toWorkoutUI(),
-                        timestampUI = timestamp.toTimestampUI()
+                        timestampUI =  timestamp.toTimestampUI()
                     )
-                } else {
-                    ExistingWorkout(
-                        workoutUI = workout.toWorkoutUI(),
-                        timestampUI = TimestampUI()
-                    )
+                    else
+                        ExistingWorkout(
+                            workoutUI = workout.toWorkoutUI().copy(performances = "0"),
+                            timestampUI =  TimestampUI())
+
                 }
+        }.stateIn(
+            scope = viewModelScope, started = SharingStarted.WhileSubscribed(
+                TIMEOUT_MILLIS
+            ), initialValue = ExistingWorkout()
+        )
 
-            }
-    }
+
 
     fun addOnePerformance() {
         viewModelScope.launch {
