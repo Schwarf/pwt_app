@@ -37,15 +37,16 @@ class ExistingWorkoutViewModel(
         workoutRepository.getWorkoutStream(workoutId).filterNotNull().flatMapLatest { workout ->
             timestampRepository.getLatestTimestampStreamForOneWorkout(workout.id)
                 .map { timestamp ->
-                    if(timestamp != null)
-                    ExistingWorkout(
-                        workoutUI = workout.toWorkoutUI(),
-                        timestampUI =  timestamp.toTimestampUI()
-                    )
+                    if (timestamp != null)
+                        ExistingWorkout(
+                            workoutUI = workout.toWorkoutUI(),
+                            timestampUI = timestamp.toTimestampUI()
+                        )
                     else
                         ExistingWorkout(
                             workoutUI = workout.toWorkoutUI().copy(performances = "0"),
-                            timestampUI =  TimestampUI())
+                            timestampUI = TimestampUI()
+                        )
 
                 }
         }.stateIn(
@@ -55,34 +56,18 @@ class ExistingWorkoutViewModel(
         )
 
 
-
     fun addOnePerformance() {
         viewModelScope.launch {
             val currentWorkout = existingWorkoutsState.value.workoutUI.toWorkout()
             workoutRepository.upsertWorkout(currentWorkout.copy(performances = currentWorkout.performances + 1))
-
-            if (existingWorkoutsState.value.timestampUI.isDateTimeValid) {
-                val currentTimestamp = existingWorkoutsState.value.timestampUI.toTimestamp()
-                timestampRepository.upsertTimestamp(
-                    currentTimestamp.copy(
-                        timestamp = LocalDateTime.now().atZone(
-                            ZoneId.systemDefault()
-                        ).toEpochSecond()
-                    )
-                )
-            } else {
-                val currentTimestamp = Timestamp(
-                    workoutId = existingWorkoutsState.value.workoutUI.id,
-                    timestamp = LocalDateTime.now().atZone(
-                        ZoneId.systemDefault()
-                    ).toEpochSecond()
-                )
-                timestampRepository.upsertTimestamp(currentTimestamp)
-            }
-
-
+            val currentTimestamp = Timestamp(
+                workoutId = existingWorkoutsState.value.workoutUI.id,
+                timestamp = LocalDateTime.now().atZone(
+                    ZoneId.systemDefault()
+                ).toEpochSecond()
+            )
+            timestampRepository.upsertTimestamp(currentTimestamp)
         }
-
     }
 
     fun removeOnePerformance() {
