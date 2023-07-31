@@ -21,6 +21,7 @@
     <string name="workout_totalReps_required">Total repetitions*</string>>
     <string name="workout_maxRepsInSets_required">Max repetitions in set*</string>>
     <string name="workout_performances_required">Performed*</string>>
+    <string name="add_one_performance">Add one performance?</string>>
     <string name="workout_name">Name: </string>>
     <string name="workout_sets">Sets: </string>>
     <string name="workout_totalReps">Total repetitions: </string>>
