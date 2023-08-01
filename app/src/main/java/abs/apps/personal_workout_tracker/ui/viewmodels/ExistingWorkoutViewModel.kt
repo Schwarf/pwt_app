@@ -60,13 +60,14 @@ class ExistingWorkoutViewModel(
         viewModelScope.launch {
             val currentWorkout = existingWorkoutsState.value.workoutUI.toWorkout()
             workoutRepository.upsertWorkout(currentWorkout.copy(performances = currentWorkout.performances + 1))
-            val currentTimestamp = Timestamp(
-                workoutId = existingWorkoutsState.value.workoutUI.id,
-                timestamp = LocalDateTime.now().atZone(
-                    ZoneId.systemDefault()
-                ).toEpochSecond()
+            timestampRepository.upsertTimestamp(
+                Timestamp(
+                    workoutId = existingWorkoutsState.value.workoutUI.id,
+                    timestamp = LocalDateTime.now().atZone(
+                        ZoneId.systemDefault()
+                    ).toEpochSecond()
+                )
             )
-            timestampRepository.upsertTimestamp(currentTimestamp)
         }
     }
 
