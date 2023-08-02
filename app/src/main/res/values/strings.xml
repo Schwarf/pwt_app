@@ -34,5 +34,5 @@
     <string name="workout_exists">What do you want to do with this workout?</string>
     <string name="required_fields">*required fields</string>>
     <string name="back_button">Back</string>
-    <string name="startup">This is the startup screen.\nShown for one second.</string>
+    <string name="startup">Willkommen Ihr Dicken.</string>
 </resources>
