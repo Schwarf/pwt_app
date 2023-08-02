@@ -7,6 +7,8 @@ import abs.apps.personal_workout_tracker.ui.screens.ExistingWorkoutDestination
 import abs.apps.personal_workout_tracker.ui.screens.ExistingWorkoutScreen
 import abs.apps.personal_workout_tracker.ui.screens.HomeDestination
 import abs.apps.personal_workout_tracker.ui.screens.HomeScreen
+import abs.apps.personal_workout_tracker.ui.screens.StartupDestination
+import abs.apps.personal_workout_tracker.ui.screens.StartupScreen
 import abs.apps.personal_workout_tracker.ui.screens.WorkoutEntryDestination
 import android.annotation.SuppressLint
 import androidx.compose.runtime.Composable
@@ -34,9 +36,13 @@ fun WorkoutTrackerNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = HomeDestination.route,
+        startDestination = StartupDestination.route,
         modifier = modifier
     ) {
+
+        composable(route = StartupDestination.route) {
+            StartupScreen(navigateToHome = { navController.navigate(HomeDestination.route) })
+        }
         composable(route = HomeDestination.route) {
             HomeScreen(
                 navigateToExistingWorkout = {
