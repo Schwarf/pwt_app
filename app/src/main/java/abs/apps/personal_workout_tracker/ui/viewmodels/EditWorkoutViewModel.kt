@@ -5,6 +5,7 @@ import abs.apps.personal_workout_tracker.data.database.toValidatedWorkoutUI
 import abs.apps.personal_workout_tracker.ui.screens.EditWorkoutDestination
 import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.WorkoutUI
 import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.toWorkout
+import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.validateWorkoutUI
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -45,11 +46,8 @@ class EditWorkoutViewModel(
             ValidatedWorkoutUI(workoutUI = workoutUI, isValid = validateInput(workoutUI))
     }
 
-    private fun validateInput(state: WorkoutUI = this.state.workoutUI): Boolean {
-        return with(state) {
-            name.isNotBlank() && sets.isNotBlank() && sets.all { it.isDigit() } &&
-                    totalRepetitions.isNotBlank() && totalRepetitions.all { it.isDigit() } &&
-                    maxRepetitionsInSet.isNotBlank() && maxRepetitionsInSet.all { it.isDigit() }
-        }
+    private fun validateInput(workoutUI : WorkoutUI= this.state.workoutUI) :Boolean
+    {
+        return validateWorkoutUI(workoutUI)
     }
 }

@@ -20,3 +20,12 @@ fun WorkoutUI.toWorkout(): Workout = Workout(
     maxRepetitionsInSet = maxRepetitionsInSet.toIntOrNull() ?: 0,
     performances = performances.toIntOrNull() ?: 0,
 )
+
+fun validateWorkoutUI(workoutUI: WorkoutUI): Boolean {
+    return with(workoutUI) {
+        name.isNotBlank() && sets.isNotBlank() && sets.all { it.isDigit() } &&
+                totalRepetitions.isNotBlank() && totalRepetitions.all { it.isDigit() } &&
+                maxRepetitionsInSet.isNotBlank() && maxRepetitionsInSet.all { it.isDigit() }
+
+    }
+}
