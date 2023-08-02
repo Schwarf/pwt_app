@@ -1,7 +1,5 @@
-- Check how to access Room database-view during debugging ...
 - Some details how the navigation to single workouts works evades me. Needs a detailed study.
 - Clean up the string resources.
-- Some code duplication could be avoided e.g. validateInput in Add- and EditWorkoutViewModel
 - EditWorkoutScreen Add button that allows edited workout to add "as new" instead of update
 
 - Possible features:
