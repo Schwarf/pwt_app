@@ -1,7 +1,7 @@
 package abs.apps.personal_workout_tracker.ui.screens.helpers
 
 import abs.apps.personal_workout_tracker.R
-import abs.apps.personal_workout_tracker.ui.viewmodels.ValidatedWorkoutUI
+import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.ValidatedWorkoutUI
 import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.WorkoutUI
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
