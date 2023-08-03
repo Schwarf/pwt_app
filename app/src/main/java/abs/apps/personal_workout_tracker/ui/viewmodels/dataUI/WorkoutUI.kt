@@ -29,3 +29,9 @@ fun validateWorkoutUI(workoutUI: WorkoutUI): Boolean {
 
     }
 }
+
+data class ValidatedWorkoutUI(
+    val workoutUI: WorkoutUI = WorkoutUI(),
+    val isValid: Boolean = false
+)
+

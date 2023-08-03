@@ -1,6 +1,7 @@
 package abs.apps.personal_workout_tracker.ui.viewmodels
 
 import abs.apps.personal_workout_tracker.data.repositories.IWorkoutRepository
+import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.ValidatedWorkoutUI
 import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.WorkoutUI
 import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.toWorkout
 import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.validateWorkoutUI
@@ -32,10 +33,6 @@ class AddWorkoutViewModel(private val workoutRepository: IWorkoutRepository) : V
     }
 }
 
-data class ValidatedWorkoutUI(
-    val workoutUI: WorkoutUI = WorkoutUI(),
-    val isValid: Boolean = false
-)
 
 
 
