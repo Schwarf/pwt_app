@@ -36,7 +36,7 @@ fun Timestamp.toTimestampUI(): TimestampUI = TimestampUI(
     workoutId = workoutId,
     dateTimeString = LocalDateTime.ofInstant(
         Instant.ofEpochSecond(timestamp), ZoneId.systemDefault()
-    ).format(DateTimeFormatter.ofPattern("yyyy-HH-dd HH:mm::ss"))
+    ).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm::ss"))
 )
 
 
