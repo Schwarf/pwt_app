@@ -24,6 +24,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -120,7 +121,7 @@ private fun WorkoutList(
         items(items = itemList, key = { it.id }) { item ->
             WorkoutItem(workout = item,
                 modifier = Modifier
-                    .padding(dimensionResource(id = R.dimen.padding_small))
+                    .padding(dimensionResource(id = R.dimen.padding_extra_small))
                     .clickable { onItemClick(item) })
         }
     }
@@ -138,12 +139,24 @@ private fun WorkoutItem(
             verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_small))
         ) {
             Row(
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
                     text = workout.name,
                     style = MaterialTheme.typography.titleLarge,
                 )
+                Spacer(Modifier.weight(1f))
+                Text(
+                    text = stringResource(id = R.string.workout_performances_home, workout.performances),
+                    style = MaterialTheme.typography.titleMedium,
+                )
+                Spacer(Modifier.weight(1f))
+                IconButton(
+                    onClick = {}
+                ) {
+                    Icon(Icons.Default.Add, contentDescription = "Add")
+                }
             }
             Row(
                 modifier = Modifier.fillMaxWidth()

@@ -228,7 +228,7 @@ fun ExistingWorkoutDetails(
             val lastPerformanceDateTime: String =
                 " (last: " + existingWorkout.timestampUI.dateTimeString + ")"
             ExistingWorkoutRow(
-                labelResID = R.string.performance_preformedCounter,
+                labelResID = R.string.workout_performances,
                 value = existingWorkout.workoutUI.performances,
                 modifier = Modifier.padding(
                     horizontal = dimensionResource(
