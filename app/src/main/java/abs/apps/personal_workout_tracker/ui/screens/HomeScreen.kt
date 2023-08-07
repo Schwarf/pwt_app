@@ -88,14 +88,16 @@ fun HomeScreen(
             onItemClick = navigateToExistingWorkout,
             modifier = modifier
                 .padding(padding)
-                .fillMaxSize()
-        )
+                .fillMaxSize(),
+            onAddPerformance = { workoutId -> viewModel.addPerformance(workoutId) }
+            )
     }
 }
 
 @Composable
 private fun HomeBody(
-    workoutList: List<Workout>, onItemClick: (Int) -> Unit, modifier: Modifier = Modifier
+    workoutList: List<Workout>, onItemClick: (Int) -> Unit, modifier: Modifier = Modifier,
+    onAddPerformance: (Int) -> Unit
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -111,7 +113,8 @@ private fun HomeBody(
             WorkoutList(
                 itemList = workoutList,
                 onItemClick = { onItemClick(it.id) },
-                modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.padding_small))
+                modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.padding_small)),
+                onAddPerformance = onAddPerformance
             )
         }
     }
@@ -119,21 +122,27 @@ private fun HomeBody(
 
 @Composable
 private fun WorkoutList(
-    itemList: List<Workout>, onItemClick: (Workout) -> Unit, modifier: Modifier = Modifier
+    itemList: List<Workout>, onItemClick: (Workout) -> Unit, modifier: Modifier = Modifier,
+    onAddPerformance: (Int) -> Unit
 ) {
     LazyColumn(modifier = modifier) {
         items(items = itemList, key = { it.id }) { item ->
-            WorkoutItem(workout = item,
+            WorkoutItem(
+                workout = item,
                 modifier = Modifier
                     .padding(dimensionResource(id = R.dimen.padding_extra_small))
-                    .clickable { onItemClick(item) })
+                    .clickable { onItemClick(item) },
+                onAddPerformance = onAddPerformance
+            )
         }
     }
 }
 
 @Composable
 private fun WorkoutItem(
-    workout: Workout, modifier: Modifier = Modifier
+    workout: Workout,
+    modifier: Modifier = Modifier,
+    onAddPerformance: (Int) -> Unit
 ) {
 
     Card(
@@ -169,7 +178,7 @@ private fun WorkoutItem(
                         .padding(8.dp)
                 ) {
                     IconButton(
-                        onClick = {}
+                        onClick = {onAddPerformance(workout.id)}
                     ) {
                         Icon(Icons.Default.Add, contentDescription = "Add")
                     }

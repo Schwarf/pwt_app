@@ -11,4 +11,6 @@ interface IWorkoutRepository {
     suspend fun upsertWorkout(workout: Workout)
 
     suspend fun deleteWorkout(workout: Workout)
+
+    suspend fun updateWorkoutPerformances(id: Int, performances: Int)
 }

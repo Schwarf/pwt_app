@@ -15,7 +15,8 @@ object AppViewModelProvider {
     val Factory = viewModelFactory {
         // Initializer for HomeViewModel
         initializer {
-            HomeViewModel(workoutTrackerApplication().container.workoutRepository)
+            HomeViewModel(workoutTrackerApplication().container.workoutRepository,
+                workoutTrackerApplication().container.timestampRepository)
         }
         initializer {
             AddWorkoutViewModel(workoutTrackerApplication().container.workoutRepository)
