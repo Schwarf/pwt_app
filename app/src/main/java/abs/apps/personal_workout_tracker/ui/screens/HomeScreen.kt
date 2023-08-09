@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
@@ -90,7 +91,7 @@ fun HomeScreen(
                 .padding(padding)
                 .fillMaxSize(),
             onAddPerformance = { workoutId -> viewModel.addPerformance(workoutId) }
-            )
+        )
     }
 }
 
@@ -154,33 +155,42 @@ private fun WorkoutItem(
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
+                // This ensures elements take as much space as they can
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
                     text = workout.name,
                     style = MaterialTheme.typography.titleLarge,
+                    // This makes the text take up all available space but no more
+                    modifier = Modifier.weight(1f)
                 )
-                Spacer(Modifier.weight(1f))
-                Text(
-                    text = stringResource(
-                        id = R.string.workout_performances_home,
-                        workout.performances
-                    ),
-                    color = Color.Gray,
-                    style = MaterialTheme.typography.titleMedium,
-                )
-                Spacer(Modifier.weight(0.1f))
-                Surface(
-                    shape = CircleShape,
-                    color = Color.Gray,
-                    modifier = Modifier
-                        .size(48.dp)
-                        .padding(8.dp)
+                // Nested row
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.End
                 ) {
-                    IconButton(
-                        onClick = {onAddPerformance(workout.id)}
+                    Text(
+                        text = stringResource(
+                            id = R.string.workout_performances_home,
+                            workout.performances
+                        ),
+                        color = Color.Gray,
+                        style = MaterialTheme.typography.titleMedium
+                    )
+                    // Space between Text and IconButton
+                    Spacer(Modifier.width(8.dp))
+                    Surface(
+                        shape = CircleShape,
+                        color = Color.Gray,
+                        modifier = Modifier
+                            .size(48.dp)
                     ) {
-                        Icon(Icons.Default.Add, contentDescription = "Add")
+                        IconButton(
+                            onClick = { onAddPerformance(workout.id) }
+                        ) {
+                            Icon(Icons.Default.Add, contentDescription = "Add")
+                        }
                     }
                 }
             }
