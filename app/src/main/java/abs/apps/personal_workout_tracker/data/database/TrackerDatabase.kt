@@ -8,9 +8,9 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(
-    entities = [Workout::class,  Timestamp::class],
+    entities = [Workout::class, Timestamp::class],
     version = 1,
-    exportSchema = false
+    exportSchema = true,
 )
 abstract class TrackerDatabase : RoomDatabase() {
     abstract val workoutDao: IWorkoutDao
