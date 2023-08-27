@@ -1,4 +1,7 @@
 <resources>
+    <string name="choose_add">Add Training or add Workout?</string>
+    <string name="workout_explanation">Workout: Divided in sets where each set has repetitions.</string>
+    <string name="training_explanation">Training: A single exercise that you do for limited time (e.g. jogging).</string>
     <string name="attention">Attention</string>
     <string name="delete_question">Are you sure you want to delete?</string>
     <string name="remove_performance_question">Are you sure you want to remove the last performance?</string>
