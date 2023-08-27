@@ -4,9 +4,8 @@ import abs.apps.personal_workout_tracker.R
 import abs.apps.personal_workout_tracker.data.database.Workout
 import abs.apps.personal_workout_tracker.ui.AppViewModelProvider
 import abs.apps.personal_workout_tracker.ui.navigation.INavigationDestination
-import abs.apps.personal_workout_tracker.ui.screens.helpers.AppTopBar
 import abs.apps.personal_workout_tracker.ui.screens.helpers.HomeScreenTopBar
-import abs.apps.personal_workout_tracker.ui.viewmodels.HomeViewModel
+import abs.apps.personal_workout_tracker.ui.viewmodels.WorkoutListScreenViewModel
 import android.annotation.SuppressLint
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -57,11 +56,11 @@ object HomeDestination : INavigationDestination {
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun HomeScreen(
+fun WorkoutListScreen(
     navigateToAddWorkout: () -> Unit,
     navigateToExistingWorkout: (Int) -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: HomeViewModel = viewModel(factory = AppViewModelProvider.Factory)
+    viewModel: WorkoutListScreenViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
     val state by viewModel.listOfWorkoutsState.collectAsState()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
@@ -85,7 +84,7 @@ fun HomeScreen(
         },
     ) { padding ->
 
-        HomeBody(
+        WorkoutListBody(
             workoutList = state.workoutList,
             onItemClick = navigateToExistingWorkout,
             modifier = modifier
@@ -97,7 +96,7 @@ fun HomeScreen(
 }
 
 @Composable
-private fun HomeBody(
+private fun WorkoutListBody(
     workoutList: List<Workout>, onItemClick: (Int) -> Unit, modifier: Modifier = Modifier,
     onAddPerformance: (Int) -> Unit
 ) {

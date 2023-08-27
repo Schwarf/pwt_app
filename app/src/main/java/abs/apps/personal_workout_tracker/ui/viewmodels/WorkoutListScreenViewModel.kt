@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 import java.time.ZoneId
 
-class HomeViewModel(
+class WorkoutListScreenViewModel(
     private val workoutRepository: IWorkoutRepository,
     private val timestampRepository: ITimestampRepository
 ) : ViewModel() {
