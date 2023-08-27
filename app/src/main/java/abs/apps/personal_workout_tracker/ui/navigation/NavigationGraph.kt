@@ -9,6 +9,12 @@ import abs.apps.personal_workout_tracker.ui.screens.workouts.WorkoutListDestinat
 import abs.apps.personal_workout_tracker.ui.screens.workouts.WorkoutListScreen
 import abs.apps.personal_workout_tracker.ui.screens.StartupDestination
 import abs.apps.personal_workout_tracker.ui.screens.StartupScreen
+import abs.apps.personal_workout_tracker.ui.screens.trainings.AddTrainingScreen
+import abs.apps.personal_workout_tracker.ui.screens.trainings.EditTrainingDestination
+import abs.apps.personal_workout_tracker.ui.screens.trainings.ExistingTrainingDestination
+import abs.apps.personal_workout_tracker.ui.screens.trainings.TrainingEntryDestination
+import abs.apps.personal_workout_tracker.ui.screens.trainings.TrainingListDestination
+import abs.apps.personal_workout_tracker.ui.screens.trainings.TrainingListScreen
 import abs.apps.personal_workout_tracker.ui.screens.workouts.WorkoutEntryDestination
 import android.annotation.SuppressLint
 import androidx.compose.runtime.Composable
@@ -43,6 +49,16 @@ fun WorkoutTrackerNavHost(
         composable(route = StartupDestination.route) {
             StartupScreen(navigateToHome = { navController.navigate(WorkoutListDestination.route) })
         }
+        composable(route = TrainingListDestination.route) {
+            TrainingListScreen(
+                navigateToExistingTraining = {
+                    navController.navigate("${ExistingTrainingDestination.route}/${it}")
+                },
+                navigateToAddTraining = { navController.navigate(TrainingEntryDestination.route) }
+            )
+        }
+
+
         composable(route = WorkoutListDestination.route) {
             WorkoutListScreen(
                 navigateToExistingWorkout = {
@@ -50,6 +66,12 @@ fun WorkoutTrackerNavHost(
                 },
                 navigateToAddWorkout = { navController.navigate(WorkoutEntryDestination.route) }
             )
+        }
+
+        composable(route = TrainingEntryDestination.route)
+        {
+            AddTrainingScreen(navigateBack = { navController.popBackStack() },
+                onNavigateUp = { navController.navigateUp() })
         }
 
         composable(route = WorkoutEntryDestination.route)
@@ -69,7 +91,20 @@ fun WorkoutTrackerNavHost(
                 navigateToEditWorkout = { navController.navigate("${EditWorkoutDestination.route}/$it") },
                 navigateBack = { navController.popBackStack() })
         }
+/*
+        composable(
+            route = ExistingTrainingDestination.routeWithArgs,
+            arguments = listOf(navArgument(ExistingTrainingDestination.trainingIdArg) {
+                type = NavType.IntType
+            })
+        )
+        {
+            ExistingTrainingScreen(
+                navigateToEditTraining = { navController.navigate("${EditTrainingDestination.route}/$it") },
+                navigateBack = { navController.popBackStack() })
+        }
 
+*/
         composable(
             route = EditWorkoutDestination.routeWithArgs,
             arguments = listOf(navArgument(EditWorkoutDestination.workoutIdArg) {

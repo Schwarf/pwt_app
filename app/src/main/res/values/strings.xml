@@ -31,6 +31,9 @@
     <string name="workout_performances_required">Performed*</string>>
     <string name="training_duration_required">Duration in minutes*</string>>
     <string name="add_one_performance">Add one performance?</string>>
+    <string name="training_name">Name: </string>>
+    <string name="training_duration">Duration( in minutes): </string>>
+    <string name="training_performances">Performed:</string>>
     <string name="workout_name">Name: </string>>
     <string name="workout_sets">Sets: </string>>
     <string name="workout_totalReps">Total repetitions: </string>>
