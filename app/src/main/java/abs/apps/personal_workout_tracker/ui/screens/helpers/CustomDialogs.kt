@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 private fun ChooseAddTrainingOrAddWorkoutDialog(
-    onDeleteConfirm: () -> Unit, onDeleteCancel: () -> Unit,
+    onAddWorkout: () -> Unit, onAddTraining: () -> Unit,
     modifier: Modifier = Modifier,
 
     ) {
@@ -35,13 +35,13 @@ private fun ChooseAddTrainingOrAddWorkoutDialog(
         }) },
         modifier = modifier,
         dismissButton = {
-            TextButton(onClick = onDeleteCancel) {
-                Text(text = stringResource(R.string.no))
+            TextButton(onClick = onAddTraining) {
+                Text(text = stringResource(R.string.add_workout))
             }
         },
         confirmButton = {
-            TextButton(onClick = onDeleteConfirm) {
-                Text(text = stringResource(R.string.yes))
+            TextButton(onClick = onAddWorkout) {
+                Text(text = stringResource(R.string.add_training))
             }
         })
 }
