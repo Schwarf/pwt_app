@@ -4,7 +4,7 @@ import abs.apps.personal_workout_tracker.R
 import abs.apps.personal_workout_tracker.data.database.Workout
 import abs.apps.personal_workout_tracker.ui.AppViewModelProvider
 import abs.apps.personal_workout_tracker.ui.navigation.INavigationDestination
-import abs.apps.personal_workout_tracker.ui.screens.helpers.HomeScreenTopBar
+import abs.apps.personal_workout_tracker.ui.screens.helpers.ListScreenTopBar
 import abs.apps.personal_workout_tracker.ui.viewmodels.workouts.WorkoutListScreenViewModel
 import android.annotation.SuppressLint
 import androidx.compose.foundation.clickable
@@ -59,6 +59,7 @@ object WorkoutListDestination : INavigationDestination {
 fun WorkoutListScreen(
     navigateToAddWorkout: () -> Unit,
     navigateToExistingWorkout: (Int) -> Unit,
+    navigateToOtherList: () ->Unit,
     modifier: Modifier = Modifier,
     viewModel: WorkoutListScreenViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
@@ -67,9 +68,9 @@ fun WorkoutListScreen(
     Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            HomeScreenTopBar(
+            ListScreenTopBar(
                 switchToWorkoutsButtonEnabled = true,
-                canNavigateBack = false,
+                navigateToOtherList =navigateToOtherList,
                 scrollBehavior = scrollBehavior
             )
         },

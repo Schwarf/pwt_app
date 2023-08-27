@@ -49,24 +49,20 @@ fun AppTopBar(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreenTopBar(
+fun ListScreenTopBar(
     switchToWorkoutsButtonEnabled: Boolean,
-    canNavigateBack: Boolean,
+    navigateToOtherList: () -> Unit,
     modifier: Modifier = Modifier,
-    scrollBehavior: TopAppBarScrollBehavior? = null,
-    navigateUp: () -> Unit = {}
-
+    scrollBehavior: TopAppBarScrollBehavior? = null
 ) {
     var workoutText = ""
     var trainingText = ""
     val switchSize = 16.sp
     val showSize = 20.sp
-    if(switchToWorkoutsButtonEnabled) {
+    if (switchToWorkoutsButtonEnabled) {
         trainingText = "Switch to trainings"
         workoutText = "Showing all workouts"
-    }
-    else
-    {
+    } else {
         trainingText = "Showing all trainings "
         workoutText = "Switch to workouts"
 
@@ -75,38 +71,33 @@ fun HomeScreenTopBar(
         title = { },
         modifier = modifier,
         scrollBehavior = scrollBehavior,
-        navigationIcon = {
-            if (canNavigateBack) {
-                IconButton(onClick = navigateUp) {
-                    Icon(
-                        imageVector = Icons.Filled.ArrowBack,
-                        contentDescription = stringResource(R.string.back_button)
-                    )
-                }
-            }
-        },
         actions = {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center
             ) {
                 TextButton(
-                    onClick = { /*TODO*/ },
+                    onClick = navigateToOtherList,
                     enabled = !switchToWorkoutsButtonEnabled
                 ) {
                     Text(
                         text = workoutText,
-                        style = TextStyle(fontSize = if(!switchToWorkoutsButtonEnabled)  switchSize else showSize, fontWeight = FontWeight.Bold)
+                        style = TextStyle(
+                            fontSize = if (!switchToWorkoutsButtonEnabled) switchSize else showSize,
+                            fontWeight = FontWeight.Bold
+                        )
                     )
                 }
                 TextButton(
-                    onClick = { /*TODO*/ },
-
+                    onClick = navigateToOtherList,
                     enabled = switchToWorkoutsButtonEnabled
                 ) {
                     Text(
                         text = trainingText,
-                        style = TextStyle(fontSize = if(switchToWorkoutsButtonEnabled)  switchSize else showSize, fontWeight = FontWeight.Bold)
+                        style = TextStyle(
+                            fontSize = if (switchToWorkoutsButtonEnabled) switchSize else showSize,
+                            fontWeight = FontWeight.Bold
+                        )
                     )
 
                 }

@@ -66,7 +66,8 @@ fun WorkoutTrackerNavHost(
                 navigateToExistingTraining = {
                     navController.navigate("${ExistingTrainingDestination.route}/${it}")
                 },
-                navigateToAddTraining = { navController.navigate(TrainingEntryDestination.route) }
+                navigateToAddTraining = { navController.navigate(TrainingEntryDestination.route) },
+                navigateToOtherList = { navController.navigate(WorkoutListDestination.route) }
             )
         }
         composable(route = TrainingEntryDestination.route)
@@ -104,7 +105,8 @@ fun WorkoutTrackerNavHost(
                 navigateToExistingWorkout = {
                     navController.navigate("${ExistingWorkoutDestination.route}/${it}")
                 },
-                navigateToAddWorkout = { navController.navigate(WorkoutEntryDestination.route) }
+                navigateToAddWorkout = { navController.navigate(WorkoutEntryDestination.route) },
+                navigateToOtherList = { navController.navigate(TrainingListDestination.route) }
             )
         }
         composable(route = WorkoutEntryDestination.route)
