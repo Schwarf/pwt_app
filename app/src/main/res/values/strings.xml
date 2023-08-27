@@ -23,10 +23,12 @@
     <string name="edit">Edit </string>>
     <string name="no_workout_description">Oops!\nNo workouts yet.\nTap + to add.</string>
     <string name="workout_name_required">Workout Name*</string>>
+    <string name="training_name_required">Training Name*</string>>
     <string name="workout_sets_required">Sets*</string>>
     <string name="workout_totalReps_required">Total repetitions*</string>>
     <string name="workout_maxRepsInSets_required">Max repetitions in set*</string>>
     <string name="workout_performances_required">Performed*</string>>
+    <string name="training_duration_required">Duration in minutes*</string>>
     <string name="add_one_performance">Add one performance?</string>>
     <string name="workout_name">Name: </string>>
     <string name="workout_sets">Sets: </string>>
