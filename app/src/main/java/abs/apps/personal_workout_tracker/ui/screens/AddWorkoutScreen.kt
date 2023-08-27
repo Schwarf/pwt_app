@@ -5,7 +5,7 @@ import abs.apps.personal_workout_tracker.ui.AppViewModelProvider
 import abs.apps.personal_workout_tracker.ui.navigation.INavigationDestination
 import abs.apps.personal_workout_tracker.ui.screens.helpers.AppTopBar
 import abs.apps.personal_workout_tracker.ui.screens.helpers.WorkoutInputBody
-import abs.apps.personal_workout_tracker.ui.viewmodels.AddWorkoutViewModel
+import abs.apps.personal_workout_tracker.ui.viewmodels.workouts.AddWorkoutViewModel
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState

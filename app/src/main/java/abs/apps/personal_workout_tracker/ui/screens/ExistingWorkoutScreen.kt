@@ -4,8 +4,8 @@ import abs.apps.personal_workout_tracker.R
 import abs.apps.personal_workout_tracker.ui.AppViewModelProvider
 import abs.apps.personal_workout_tracker.ui.navigation.INavigationDestination
 import abs.apps.personal_workout_tracker.ui.screens.helpers.AppTopBar
-import abs.apps.personal_workout_tracker.ui.viewmodels.ExistingWorkout
-import abs.apps.personal_workout_tracker.ui.viewmodels.ExistingWorkoutViewModel
+import abs.apps.personal_workout_tracker.ui.viewmodels.workouts.ExistingWorkout
+import abs.apps.personal_workout_tracker.ui.viewmodels.workouts.ExistingWorkoutViewModel
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

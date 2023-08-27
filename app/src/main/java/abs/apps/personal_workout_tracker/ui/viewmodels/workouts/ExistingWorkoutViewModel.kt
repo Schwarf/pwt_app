@@ -1,4 +1,4 @@
-package abs.apps.personal_workout_tracker.ui.viewmodels
+package abs.apps.personal_workout_tracker.ui.viewmodels.workouts
 
 import abs.apps.personal_workout_tracker.data.database.Timestamp
 import abs.apps.personal_workout_tracker.data.database.toTimestampUI
