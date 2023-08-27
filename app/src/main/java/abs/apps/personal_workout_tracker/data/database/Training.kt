@@ -1,5 +1,6 @@
 package abs.apps.personal_workout_tracker.data.database
 
+import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.TrainingUI
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -14,4 +15,11 @@ data class Training(
     var performances: Int,
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0
+)
+
+fun Training.toTrainingUI(): TrainingUI = TrainingUI(
+    id = id,
+    name = name,
+    timeIntervalMinutes = timeIntervalMinuts.toString(),
+    performances = performances.toString()
 )
