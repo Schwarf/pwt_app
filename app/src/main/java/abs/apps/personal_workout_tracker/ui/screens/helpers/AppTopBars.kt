@@ -18,7 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.sp
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -50,23 +49,13 @@ fun AppTopBar(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ListScreenTopBar(
-    switchToWorkoutsButtonEnabled: Boolean,
+    showWorkouts: Boolean,
     navigateToOtherList: () -> Unit,
     modifier: Modifier = Modifier,
     scrollBehavior: TopAppBarScrollBehavior? = null
 ) {
-    var workoutText = ""
-    var trainingText = ""
-    val switchSize = 16.sp
-    val showSize = 20.sp
-    if (switchToWorkoutsButtonEnabled) {
-        trainingText = "Switch to trainings"
-        workoutText = "Showing all workouts"
-    } else {
-        trainingText = "Showing all trainings "
-        workoutText = "Switch to workouts"
-
-    }
+    val buttonText = if (showWorkouts) "Switch to trainings" else "Switch to workouts"
+    val title = if (showWorkouts) "List of workouts" else "List of trainings"
     CenterAlignedTopAppBar(
         title = { },
         modifier = modifier,
@@ -78,24 +67,11 @@ fun ListScreenTopBar(
             ) {
                 TextButton(
                     onClick = navigateToOtherList,
-                    enabled = !switchToWorkoutsButtonEnabled
+                    enabled = true
                 ) {
                     Text(
-                        text = workoutText,
+                        text = buttonText,
                         style = TextStyle(
-                            fontSize = if (!switchToWorkoutsButtonEnabled) switchSize else showSize,
-                            fontWeight = FontWeight.Bold
-                        )
-                    )
-                }
-                TextButton(
-                    onClick = navigateToOtherList,
-                    enabled = switchToWorkoutsButtonEnabled
-                ) {
-                    Text(
-                        text = trainingText,
-                        style = TextStyle(
-                            fontSize = if (switchToWorkoutsButtonEnabled) switchSize else showSize,
                             fontWeight = FontWeight.Bold
                         )
                     )

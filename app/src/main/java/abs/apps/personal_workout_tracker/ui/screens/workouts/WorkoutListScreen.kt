@@ -69,7 +69,7 @@ fun WorkoutListScreen(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             ListScreenTopBar(
-                switchToWorkoutsButtonEnabled = true,
+                showWorkouts = true,
                 navigateToOtherList =navigateToOtherList,
                 scrollBehavior = scrollBehavior
             )
