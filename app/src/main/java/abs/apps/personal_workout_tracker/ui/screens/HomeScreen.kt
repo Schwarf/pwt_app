@@ -5,6 +5,7 @@ import abs.apps.personal_workout_tracker.data.database.Workout
 import abs.apps.personal_workout_tracker.ui.AppViewModelProvider
 import abs.apps.personal_workout_tracker.ui.navigation.INavigationDestination
 import abs.apps.personal_workout_tracker.ui.screens.helpers.AppTopBar
+import abs.apps.personal_workout_tracker.ui.screens.helpers.HomeScreenTopBar
 import abs.apps.personal_workout_tracker.ui.viewmodels.HomeViewModel
 import android.annotation.SuppressLint
 import androidx.compose.foundation.clickable
@@ -67,8 +68,7 @@ fun HomeScreen(
     Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            AppTopBar(
-                title = stringResource(R.string.app_name),
+            HomeScreenTopBar(
                 canNavigateBack = false,
                 scrollBehavior = scrollBehavior
             )
