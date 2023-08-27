@@ -2,6 +2,7 @@ package abs.apps.personal_workout_tracker.ui
 
 import abs.apps.personal_workout_tracker.WorkoutTrackerApplication
 import abs.apps.personal_workout_tracker.ui.viewmodels.AddWorkoutViewModel
+import abs.apps.personal_workout_tracker.ui.viewmodels.EditTrainingViewModel
 import abs.apps.personal_workout_tracker.ui.viewmodels.EditWorkoutViewModel
 import abs.apps.personal_workout_tracker.ui.viewmodels.ExistingWorkoutViewModel
 import abs.apps.personal_workout_tracker.ui.viewmodels.TrainingListViewModel
@@ -40,6 +41,13 @@ object AppViewModelProvider {
                 workoutTrackerApplication().container.workoutRepository,
             )
         }
+        initializer {
+            EditTrainingViewModel(
+                this.createSavedStateHandle(),
+                workoutTrackerApplication().container.trainingRepository,
+            )
+        }
+
     }
 }
 
