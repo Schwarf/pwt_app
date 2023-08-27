@@ -10,6 +10,7 @@ import android.content.Context
 interface AppContainer {
     val workoutRepository: IWorkoutRepository
     val timestampRepository: ITimestampRepository
+    
 }
 
 class AppDataContainer(private val context: Context) : AppContainer {
