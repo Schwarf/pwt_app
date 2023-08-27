@@ -1,4 +1,4 @@
-package abs.apps.personal_workout_tracker.ui.viewmodels
+package abs.apps.personal_workout_tracker.ui.viewmodels.trainings
 
 import abs.apps.personal_workout_tracker.data.database.toValidatedTrainingUI
 import abs.apps.personal_workout_tracker.data.repositories.ITrainingRepository
