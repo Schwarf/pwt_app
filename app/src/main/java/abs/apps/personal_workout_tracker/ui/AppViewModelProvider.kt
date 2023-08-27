@@ -1,11 +1,12 @@
 package abs.apps.personal_workout_tracker.ui
 
 import abs.apps.personal_workout_tracker.WorkoutTrackerApplication
-import abs.apps.personal_workout_tracker.ui.viewmodels.workouts.AddWorkoutViewModel
+import abs.apps.personal_workout_tracker.ui.viewmodels.trainings.AddTrainingViewModel
 import abs.apps.personal_workout_tracker.ui.viewmodels.trainings.EditTrainingViewModel
+import abs.apps.personal_workout_tracker.ui.viewmodels.trainings.TrainingListViewModel
+import abs.apps.personal_workout_tracker.ui.viewmodels.workouts.AddWorkoutViewModel
 import abs.apps.personal_workout_tracker.ui.viewmodels.workouts.EditWorkoutViewModel
 import abs.apps.personal_workout_tracker.ui.viewmodels.workouts.ExistingWorkoutViewModel
-import abs.apps.personal_workout_tracker.ui.viewmodels.trainings.TrainingListViewModel
 import abs.apps.personal_workout_tracker.ui.viewmodels.workouts.WorkoutListScreenViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.createSavedStateHandle
@@ -17,16 +18,23 @@ object AppViewModelProvider {
     val Factory = viewModelFactory {
         // Initializer for HomeViewModel
         initializer {
-            WorkoutListScreenViewModel(workoutTrackerApplication().container.workoutRepository,
-                workoutTrackerApplication().container.timestampRepository)
+            WorkoutListScreenViewModel(
+                workoutTrackerApplication().container.workoutRepository,
+                workoutTrackerApplication().container.timestampRepository
+            )
         }
         initializer {
-            TrainingListViewModel(workoutTrackerApplication().container.trainingRepository,
-                workoutTrackerApplication().container.timestampRepository)
+            TrainingListViewModel(
+                workoutTrackerApplication().container.trainingRepository,
+                workoutTrackerApplication().container.timestampRepository
+            )
         }
 
         initializer {
             AddWorkoutViewModel(workoutTrackerApplication().container.workoutRepository)
+        }
+        initializer {
+            AddTrainingViewModel(workoutTrackerApplication().container.trainingRepository)
         }
         initializer {
             ExistingWorkoutViewModel(
