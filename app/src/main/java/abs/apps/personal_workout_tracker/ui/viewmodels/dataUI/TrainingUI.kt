@@ -21,3 +21,9 @@ fun TrainingUI.toTraining(): Training = Training(
     timeIntervalMinuts = timeIntervalMinutes.toIntOrNull() ?: 0,
     performances = performances.toIntOrNull() ?: 0,
 )
+
+
+data class ValidatedTrainingUI(
+    val trainingUI: TrainingUI = TrainingUI(),
+    val isValid: Boolean = false
+)
