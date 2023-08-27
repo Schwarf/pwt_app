@@ -21,7 +21,7 @@ class AddTrainingViewModel(private val trainingRepository: ITrainingRepository) 
         )
     }
 
-    suspend fun saveWorkout() {
+    suspend fun saveTraining() {
         if (validateInput()) {
             trainingRepository.upsertTraining(state.trainingUI.toTraining())
         }
