@@ -1,11 +1,11 @@
-package abs.apps.personal_workout_tracker.ui.screens.workouts
+package abs.apps.personal_workout_tracker.ui.screens.trainings
 
 import abs.apps.personal_workout_tracker.R
-import abs.apps.personal_workout_tracker.data.database.Workout
+import abs.apps.personal_workout_tracker.data.database.Training
 import abs.apps.personal_workout_tracker.ui.AppViewModelProvider
 import abs.apps.personal_workout_tracker.ui.navigation.INavigationDestination
 import abs.apps.personal_workout_tracker.ui.screens.helpers.HomeScreenTopBar
-import abs.apps.personal_workout_tracker.ui.viewmodels.workouts.WorkoutListScreenViewModel
+import abs.apps.personal_workout_tracker.ui.viewmodels.trainings.TrainingListScreenViewModel
 import android.annotation.SuppressLint
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -46,9 +46,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 
-
-object WorkoutListDestination : INavigationDestination {
-    override val route = "workout_list"
+object TrainingListDestination : INavigationDestination {
+    override val route = "training_list"
     override val titleRes = R.string.app_name
 }
 
@@ -56,13 +55,13 @@ object WorkoutListDestination : INavigationDestination {
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun WorkoutListScreen(
-    navigateToAddWorkout: () -> Unit,
-    navigateToExistingWorkout: (Int) -> Unit,
+fun TrainingListScreen(
+    navigateToAddTraining: () -> Unit,
+    navigateToExistingTraining: (Int) -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: WorkoutListScreenViewModel = viewModel(factory = AppViewModelProvider.Factory)
+    viewModel: TrainingListScreenViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
-    val state by viewModel.listOfWorkoutsState.collectAsState()
+    val state by viewModel.listOfTrainingsState.collectAsState()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -75,44 +74,44 @@ fun WorkoutListScreen(
         },
         floatingActionButton =
         {
-            FloatingActionButton(onClick = navigateToAddWorkout) {
+            FloatingActionButton(onClick = navigateToAddTraining) {
                 Icon(
                     imageVector = Icons.Default.Add,
-                    contentDescription = stringResource(id = R.string.add_workout)
+                    contentDescription = stringResource(id = R.string.add_training)
                 )
             }
         },
     ) { padding ->
 
-        WorkoutListBody(
-            workoutList = state.workoutList,
-            onItemClick = navigateToExistingWorkout,
+        TrainingListBody(
+            trainingList = state.trainingList,
+            onItemClick = navigateToExistingTraining,
             modifier = modifier
                 .padding(padding)
                 .fillMaxSize(),
-            onAddPerformance = { workoutId -> viewModel.addPerformance(workoutId) }
+            onAddPerformance = { trainingId -> viewModel.addPerformance(trainingId) }
         )
     }
 }
 
 @Composable
-private fun WorkoutListBody(
-    workoutList: List<Workout>, onItemClick: (Int) -> Unit, modifier: Modifier = Modifier,
+private fun TrainingListBody(
+    trainingList: List<Training>, onItemClick: (Int) -> Unit, modifier: Modifier = Modifier,
     onAddPerformance: (Int) -> Unit
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
     ) {
-        if (workoutList.isEmpty()) {
+        if (trainingList.isEmpty()) {
             Text(
-                text = stringResource(R.string.no_workout_description),
+                text = stringResource(R.string.no_trainings_description),
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.titleLarge
             )
         } else {
-            WorkoutList(
-                itemList = workoutList,
+            TrainingList(
+                itemList = trainingList,
                 onItemClick = { onItemClick(it.id) },
                 modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.padding_small)),
                 onAddPerformance = onAddPerformance
@@ -122,14 +121,14 @@ private fun WorkoutListBody(
 }
 
 @Composable
-private fun WorkoutList(
-    itemList: List<Workout>, onItemClick: (Workout) -> Unit, modifier: Modifier = Modifier,
+private fun TrainingList(
+    itemList: List<Training>, onItemClick: (Training) -> Unit, modifier: Modifier = Modifier,
     onAddPerformance: (Int) -> Unit
 ) {
     LazyColumn(modifier = modifier) {
         items(items = itemList, key = { it.id }) { item ->
-            WorkoutItem(
-                workout = item,
+            TrainingItem(
+                training = item,
                 modifier = Modifier
                     .padding(dimensionResource(id = R.dimen.padding_extra_small))
                     .clickable { onItemClick(item) },
@@ -140,8 +139,8 @@ private fun WorkoutList(
 }
 
 @Composable
-private fun WorkoutItem(
-    workout: Workout,
+private fun TrainingItem(
+    training: Training,
     modifier: Modifier = Modifier,
     onAddPerformance: (Int) -> Unit
 ) {
@@ -160,7 +159,7 @@ private fun WorkoutItem(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = workout.name,
+                    text = training.name,
                     style = MaterialTheme.typography.titleLarge,
                     // This makes the text take up all available space but no more
                     modifier = Modifier.weight(1f)
@@ -173,7 +172,7 @@ private fun WorkoutItem(
                     Text(
                         text = stringResource(
                             id = R.string.performed,
-                            workout.performances
+                            training.performances
                         ),
                         color = Color.Gray,
                         style = MaterialTheme.typography.titleMedium
@@ -187,7 +186,7 @@ private fun WorkoutItem(
                             .size(48.dp)
                     ) {
                         IconButton(
-                            onClick = { onAddPerformance(workout.id) }
+                            onClick = { onAddPerformance(training.id) }
                         ) {
                             Icon(Icons.Default.Add, contentDescription = "Add")
                         }
@@ -198,25 +197,9 @@ private fun WorkoutItem(
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
-                    text = stringResource(id = R.string.set_workout_sets, workout.sets),
-                    style = MaterialTheme.typography.titleMedium
-                )
-                Spacer(Modifier.weight(1f))
-                Text(
                     text = stringResource(
-                        id = R.string.set_workout_totalReps,
-                        workout.totalRepetitions
-                    ),
-                    style = MaterialTheme.typography.titleMedium
-                )
-            }
-            Row(
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(
-                    text = stringResource(
-                        id = R.string.set_workout_maxRepsInSets,
-                        workout.maxRepetitionsInSet
+                        id = R.string.set_training_duration,
+                        training.timeIntervalMinuts
                     ),
                     style = MaterialTheme.typography.titleMedium
                 )

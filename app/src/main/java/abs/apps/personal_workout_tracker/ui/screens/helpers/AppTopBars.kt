@@ -50,7 +50,7 @@ fun AppTopBar(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreenTopBar(
-    addWorkoutButtonEnabled: Boolean,
+    switchToWorkoutsButtonEnabled: Boolean,
     canNavigateBack: Boolean,
     modifier: Modifier = Modifier,
     scrollBehavior: TopAppBarScrollBehavior? = null,
@@ -61,7 +61,7 @@ fun HomeScreenTopBar(
     var trainingText = ""
     val switchSize = 16.sp
     val showSize = 20.sp
-    if(addWorkoutButtonEnabled) {
+    if(switchToWorkoutsButtonEnabled) {
         trainingText = "Switch to trainings"
         workoutText = "Showing all workouts"
     }
@@ -92,21 +92,21 @@ fun HomeScreenTopBar(
             ) {
                 TextButton(
                     onClick = { /*TODO*/ },
-                    enabled = !addWorkoutButtonEnabled
+                    enabled = !switchToWorkoutsButtonEnabled
                 ) {
                     Text(
                         text = workoutText,
-                        style = TextStyle(fontSize = if(!addWorkoutButtonEnabled)  switchSize else showSize, fontWeight = FontWeight.Bold)
+                        style = TextStyle(fontSize = if(!switchToWorkoutsButtonEnabled)  switchSize else showSize, fontWeight = FontWeight.Bold)
                     )
                 }
                 TextButton(
                     onClick = { /*TODO*/ },
 
-                    enabled = addWorkoutButtonEnabled
+                    enabled = switchToWorkoutsButtonEnabled
                 ) {
                     Text(
                         text = trainingText,
-                        style = TextStyle(fontSize = if(addWorkoutButtonEnabled)  switchSize else showSize, fontWeight = FontWeight.Bold)
+                        style = TextStyle(fontSize = if(switchToWorkoutsButtonEnabled)  switchSize else showSize, fontWeight = FontWeight.Bold)
                     )
 
                 }

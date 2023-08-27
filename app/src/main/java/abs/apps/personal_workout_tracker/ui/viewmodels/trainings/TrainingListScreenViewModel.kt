@@ -16,11 +16,11 @@ import java.time.LocalDateTime
 import java.time.ZoneId
 
 
-class TrainingListViewModel(
+class TrainingListScreenViewModel(
     private val trainingRepository: ITrainingRepository,
     private val timestampRepository: ITimestampRepository
 ) : ViewModel() {
-    val listOftrainingsState: StateFlow<ListOfTrainings> =
+    val listOfTrainingsState: StateFlow<ListOfTrainings> =
         trainingRepository.getAllTrainingsStream().map { ListOfTrainings(it) }
             .stateIn(
                 scope = viewModelScope,

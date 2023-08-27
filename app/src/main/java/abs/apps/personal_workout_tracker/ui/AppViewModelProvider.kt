@@ -3,7 +3,7 @@ package abs.apps.personal_workout_tracker.ui
 import abs.apps.personal_workout_tracker.WorkoutTrackerApplication
 import abs.apps.personal_workout_tracker.ui.viewmodels.trainings.AddTrainingViewModel
 import abs.apps.personal_workout_tracker.ui.viewmodels.trainings.EditTrainingViewModel
-import abs.apps.personal_workout_tracker.ui.viewmodels.trainings.TrainingListViewModel
+import abs.apps.personal_workout_tracker.ui.viewmodels.trainings.TrainingListScreenViewModel
 import abs.apps.personal_workout_tracker.ui.viewmodels.workouts.AddWorkoutViewModel
 import abs.apps.personal_workout_tracker.ui.viewmodels.workouts.EditWorkoutViewModel
 import abs.apps.personal_workout_tracker.ui.viewmodels.workouts.ExistingWorkoutViewModel
@@ -24,7 +24,7 @@ object AppViewModelProvider {
             )
         }
         initializer {
-            TrainingListViewModel(
+            TrainingListScreenViewModel(
                 workoutTrackerApplication().container.trainingRepository,
                 workoutTrackerApplication().container.timestampRepository
             )
