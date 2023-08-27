@@ -16,6 +16,7 @@
     <string name="add_workout">Add workout</string>
     <string name="add_training">Add training</string>
     <string name="update_workout">Update workout</string>
+    <string name="update_training">Update workout</string>
     <string name="edit_item_title">Edit Workout</string>
     <string name="save">Save </string>>
     <string name="cancel">Cancel </string>>
