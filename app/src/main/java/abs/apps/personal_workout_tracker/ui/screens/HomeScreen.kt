@@ -69,6 +69,7 @@ fun HomeScreen(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             HomeScreenTopBar(
+                addWorkoutButtonEnabled = true,
                 canNavigateBack = false,
                 scrollBehavior = scrollBehavior
             )
