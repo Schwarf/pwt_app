@@ -1,4 +1,4 @@
-package abs.apps.personal_workout_tracker.ui.screens
+package abs.apps.personal_workout_tracker.ui.screens.workouts
 
 import abs.apps.personal_workout_tracker.R
 import abs.apps.personal_workout_tracker.data.database.Workout

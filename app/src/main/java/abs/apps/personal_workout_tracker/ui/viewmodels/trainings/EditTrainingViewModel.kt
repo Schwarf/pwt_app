@@ -2,7 +2,7 @@ package abs.apps.personal_workout_tracker.ui.viewmodels.trainings
 
 import abs.apps.personal_workout_tracker.data.database.toValidatedTrainingUI
 import abs.apps.personal_workout_tracker.data.repositories.ITrainingRepository
-import abs.apps.personal_workout_tracker.ui.screens.EditTrainingDestination
+import abs.apps.personal_workout_tracker.ui.screens.trainings.EditTrainingDestination
 import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.TrainingUI
 import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.ValidatedTrainingUI
 import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.toTraining

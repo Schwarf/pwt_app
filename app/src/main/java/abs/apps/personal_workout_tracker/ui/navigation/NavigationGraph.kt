@@ -1,15 +1,15 @@
 package abs.apps.personal_workout_tracker.ui.navigation
 
-import abs.apps.personal_workout_tracker.ui.screens.AddWorkoutScreen
-import abs.apps.personal_workout_tracker.ui.screens.EditWorkoutDestination
-import abs.apps.personal_workout_tracker.ui.screens.EditWorkoutScreen
-import abs.apps.personal_workout_tracker.ui.screens.ExistingWorkoutDestination
-import abs.apps.personal_workout_tracker.ui.screens.ExistingWorkoutScreen
-import abs.apps.personal_workout_tracker.ui.screens.HomeDestination
-import abs.apps.personal_workout_tracker.ui.screens.WorkoutListScreen
+import abs.apps.personal_workout_tracker.ui.screens.workouts.AddWorkoutScreen
+import abs.apps.personal_workout_tracker.ui.screens.workouts.EditWorkoutDestination
+import abs.apps.personal_workout_tracker.ui.screens.workouts.EditWorkoutScreen
+import abs.apps.personal_workout_tracker.ui.screens.workouts.ExistingWorkoutDestination
+import abs.apps.personal_workout_tracker.ui.screens.workouts.ExistingWorkoutScreen
+import abs.apps.personal_workout_tracker.ui.screens.workouts.HomeDestination
+import abs.apps.personal_workout_tracker.ui.screens.workouts.WorkoutListScreen
 import abs.apps.personal_workout_tracker.ui.screens.StartupDestination
 import abs.apps.personal_workout_tracker.ui.screens.StartupScreen
-import abs.apps.personal_workout_tracker.ui.screens.WorkoutEntryDestination
+import abs.apps.personal_workout_tracker.ui.screens.workouts.WorkoutEntryDestination
 import android.annotation.SuppressLint
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier

@@ -5,7 +5,7 @@ import abs.apps.personal_workout_tracker.data.database.toTimestampUI
 import abs.apps.personal_workout_tracker.data.database.toWorkoutUI
 import abs.apps.personal_workout_tracker.data.repositories.ITimestampRepository
 import abs.apps.personal_workout_tracker.data.repositories.IWorkoutRepository
-import abs.apps.personal_workout_tracker.ui.screens.ExistingWorkoutDestination
+import abs.apps.personal_workout_tracker.ui.screens.workouts.ExistingWorkoutDestination
 import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.TimestampUI
 import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.WorkoutUI
 import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.toTimestamp
