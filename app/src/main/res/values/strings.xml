@@ -42,6 +42,7 @@
     <string name="set_workout_totalReps">Total repetitions: %s </string>>
     <string name="set_workout_maxRepsInSets">Max repetitions in one set: %s </string>>
     <string name="workout_exists">Workout Detailed View</string>
+    <string name="training_exists">Training Detailed View</string>
     <string name="required_fields">*required fields</string>>
     <string name="back_button">Back</string>
     <string name="startup">Willkommen Ihr Dicken.</string>
