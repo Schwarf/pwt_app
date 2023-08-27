@@ -47,8 +47,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 
 
-object HomeDestination : INavigationDestination {
-    override val route = "home"
+object WorkoutListDestination : INavigationDestination {
+    override val route = "workout_list"
     override val titleRes = R.string.app_name
 }
 
