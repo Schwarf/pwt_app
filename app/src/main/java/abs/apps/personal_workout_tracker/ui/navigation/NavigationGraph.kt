@@ -1,5 +1,8 @@
 package abs.apps.personal_workout_tracker.ui.navigation
 
+import abs.apps.personal_workout_tracker.data.database.Training
+import abs.apps.personal_workout_tracker.ui.screens.StartDestination
+import abs.apps.personal_workout_tracker.ui.screens.StartScreen
 import abs.apps.personal_workout_tracker.ui.screens.workouts.AddWorkoutScreen
 import abs.apps.personal_workout_tracker.ui.screens.workouts.EditWorkoutDestination
 import abs.apps.personal_workout_tracker.ui.screens.workouts.EditWorkoutScreen
@@ -49,8 +52,14 @@ fun WorkoutTrackerNavHost(
     ) {
 
         composable(route = StartupDestination.route) {
-            StartupScreen(navigateToHome = { navController.navigate(WorkoutListDestination.route) })
+            StartupScreen(navigateToStartScreen = { navController.navigate(StartDestination.route) })
         }
+
+        composable(route = StartDestination.route) {
+            StartScreen(navigateToWorkouts = { navController.navigate(WorkoutListDestination.route)},
+                navigateToTrainings = { navController.navigate(TrainingListDestination.route)})
+        }
+
 
         composable(route = TrainingListDestination.route) {
             TrainingListScreen(

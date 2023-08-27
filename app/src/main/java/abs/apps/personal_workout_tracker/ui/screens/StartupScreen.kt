@@ -25,11 +25,11 @@ object StartupDestination : INavigationDestination {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun StartupScreen(navigateToHome: () -> Unit) {
+fun StartupScreen(navigateToStartScreen: () -> Unit) {
     LaunchedEffect(Unit)
     {
         delay(1000L)
-        navigateToHome()
+        navigateToStartScreen()
     }
     Scaffold(topBar = {
         AppTopBar(

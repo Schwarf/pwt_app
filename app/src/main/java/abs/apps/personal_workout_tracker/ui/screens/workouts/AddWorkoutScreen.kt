@@ -20,7 +20,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.launch
 
 object WorkoutEntryDestination : INavigationDestination {
-    override val route = "item_entry"
+    override val route = "workout_entry"
     override val titleRes = R.string.add_workout
 }
 

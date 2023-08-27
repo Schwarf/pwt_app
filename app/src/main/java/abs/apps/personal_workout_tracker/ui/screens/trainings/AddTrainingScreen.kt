@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 
 
 object TrainingEntryDestination : INavigationDestination {
-    override val route = "item_entry"
+    override val route = "training_entry"
     override val titleRes = R.string.add_training
 }
 
