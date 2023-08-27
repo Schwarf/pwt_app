@@ -43,7 +43,7 @@ fun StartupScreen(navigateToHome: () -> Unit) {
             contentAlignment = Alignment.Center
         ) {
             // Replace R.drawable.ic_launcher_foreground with your image resource ID
-            val image = painterResource(R.drawable.sample)
+            val image = painterResource(R.drawable.sumocat)
             Image(
                 painter = image,
                 contentDescription = null, // Provide a description if needed
