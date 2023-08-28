@@ -4,7 +4,6 @@ import abs.apps.personal_workout_tracker.R
 import abs.apps.personal_workout_tracker.ui.AppViewModelProvider
 import abs.apps.personal_workout_tracker.ui.navigation.INavigationDestination
 import abs.apps.personal_workout_tracker.ui.screens.helpers.AppTopBar
-import abs.apps.personal_workout_tracker.ui.screens.workouts.ExistingWorkoutDestination
 import abs.apps.personal_workout_tracker.ui.viewmodels.trainings.ExistingTraining
 import abs.apps.personal_workout_tracker.ui.viewmodels.trainings.ExistingTrainingViewModel
 import androidx.annotation.StringRes
@@ -46,7 +45,7 @@ import kotlinx.coroutines.launch
 
 object ExistingTrainingDestination : INavigationDestination {
     override val route = "existing_training"
-    override val titleRes = R.string.workout_exists
+    override val titleRes = R.string.training_exists
     const val trainingIdArg = "trainingId"
     val routeWithArgs = "$route/{$trainingIdArg}"
 }
@@ -65,7 +64,7 @@ fun ExistingTrainingScreen(
     Scaffold(
         topBar = {
             AppTopBar(
-                title = stringResource(ExistingWorkoutDestination.titleRes),
+                title = stringResource(ExistingTrainingDestination.titleRes),
                 canNavigateBack = true,
                 navigateUp = navigateBack
             )
@@ -91,7 +90,7 @@ fun ExistingTrainingScreen(
             onRemovePerformance = { viewModel.removeOnePerformance() },
             onDelete = {
                 coroutineScope.launch {
-                    viewModel.deleteWorkout()
+                    viewModel.deleteTraining()
                     navigateBack()
                 }
             },

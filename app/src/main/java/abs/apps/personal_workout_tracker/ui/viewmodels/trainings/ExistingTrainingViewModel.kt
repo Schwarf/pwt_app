@@ -83,7 +83,7 @@ class ExistingTrainingViewModel(
     }
 
 
-    suspend fun deleteWorkout() {
+    suspend fun deleteTraining() {
         trainingRepository.deleteTraining(existingTrainingsState.value.trainingUI.toTraining())
     }
 
