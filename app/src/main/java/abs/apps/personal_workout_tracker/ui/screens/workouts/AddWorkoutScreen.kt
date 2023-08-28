@@ -19,8 +19,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.launch
 
-object WorkoutEntryDestination : INavigationDestination {
-    override val route = "workout_entry"
+object AddWorkoutDestination : INavigationDestination {
+    override val route = "add_workout"
     override val titleRes = R.string.add_workout
 }
 
