@@ -1,14 +1,12 @@
 - Some details how the navigation to single workouts works evades me. Needs a detailed study.
-- Cleanup UI elements and remove inconsistencies Trainings vs. Workouts.
-- Clean up the string resources.
-- EditWorkoutScreen Add button that allows edited workout to add "as new" instead of update
 
 - Possible features:
+  - Add button that shows list of all performances for one workout/training (PURE UI)
+  - Connect ROOM database with Desktop MS SQL database using RESTful API and sync user data.
   - Review use cases and data layer:
-    - Introduce "Session" that has multiple workouts???
+    - Introduce "Session" that has multiple workouts??? Unclear if needed.
     - Show all workouts or a "Session" of one day (calendar access)???
     - Allow to define "breaks" between sets that automatically go to stopwatch
-  - Connect ROOM database with Desktop MS SQL database using RESTful API and sync user data.
   - Internationalization
-  - Add button that shows list of all performances for one workout
+  - EditWorkoutScreen Add button that allows edited workout to add "as new" instead of update
   - Is it possible to show performance list in calendar?
