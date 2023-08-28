@@ -1,5 +1,4 @@
 <resources>
-    <string name="choose_add">Add Training or add Workout?</string>
     <string name="workout_explanation">Workout: Divided in sets where each set has repetitions.</string>
     <string name="training_explanation">Training: A single exercise that you do for limited time (e.g. jogging).</string>
     <string name="attention">Attention</string>
@@ -15,12 +14,9 @@
     <string name="add_workout">Add workout</string>
     <string name="add_training">Add training</string>
     <string name="update_workout">Update workout</string>
-    <string name="update_training">Update workout</string>
-    <string name="edit_item_title">Edit Workout</string>
+    <string name="update_training">Update training</string>
     <string name="save">Save </string>>
-    <string name="cancel">Cancel </string>>
     <string name="delete">Delete </string>>
-    <string name="edit">Edit </string>>
     <string name="no_workout_description">Oops!\nNo workouts yet.\nTap + to add.</string>
     <string name="no_trainings_description">Oops!\nNo trainings yet.\nTap + to add.</string>
     <string name="workout_name_required">Workout Name*</string>>
@@ -30,7 +26,6 @@
     <string name="workout_maxRepsInSets_required">Max repetitions in set*</string>>
     <string name="workout_performances_required">Performed*</string>>
     <string name="training_duration_required">Duration in minutes*</string>>
-    <string name="add_one_performance">Add one performance?</string>>
     <string name="training_name">Name: </string>>
     <string name="training_duration">Duration( in minutes): </string>>
     <string name="training_performances">Performed:</string>>
