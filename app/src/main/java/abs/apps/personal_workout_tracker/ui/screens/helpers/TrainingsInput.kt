@@ -75,11 +75,11 @@ fun TrainingInputForm(
             singleLine = true
         )
         OutlinedTextField(
-            value = trainingUI.timeIntervalMinutes,
+            value = trainingUI.durationInMinutes,
             onValueChange = {
                 onTrainingValueChange(
                     trainingUI.copy(
-                        timeIntervalMinutes = removeNonDigits(
+                        durationInMinutes = removeNonDigits(
                             it
                         )
                     )

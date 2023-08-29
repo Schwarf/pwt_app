@@ -198,7 +198,7 @@ fun ExistingTrainingDetails(
             )
             ExistingTrainingRow(
                 labelResID = R.string.training_duration,
-                value = existingTraining.trainingUI.timeIntervalMinutes,
+                value = existingTraining.trainingUI.durationInMinutes,
                 modifier = Modifier.padding(
                     horizontal = dimensionResource(
                         id = R.dimen

@@ -2,7 +2,6 @@ package abs.apps.personal_workout_tracker.data.database
 
 import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.TrainingUI
 import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.ValidatedTrainingUI
-import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.ValidatedWorkoutUI
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -22,7 +21,7 @@ data class Training(
 fun Training.toTrainingUI(): TrainingUI = TrainingUI(
     id = id,
     name = name,
-    timeIntervalMinutes = timeIntervalMinuts.toString(),
+    durationInMinutes = timeIntervalMinuts.toString(),
     performances = performances.toString()
 )
 fun Training.toValidatedTrainingUI(isValid: Boolean = false): ValidatedTrainingUI = ValidatedTrainingUI(
