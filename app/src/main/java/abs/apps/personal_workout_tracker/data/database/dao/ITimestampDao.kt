@@ -10,10 +10,10 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface ITimestampDao {
     @Upsert
-    suspend fun upsertTimestamp(Timestamp: Timestamp)
+    suspend fun upsertTimestamp(timestamp: Timestamp)
 
     @Delete
-    suspend fun deleteTimestamp(Timestamp: Timestamp)
+    suspend fun deleteTimestamp(timestamp: Timestamp)
 
     @Query("SELECT * FROM timestamps")
     fun getAllTimestamps(): Flow<List<Timestamp>>
