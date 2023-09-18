@@ -4,20 +4,20 @@ import abs.apps.personal_workout_tracker.data.database.WorkoutTimestamp
 import abs.apps.personal_workout_tracker.data.database.dao.IWorkoutTimestampDao
 import kotlinx.coroutines.flow.Flow
 
-class DBWorkoutTimestampRepository(private val timestampDao: IWorkoutTimestampDao) :
+class DBWorkoutTimestampRepository(private val workoutTimestampDao: IWorkoutTimestampDao) :
     IWorkoutTimestampRepository {
     override fun getAllTimestampsStream(): Flow<List<WorkoutTimestamp>> =
-        timestampDao.getAllTimestamps()
+        workoutTimestampDao.getAllTimestamps()
 
     override fun getTimestampsStreamForOneWorkout(workoutId: Int): Flow<List<WorkoutTimestamp>> =
-        timestampDao.getAllTimestampsForOneWorkout(workoutId)
+        workoutTimestampDao.getAllTimestampsForOneWorkout(workoutId)
 
     override fun getLatestTimestampStreamForOneWorkout(workoutId: Int): Flow<WorkoutTimestamp> =
-        timestampDao.getLatestTimestampForOneWorkout(workoutId)
+        workoutTimestampDao.getLatestTimestampForOneWorkout(workoutId)
 
     override suspend fun upsertTimestamp(workoutTimestamp: WorkoutTimestamp) =
-        timestampDao.upsertTimestamp(workoutTimestamp)
+        workoutTimestampDao.upsertTimestamp(workoutTimestamp)
 
     override suspend fun deleteTimestamp(workoutTimestamp: WorkoutTimestamp) =
-        timestampDao.deleteTimestamp(workoutTimestamp)
+        workoutTimestampDao.deleteTimestamp(workoutTimestamp)
 }

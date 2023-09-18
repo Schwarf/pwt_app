@@ -21,13 +21,13 @@ object AppViewModelProvider {
         initializer {
             WorkoutListScreenViewModel(
                 workoutTrackerApplication().container.workoutRepository,
-                workoutTrackerApplication().container.timestampRepository
+                workoutTrackerApplication().container.workoutTimestampRepository
             )
         }
         initializer {
             TrainingListScreenViewModel(
                 workoutTrackerApplication().container.trainingRepository,
-                workoutTrackerApplication().container.timestampRepository
+                workoutTrackerApplication().container.workoutTimestampRepository
             )
         }
 
@@ -41,7 +41,7 @@ object AppViewModelProvider {
             ExistingWorkoutViewModel(
                 this.createSavedStateHandle(),
                 workoutTrackerApplication().container.workoutRepository,
-                workoutTrackerApplication().container.timestampRepository
+                workoutTrackerApplication().container.workoutTimestampRepository
             )
         }
 
@@ -49,7 +49,7 @@ object AppViewModelProvider {
             ExistingTrainingViewModel(
                 this.createSavedStateHandle(),
                 workoutTrackerApplication().container.trainingRepository,
-                workoutTrackerApplication().container.timestampRepository
+                workoutTrackerApplication().container.workoutTimestampRepository
             )
         }
 
