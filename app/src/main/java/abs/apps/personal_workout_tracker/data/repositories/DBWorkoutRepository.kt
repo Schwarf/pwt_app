@@ -5,7 +5,7 @@ import abs.apps.personal_workout_tracker.data.database.Workout
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.firstOrNull
 
-class DatabaseWorkoutRepository(private val workoutDao: IWorkoutDao) : IWorkoutRepository {
+class DBWorkoutRepository(private val workoutDao: IWorkoutDao) : IWorkoutRepository {
     override fun getAllWorkoutsStream(): Flow<List<Workout>> = workoutDao.getAllWorkouts()
 
     override fun getWorkoutStream(id: Int): Flow<Workout?> = workoutDao.getWorkout(id)

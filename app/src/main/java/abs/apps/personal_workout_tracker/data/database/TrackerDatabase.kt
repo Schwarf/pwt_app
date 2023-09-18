@@ -1,7 +1,7 @@
 package abs.apps.personal_workout_tracker.data.database
 
 import abs.apps.personal_training_tracker.data.database.dao.ITrainingsDao
-import abs.apps.personal_workout_tracker.data.database.dao.ITimestampDao
+import abs.apps.personal_workout_tracker.data.database.dao.IWorkoutTimestampDao
 import abs.apps.personal_workout_tracker.data.database.dao.ITrainingTimestampDao
 import abs.apps.personal_workout_tracker.data.database.dao.IWorkoutDao
 import android.content.Context
@@ -16,7 +16,7 @@ import androidx.room.RoomDatabase
 )
 abstract class TrackerDatabase : RoomDatabase() {
     abstract val workoutDao: IWorkoutDao
-    abstract val timestampDao: ITimestampDao
+    abstract val timestampDao: IWorkoutTimestampDao
     abstract val trainingDao: ITrainingsDao
     abstract val trainingTimestampDao: ITrainingTimestampDao
 

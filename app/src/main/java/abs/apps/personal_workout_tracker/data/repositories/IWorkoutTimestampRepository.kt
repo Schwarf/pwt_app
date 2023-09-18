@@ -3,7 +3,7 @@ package abs.apps.personal_workout_tracker.data.repositories
 import abs.apps.personal_workout_tracker.data.database.WorkoutTimestamp
 import kotlinx.coroutines.flow.Flow
 
-interface ITimestampRepository {
+interface IWorkoutTimestampRepository {
     fun getAllTimestampsStream(): Flow<List<WorkoutTimestamp>>
 
     fun getTimestampsStreamForOneWorkout(workoutId: Int): Flow<List<WorkoutTimestamp>>

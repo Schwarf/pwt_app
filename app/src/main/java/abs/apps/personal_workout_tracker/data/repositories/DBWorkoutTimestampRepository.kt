@@ -1,11 +1,13 @@
 package abs.apps.personal_workout_tracker.data.repositories
 
 import abs.apps.personal_workout_tracker.data.database.WorkoutTimestamp
-import abs.apps.personal_workout_tracker.data.database.dao.ITimestampDao
+import abs.apps.personal_workout_tracker.data.database.dao.IWorkoutTimestampDao
 import kotlinx.coroutines.flow.Flow
 
-class DatabaseTimestampRepository(private val timestampDao: ITimestampDao) : ITimestampRepository {
-    override fun getAllTimestampsStream(): Flow<List<WorkoutTimestamp>> = timestampDao.getAllTimestamps()
+class DBWorkoutTimestampRepository(private val timestampDao: IWorkoutTimestampDao) :
+    IWorkoutTimestampRepository {
+    override fun getAllTimestampsStream(): Flow<List<WorkoutTimestamp>> =
+        timestampDao.getAllTimestamps()
 
     override fun getTimestampsStreamForOneWorkout(workoutId: Int): Flow<List<WorkoutTimestamp>> =
         timestampDao.getAllTimestampsForOneWorkout(workoutId)

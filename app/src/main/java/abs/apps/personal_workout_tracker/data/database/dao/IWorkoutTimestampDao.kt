@@ -8,7 +8,7 @@ import androidx.room.Upsert
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface ITimestampDao {
+interface IWorkoutTimestampDao {
     @Upsert
     suspend fun upsertTimestamp(workoutTimestamp: WorkoutTimestamp)
 

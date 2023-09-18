@@ -3,7 +3,7 @@ package abs.apps.personal_workout_tracker.ui.viewmodels.trainings
 import abs.apps.personal_workout_tracker.data.database.WorkoutTimestamp
 import abs.apps.personal_workout_tracker.data.database.toTimestampUI
 import abs.apps.personal_workout_tracker.data.database.toTrainingUI
-import abs.apps.personal_workout_tracker.data.repositories.ITimestampRepository
+import abs.apps.personal_workout_tracker.data.repositories.IWorkoutTimestampRepository
 import abs.apps.personal_workout_tracker.data.repositories.ITrainingRepository
 import abs.apps.personal_workout_tracker.ui.screens.trainings.ExistingTrainingDestination
 import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.TimestampUI
@@ -28,7 +28,7 @@ import java.time.ZoneId
 class ExistingTrainingViewModel(
     savedStateHandle: SavedStateHandle,
     private val trainingRepository: ITrainingRepository,
-    private val timestampRepository: ITimestampRepository
+    private val timestampRepository: IWorkoutTimestampRepository
 ) : ViewModel() {
     private val trainingId: Int =
         checkNotNull(savedStateHandle[ExistingTrainingDestination.trainingIdArg])

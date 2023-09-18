@@ -2,7 +2,7 @@ package abs.apps.personal_workout_tracker.ui.viewmodels.workouts
 
 import abs.apps.personal_workout_tracker.data.database.WorkoutTimestamp
 import abs.apps.personal_workout_tracker.data.database.Workout
-import abs.apps.personal_workout_tracker.data.repositories.ITimestampRepository
+import abs.apps.personal_workout_tracker.data.repositories.IWorkoutTimestampRepository
 import abs.apps.personal_workout_tracker.data.repositories.IWorkoutRepository
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -17,7 +17,7 @@ import java.time.ZoneId
 
 class WorkoutListScreenViewModel(
     private val workoutRepository: IWorkoutRepository,
-    private val timestampRepository: ITimestampRepository
+    private val timestampRepository: IWorkoutTimestampRepository
 ) : ViewModel() {
     val listOfWorkoutsState: StateFlow<ListOfWorkouts> =
         workoutRepository.getAllWorkoutsStream().map { ListOfWorkouts(it) }
