@@ -1,6 +1,7 @@
 package abs.apps.personal_workout_tracker
 
 import abs.apps.personal_workout_tracker.data.database.TrackerDatabase
+import androidx.room.Room
 import androidx.room.testing.MigrationTestHelper
 import androidx.sqlite.db.framework.FrameworkSQLiteOpenHelperFactory
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -41,4 +42,18 @@ class MigrationTest {
             assertThat(getLong(getColumnIndex("performances"))).isEqualTo(0)
         }
     }
+
+    @Test
+    fun testAllMigrations() {
+        helper.createDatabase(DB_NAME, 1).close()
+        Room.databaseBuilder(
+            InstrumentationRegistry.getInstrumentation().targetContext,
+            TrackerDatabase::class.java,
+            DB_NAME
+        )
+            .addMigrations(TrackerDatabase.migration2to3).build()
+            .apply { openHelper.writableDatabase.close() }
+
+    }
+
 }

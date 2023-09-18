@@ -13,7 +13,7 @@ import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
 @Database(
-    entities = [Workout::class, Timestamp::class, Training::class, TrainingTimestamp::class],
+    entities = [Workout::class, Timestamp::class, Training::class],
     version = 3,
     exportSchema = true,
     autoMigrations = [AutoMigration(from = 1, to = 2)]
@@ -22,7 +22,6 @@ abstract class TrackerDatabase : RoomDatabase() {
     abstract val workoutDao: IWorkoutDao
     abstract val timestampDao: ITimestampDao
     abstract val trainingDao: ITrainingsDao
-    abstract val trainingTimestampDao: ITrainingTimestampDao
 
     companion object {
         @Volatile
@@ -32,11 +31,11 @@ abstract class TrackerDatabase : RoomDatabase() {
                 database.execSQL("ALTER TABLE timestamps RENAME TO workout_timestamps")
             }
         }
-//        val migration3to4 = object : Migration(3, 4) {
-//            override fun migrate(database: SupportSQLiteDatabase) {
-//                database.execSQL("CREATE TABLE IF NOT EXISTS training_timestamps (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `trainingId` INTEGER NOT NULL, `timestamp` INTEGER NOT NULL, FOREIGN KEY(`trainingId`) REFERENCES `trainings`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )")
-//            }
-//      }
+        val migration3to4 = object : Migration(3, 4) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("CREATE TABLE IF NOT EXISTS training_timestamps (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `trainingId` INTEGER NOT NULL DEFAULT 0, `timestamp` INTEGER NOT NULL, FOREIGN KEY(`trainingId`) REFERENCES `trainings`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )")
+            }
+      }
 
         fun getDatabase(context: Context): TrackerDatabase {
 

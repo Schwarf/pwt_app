@@ -24,7 +24,9 @@ fun Training.toTrainingUI(): TrainingUI = TrainingUI(
     durationInMinutes = timeIntervalMinuts.toString(),
     performances = performances.toString()
 )
-fun Training.toValidatedTrainingUI(isValid: Boolean = false): ValidatedTrainingUI = ValidatedTrainingUI(
-    trainingUI = this.toTrainingUI(),
-    isValid = isValid
-)
+
+fun Training.toValidatedTrainingUI(isValid: Boolean = false): ValidatedTrainingUI =
+    ValidatedTrainingUI(
+        trainingUI = this.toTrainingUI(),
+        isValid = isValid
+    )
