@@ -2,37 +2,30 @@ package abs.apps.personal_workout_tracker.data.database
 
 import abs.apps.personal_training_tracker.data.database.dao.ITrainingsDao
 import abs.apps.personal_workout_tracker.data.database.dao.ITimestampDao
+import abs.apps.personal_workout_tracker.data.database.dao.ITrainingTimestampDao
 import abs.apps.personal_workout_tracker.data.database.dao.IWorkoutDao
 import android.content.Context
-import androidx.room.AutoMigration
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.room.migration.Migration
-import androidx.sqlite.db.SupportSQLiteDatabase
 
 @Database(
-    entities = [Workout::class, Timestamp::class, Training::class],
-    version = 3,
+    entities = [Workout::class, WorkoutTimestamp::class, Training::class, TrainingTimestamp::class],
+    version = 1,
     exportSchema = true,
-    autoMigrations = [AutoMigration(from = 1, to = 2)]
 )
 abstract class TrackerDatabase : RoomDatabase() {
     abstract val workoutDao: IWorkoutDao
     abstract val timestampDao: ITimestampDao
-    abstract val trainingDao : ITrainingsDao
+    abstract val trainingDao: ITrainingsDao
+    abstract val trainingTimestampDao: ITrainingTimestampDao
 
     companion object {
         @Volatile
         private var Instance: TrackerDatabase? = null
-        val migration2to3 = object : Migration(2, 3) {
-            override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL("ALTER TABLE timestamps RENAME TO workout_timestamps")
-            }
-        }
 
         fun getDatabase(context: Context): TrackerDatabase {
-            // if the Instance is not null, return it, otherwise create a new database instance.
+
             return Instance ?: synchronized(this) {
                 Room.databaseBuilder(context, TrackerDatabase::class.java, "workout.db")
                     /**
@@ -40,7 +33,6 @@ abstract class TrackerDatabase : RoomDatabase() {
                      * permanently deletes all data from the tables in your database when it
                      * attempts to perform a migration with no defined migration path.
                      */
-                    .addMigrations(TrackerDatabase.migration2to3)
 //                    .addMigrations(TrackerDatabase.migration2to3, TrackerDatabase.migration3to4)
                     .fallbackToDestructiveMigration()
                     .build()

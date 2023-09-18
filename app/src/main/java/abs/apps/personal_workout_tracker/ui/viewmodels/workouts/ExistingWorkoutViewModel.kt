@@ -1,6 +1,6 @@
 package abs.apps.personal_workout_tracker.ui.viewmodels.workouts
 
-import abs.apps.personal_workout_tracker.data.database.Timestamp
+import abs.apps.personal_workout_tracker.data.database.WorkoutTimestamp
 import abs.apps.personal_workout_tracker.data.database.toTimestampUI
 import abs.apps.personal_workout_tracker.data.database.toWorkoutUI
 import abs.apps.personal_workout_tracker.data.repositories.ITimestampRepository
@@ -61,7 +61,7 @@ class ExistingWorkoutViewModel(
             val currentWorkout = existingWorkoutsState.value.workoutUI.toWorkout()
             workoutRepository.upsertWorkout(currentWorkout.copy(performances = currentWorkout.performances + 1))
             timestampRepository.upsertTimestamp(
-                Timestamp(
+                WorkoutTimestamp(
                     workoutId = existingWorkoutsState.value.workoutUI.id,
                     timestamp = LocalDateTime.now().atZone(
                         ZoneId.systemDefault()

@@ -1,6 +1,6 @@
 package abs.apps.personal_workout_tracker.ui.viewmodels.trainings
 
-import abs.apps.personal_workout_tracker.data.database.Timestamp
+import abs.apps.personal_workout_tracker.data.database.WorkoutTimestamp
 import abs.apps.personal_workout_tracker.data.database.Training
 import abs.apps.personal_workout_tracker.data.repositories.ITimestampRepository
 import abs.apps.personal_workout_tracker.data.repositories.ITrainingRepository
@@ -37,11 +37,11 @@ class TrainingListScreenViewModel(
                 trainingRepository.updateTrainingPerformances(trainingId, updatedPerformances)
             }
 
-            val timestamp = Timestamp(
+            val workoutTimestamp = WorkoutTimestamp(
                 workoutId = trainingId,
                 timestamp = LocalDateTime.now().atZone(ZoneId.systemDefault()).toEpochSecond()
             )
-            timestampRepository.upsertTimestamp(timestamp)
+            timestampRepository.upsertTimestamp(workoutTimestamp)
         }
     }
 

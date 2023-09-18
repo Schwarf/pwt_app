@@ -22,7 +22,7 @@ import java.time.format.DateTimeFormatter
     indices = [Index(value = ["workoutId"])]
 )
 
-data class Timestamp(
+data class WorkoutTimestamp(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     @ColumnInfo(name = "workoutId")
@@ -31,7 +31,7 @@ data class Timestamp(
     val timestamp: Long,
 )
 
-fun Timestamp.toTimestampUI(): TimestampUI = TimestampUI(
+fun WorkoutTimestamp.toTimestampUI(): TimestampUI = TimestampUI(
     id = id,
     workoutId = workoutId,
     dateTimeString = LocalDateTime.ofInstant(

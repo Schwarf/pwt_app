@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "77346a2801141ce1f7e4a00a80796662",
+    "identityHash": "bca8e7e078de22cbdfb8a9794687985f",
     "entities": [
       {
         "tableName": "workouts",
@@ -55,7 +55,7 @@
         "foreignKeys": []
       },
       {
-        "tableName": "timestamps",
+        "tableName": "workout_timestamps",
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `workoutId` INTEGER NOT NULL, `timestamp` INTEGER NOT NULL, FOREIGN KEY(`workoutId`) REFERENCES `workouts`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
@@ -85,13 +85,13 @@
         },
         "indices": [
           {
-            "name": "index_timestamps_workoutId",
+            "name": "index_workout_timestamps_workoutId",
             "unique": false,
             "columnNames": [
               "workoutId"
             ],
             "orders": [],
-            "createSql": "CREATE INDEX IF NOT EXISTS `index_timestamps_workoutId` ON `${TABLE_NAME}` (`workoutId`)"
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_timestamps_workoutId` ON `${TABLE_NAME}` (`workoutId`)"
           }
         ],
         "foreignKeys": [
@@ -107,12 +107,104 @@
             ]
           }
         ]
+      },
+      {
+        "tableName": "trainings",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `time_interval_minutes` INTEGER NOT NULL, `performances` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "timeIntervalMinuts",
+            "columnName": "time_interval_minutes",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "performances",
+            "columnName": "performances",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "training_timestamps",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `trainingId` INTEGER NOT NULL, `timestamp` INTEGER NOT NULL, FOREIGN KEY(`trainingId`) REFERENCES `trainings`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "trainingId",
+            "columnName": "trainingId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "timestamp",
+            "columnName": "timestamp",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_training_timestamps_trainingId",
+            "unique": false,
+            "columnNames": [
+              "trainingId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_training_timestamps_trainingId` ON `${TABLE_NAME}` (`trainingId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "trainings",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "trainingId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '77346a2801141ce1f7e4a00a80796662')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'bca8e7e078de22cbdfb8a9794687985f')"
     ]
   }
 }

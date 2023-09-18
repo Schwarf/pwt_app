@@ -1,15 +1,15 @@
 package abs.apps.personal_workout_tracker.data.repositories
 
-import abs.apps.personal_workout_tracker.data.database.Timestamp
+import abs.apps.personal_workout_tracker.data.database.WorkoutTimestamp
 import kotlinx.coroutines.flow.Flow
 
 interface ITimestampRepository {
-    fun getAllTimestampsStream(): Flow<List<Timestamp>>
+    fun getAllTimestampsStream(): Flow<List<WorkoutTimestamp>>
 
-    fun getTimestampsStreamForOneWorkout(workoutId: Int): Flow<List<Timestamp>>
+    fun getTimestampsStreamForOneWorkout(workoutId: Int): Flow<List<WorkoutTimestamp>>
 
-    fun getLatestTimestampStreamForOneWorkout(workoutId: Int): Flow<Timestamp>
-    suspend fun upsertTimestamp(timestamp: Timestamp)
+    fun getLatestTimestampStreamForOneWorkout(workoutId: Int): Flow<WorkoutTimestamp>
+    suspend fun upsertTimestamp(workoutTimestamp: WorkoutTimestamp)
 
-    suspend fun deleteTimestamp(timestamp: Timestamp)
+    suspend fun deleteTimestamp(workoutTimestamp: WorkoutTimestamp)
 }
