@@ -8,10 +8,12 @@ import androidx.room.AutoMigration
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 
 @Database(
     entities = [Workout::class, Timestamp::class, Training::class],
-    version = 2,
+    version = 3,
     exportSchema = true,
     autoMigrations = [AutoMigration(from = 1, to = 2)]
 )
@@ -23,6 +25,12 @@ abstract class TrackerDatabase : RoomDatabase() {
     companion object {
         @Volatile
         private var Instance: TrackerDatabase? = null
+        val migration2to3 = object : Migration(2, 3) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("ALTER TABLE timestamps RENAME TO workout_timestamps")
+            }
+        }
+
         fun getDatabase(context: Context): TrackerDatabase {
             // if the Instance is not null, return it, otherwise create a new database instance.
             return Instance ?: synchronized(this) {
@@ -32,6 +40,8 @@ abstract class TrackerDatabase : RoomDatabase() {
                      * permanently deletes all data from the tables in your database when it
                      * attempts to perform a migration with no defined migration path.
                      */
+                    .addMigrations(TrackerDatabase.migration2to3)
+//                    .addMigrations(TrackerDatabase.migration2to3, TrackerDatabase.migration3to4)
                     .fallbackToDestructiveMigration()
                     .build()
                     .also { Instance = it }

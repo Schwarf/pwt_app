@@ -12,7 +12,7 @@ import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
 @Entity(
-    tableName = "timestamps",
+    tableName = "workout_timestamps",
     foreignKeys = [ForeignKey(
         entity = Workout::class,
         parentColumns = ["id"],

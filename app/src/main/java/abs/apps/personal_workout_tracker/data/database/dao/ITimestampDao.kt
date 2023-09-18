@@ -15,12 +15,12 @@ interface ITimestampDao {
     @Delete
     suspend fun deleteTimestamp(timestamp: Timestamp)
 
-    @Query("SELECT * FROM timestamps")
+    @Query("SELECT * FROM workout_timestamps")
     fun getAllTimestamps(): Flow<List<Timestamp>>
 
-    @Query("SELECT * FROM timestamps WHERE workoutId = :workoutId")
+    @Query("SELECT * FROM workout_timestamps WHERE workoutId = :workoutId")
     fun getAllTimestampsForOneWorkout(workoutId: Int): Flow<List<Timestamp>>
 
-    @Query("SELECT * FROM timestamps WHERE workoutId = :workoutId ORDER BY timestamp DESC LIMIT 1")
+    @Query("SELECT * FROM workout_timestamps WHERE workoutId = :workoutId ORDER BY timestamp DESC LIMIT 1")
     fun getLatestTimestampForOneWorkout(workoutId: Int): Flow<Timestamp>
 }
