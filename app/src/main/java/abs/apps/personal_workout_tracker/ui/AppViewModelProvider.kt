@@ -4,7 +4,6 @@ import abs.apps.personal_training_tracker.ui.viewmodels.trainings.ExistingTraini
 import abs.apps.personal_workout_tracker.WorkoutTrackerApplication
 import abs.apps.personal_workout_tracker.ui.viewmodels.trainings.AddTrainingViewModel
 import abs.apps.personal_workout_tracker.ui.viewmodels.trainings.EditTrainingViewModel
-import abs.apps.personal_workout_tracker.ui.viewmodels.trainings.ExistingTrainingViewModel
 import abs.apps.personal_workout_tracker.ui.viewmodels.trainings.TrainingListScreenViewModel
 import abs.apps.personal_workout_tracker.ui.viewmodels.workouts.AddWorkoutViewModel
 import abs.apps.personal_workout_tracker.ui.viewmodels.workouts.EditWorkoutViewModel

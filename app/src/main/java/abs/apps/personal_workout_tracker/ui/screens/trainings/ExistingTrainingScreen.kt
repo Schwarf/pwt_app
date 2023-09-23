@@ -1,11 +1,11 @@
 package abs.apps.personal_workout_tracker.ui.screens.trainings
 
+import abs.apps.personal_training_tracker.ui.viewmodels.trainings.ExistingTraining
+import abs.apps.personal_training_tracker.ui.viewmodels.trainings.ExistingTrainingViewModel
 import abs.apps.personal_workout_tracker.R
 import abs.apps.personal_workout_tracker.ui.AppViewModelProvider
 import abs.apps.personal_workout_tracker.ui.navigation.INavigationDestination
 import abs.apps.personal_workout_tracker.ui.screens.helpers.AppTopBar
-import abs.apps.personal_workout_tracker.ui.viewmodels.trainings.ExistingTraining
-import abs.apps.personal_workout_tracker.ui.viewmodels.trainings.ExistingTrainingViewModel
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -207,7 +207,7 @@ fun ExistingTrainingDetails(
                 )
             )
             val lastPerformanceDateTime: String =
-                " (last: " + existingTraining.workoutTimestampUI.dateTimeString + ")"
+                " (last: " + existingTraining.trainingTimestampUI.dateTimeString + ")"
             ExistingTrainingRow(
                 labelResID = R.string.training_performances,
                 value = existingTraining.trainingUI.performances,
