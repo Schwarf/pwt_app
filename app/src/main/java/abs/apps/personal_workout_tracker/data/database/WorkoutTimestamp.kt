@@ -31,7 +31,7 @@ data class WorkoutTimestamp(
     val timestamp: Long,
 )
 
-fun WorkoutTimestamp.toTimestampUI(): WorkoutTimestampUI = WorkoutTimestampUI(
+fun WorkoutTimestamp.toWorkoutTimestampUI(): WorkoutTimestampUI = WorkoutTimestampUI(
     id = id,
     workoutId = workoutId,
     dateTimeString = LocalDateTime.ofInstant(

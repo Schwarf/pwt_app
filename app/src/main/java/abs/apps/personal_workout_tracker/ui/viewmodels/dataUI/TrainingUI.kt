@@ -18,7 +18,7 @@ fun validateTrainingUI(trainingUI: TrainingUI): Boolean {
 fun TrainingUI.toTraining(): Training = Training(
     id = id,
     name = name,
-    timeIntervalMinuts = durationInMinutes.toIntOrNull() ?: 0,
+    durationMinutes = durationInMinutes.toIntOrNull() ?: 0,
     performances = performances.toIntOrNull() ?: 0,
 )
 

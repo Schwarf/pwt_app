@@ -1,14 +1,15 @@
-package abs.apps.personal_workout_tracker.ui.viewmodels.trainings
+package abs.apps.personal_training_tracker.ui.viewmodels.trainings
 
 import abs.apps.personal_training_tracker.data.repositories.ITrainingTimestampRepository
-import abs.apps.personal_workout_tracker.data.database.WorkoutTimestamp
-import abs.apps.personal_workout_tracker.data.database.toTimestampUI
+import abs.apps.personal_workout_tracker.data.database.TrainingTimestamp
+import abs.apps.personal_workout_tracker.data.database.toTrainingTimestampUI
 import abs.apps.personal_workout_tracker.data.database.toTrainingUI
 import abs.apps.personal_workout_tracker.data.repositories.ITrainingRepository
 import abs.apps.personal_workout_tracker.ui.screens.trainings.ExistingTrainingDestination
-import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.WorkoutTimestampUI
+import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.TrainingTimestamp
+import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.TrainingTimestampUI
 import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.TrainingUI
-import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.WorkoutTimestamp
+import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.WorkoutTimestampUI
 import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.toTraining
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -41,12 +42,12 @@ class ExistingTrainingViewModel(
                     if (timestamp != null)
                         ExistingTraining(
                             trainingUI = training.toTrainingUI(),
-                            workoutTimestampUI = timestamp.toTimestampUI()
+                            trainingTimestampUI = timestamp.toTrainingTimestampUI()
                         )
                     else
                         ExistingTraining(
                             trainingUI = training.toTrainingUI().copy(performances = "0"),
-                            workoutTimestampUI = WorkoutTimestampUI()
+                            trainingTimestampUI = TrainingTimestampUI()
                         )
 
                 }
@@ -62,8 +63,8 @@ class ExistingTrainingViewModel(
             val currentWorkout = existingTrainingsState.value.trainingUI.toTraining()
             trainingRepository.upsertTraining(currentWorkout.copy(performances = currentWorkout.performances + 1))
             timestampRepository.upsertTimestamp(
-                WorkoutTimestamp(
-                    workoutId = existingTrainingsState.value.trainingUI.id,
+                TrainingTimestamp(
+                    trainingId = existingTrainingsState.value.trainingUI.id,
                     timestamp = LocalDateTime.now().atZone(
                         ZoneId.systemDefault()
                     ).toEpochSecond()
@@ -77,7 +78,7 @@ class ExistingTrainingViewModel(
             if (existingTrainingsState.value.trainingUI.toTraining().performances > 0) {
                 val currentWorkout = existingTrainingsState.value.trainingUI.toTraining()
                 trainingRepository.upsertTraining(currentWorkout.copy(performances = currentWorkout.performances - 1))
-                timestampRepository.deleteTimestamp(existingTrainingsState.value.workoutTimestampUI.WorkoutTimestamp())
+                timestampRepository.deleteTimestamp(existingTrainingsState.value.trainingTimestampUI.TrainingTimestamp())
             }
         }
     }
@@ -95,6 +96,6 @@ class ExistingTrainingViewModel(
 
 data class ExistingTraining(
     val trainingUI: TrainingUI = TrainingUI(),
-    val workoutTimestampUI: WorkoutTimestampUI = WorkoutTimestampUI()
+    val trainingTimestampUI: TrainingTimestampUI = TrainingTimestampUI()
 )
 

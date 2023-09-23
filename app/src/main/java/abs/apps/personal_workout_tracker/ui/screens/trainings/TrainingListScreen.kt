@@ -200,7 +200,7 @@ private fun TrainingItem(
                 Text(
                     text = stringResource(
                         id = R.string.set_training_duration,
-                        training.timeIntervalMinuts
+                        training.durationMinutes
                     ),
                     style = MaterialTheme.typography.titleMedium
                 )

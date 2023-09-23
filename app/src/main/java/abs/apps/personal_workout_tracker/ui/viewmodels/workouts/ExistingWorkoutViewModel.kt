@@ -1,7 +1,7 @@
 package abs.apps.personal_workout_tracker.ui.viewmodels.workouts
 
 import abs.apps.personal_workout_tracker.data.database.WorkoutTimestamp
-import abs.apps.personal_workout_tracker.data.database.toTimestampUI
+import abs.apps.personal_workout_tracker.data.database.toWorkoutTimestampUI
 import abs.apps.personal_workout_tracker.data.database.toWorkoutUI
 import abs.apps.personal_workout_tracker.data.repositories.IWorkoutTimestampRepository
 import abs.apps.personal_workout_tracker.data.repositories.IWorkoutRepository
@@ -40,7 +40,7 @@ class ExistingWorkoutViewModel(
                     if (timestamp != null)
                         ExistingWorkout(
                             workoutUI = workout.toWorkoutUI(),
-                            workoutTimestampUI = timestamp.toTimestampUI()
+                            workoutTimestampUI = timestamp.toWorkoutTimestampUI()
                         )
                     else
                         ExistingWorkout(

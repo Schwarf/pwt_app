@@ -10,8 +10,8 @@ import androidx.room.PrimaryKey
 data class Training(
     @ColumnInfo(name = "name")
     var name: String,
-    @ColumnInfo(name = "time_interval_minutes")
-    var timeIntervalMinuts: Int,
+    @ColumnInfo(name = "durationMinutes")
+    var durationMinutes: Int,
     @ColumnInfo(name = "performances")
     var performances: Int,
     @PrimaryKey(autoGenerate = true)
@@ -21,7 +21,7 @@ data class Training(
 fun Training.toTrainingUI(): TrainingUI = TrainingUI(
     id = id,
     name = name,
-    durationInMinutes = timeIntervalMinuts.toString(),
+    durationInMinutes = durationMinutes.toString(),
     performances = performances.toString()
 )
 
