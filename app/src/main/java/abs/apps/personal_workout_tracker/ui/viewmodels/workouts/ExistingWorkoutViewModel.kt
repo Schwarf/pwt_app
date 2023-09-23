@@ -6,9 +6,9 @@ import abs.apps.personal_workout_tracker.data.database.toWorkoutUI
 import abs.apps.personal_workout_tracker.data.repositories.IWorkoutTimestampRepository
 import abs.apps.personal_workout_tracker.data.repositories.IWorkoutRepository
 import abs.apps.personal_workout_tracker.ui.screens.workouts.ExistingWorkoutDestination
-import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.TimestampUI
+import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.WorkoutTimestampUI
 import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.WorkoutUI
-import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.toTimestamp
+import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.WorkoutTimestamp
 import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.toWorkout
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -40,12 +40,12 @@ class ExistingWorkoutViewModel(
                     if (timestamp != null)
                         ExistingWorkout(
                             workoutUI = workout.toWorkoutUI(),
-                            timestampUI = timestamp.toTimestampUI()
+                            workoutTimestampUI = timestamp.toTimestampUI()
                         )
                     else
                         ExistingWorkout(
                             workoutUI = workout.toWorkoutUI().copy(performances = "0"),
-                            timestampUI = TimestampUI()
+                            workoutTimestampUI = WorkoutTimestampUI()
                         )
 
                 }
@@ -76,7 +76,7 @@ class ExistingWorkoutViewModel(
             if (existingWorkoutsState.value.workoutUI.toWorkout().performances > 0) {
                 val currentWorkout = existingWorkoutsState.value.workoutUI.toWorkout()
                 workoutRepository.upsertWorkout(currentWorkout.copy(performances = currentWorkout.performances - 1))
-                timestampRepository.deleteTimestamp(existingWorkoutsState.value.timestampUI.toTimestamp())
+                timestampRepository.deleteTimestamp(existingWorkoutsState.value.workoutTimestampUI.WorkoutTimestamp())
             }
         }
     }
@@ -94,6 +94,6 @@ class ExistingWorkoutViewModel(
 
 data class ExistingWorkout(
     val workoutUI: WorkoutUI = WorkoutUI(),
-    val timestampUI: TimestampUI = TimestampUI()
+    val workoutTimestampUI: WorkoutTimestampUI = WorkoutTimestampUI()
 )
 

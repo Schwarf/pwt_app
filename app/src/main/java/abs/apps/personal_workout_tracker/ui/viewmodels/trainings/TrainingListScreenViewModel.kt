@@ -1,5 +1,6 @@
 package abs.apps.personal_workout_tracker.ui.viewmodels.trainings
 
+import abs.apps.personal_training_tracker.data.repositories.ITrainingTimestampRepository
 import abs.apps.personal_workout_tracker.data.database.WorkoutTimestamp
 import abs.apps.personal_workout_tracker.data.database.Training
 import abs.apps.personal_workout_tracker.data.repositories.IWorkoutTimestampRepository
@@ -18,7 +19,7 @@ import java.time.ZoneId
 
 class TrainingListScreenViewModel(
     private val trainingRepository: ITrainingRepository,
-    private val timestampRepository: IWorkoutTimestampRepository
+    private val timestampRepository: ITrainingTimestampRepository
 ) : ViewModel() {
     val listOfTrainingsState: StateFlow<ListOfTrainings> =
         trainingRepository.getAllTrainingsStream().map { ListOfTrainings(it) }

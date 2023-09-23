@@ -1,14 +1,14 @@
 package abs.apps.personal_workout_tracker.ui.viewmodels.trainings
 
+import abs.apps.personal_training_tracker.data.repositories.ITrainingTimestampRepository
 import abs.apps.personal_workout_tracker.data.database.WorkoutTimestamp
 import abs.apps.personal_workout_tracker.data.database.toTimestampUI
 import abs.apps.personal_workout_tracker.data.database.toTrainingUI
-import abs.apps.personal_workout_tracker.data.repositories.IWorkoutTimestampRepository
 import abs.apps.personal_workout_tracker.data.repositories.ITrainingRepository
 import abs.apps.personal_workout_tracker.ui.screens.trainings.ExistingTrainingDestination
-import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.TimestampUI
+import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.WorkoutTimestampUI
 import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.TrainingUI
-import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.toTimestamp
+import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.WorkoutTimestamp
 import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.toTraining
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -28,7 +28,7 @@ import java.time.ZoneId
 class ExistingTrainingViewModel(
     savedStateHandle: SavedStateHandle,
     private val trainingRepository: ITrainingRepository,
-    private val timestampRepository: IWorkoutTimestampRepository
+    private val timestampRepository: ITrainingTimestampRepository
 ) : ViewModel() {
     private val trainingId: Int =
         checkNotNull(savedStateHandle[ExistingTrainingDestination.trainingIdArg])
@@ -36,17 +36,17 @@ class ExistingTrainingViewModel(
     @OptIn(ExperimentalCoroutinesApi::class)
     val existingTrainingsState: StateFlow<ExistingTraining> =
         trainingRepository.getTrainingStream(trainingId).filterNotNull().flatMapLatest { training ->
-            timestampRepository.getLatestTimestampStreamForOneWorkout(training.id)
+            timestampRepository.getLatestTimestampStreamForOneTraining(training.id)
                 .map { timestamp ->
                     if (timestamp != null)
                         ExistingTraining(
                             trainingUI = training.toTrainingUI(),
-                            timestampUI = timestamp.toTimestampUI()
+                            workoutTimestampUI = timestamp.toTimestampUI()
                         )
                     else
                         ExistingTraining(
                             trainingUI = training.toTrainingUI().copy(performances = "0"),
-                            timestampUI = TimestampUI()
+                            workoutTimestampUI = WorkoutTimestampUI()
                         )
 
                 }
@@ -77,7 +77,7 @@ class ExistingTrainingViewModel(
             if (existingTrainingsState.value.trainingUI.toTraining().performances > 0) {
                 val currentWorkout = existingTrainingsState.value.trainingUI.toTraining()
                 trainingRepository.upsertTraining(currentWorkout.copy(performances = currentWorkout.performances - 1))
-                timestampRepository.deleteTimestamp(existingTrainingsState.value.timestampUI.toTimestamp())
+                timestampRepository.deleteTimestamp(existingTrainingsState.value.workoutTimestampUI.WorkoutTimestamp())
             }
         }
     }
@@ -95,6 +95,6 @@ class ExistingTrainingViewModel(
 
 data class ExistingTraining(
     val trainingUI: TrainingUI = TrainingUI(),
-    val timestampUI: TimestampUI = TimestampUI()
+    val workoutTimestampUI: WorkoutTimestampUI = WorkoutTimestampUI()
 )
 

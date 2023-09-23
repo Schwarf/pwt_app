@@ -4,14 +4,14 @@ import abs.apps.personal_workout_tracker.data.database.WorkoutTimestamp
 import java.time.LocalDateTime
 import java.time.ZoneId
 
-data class TimestampUI(
+data class WorkoutTimestampUI(
     val id: Int = 0,
     val workoutId: Int = 0,
     val dateTimeString: String = "",
     val isDateTimeValid: Boolean = false
 )
 
-fun TimestampUI.toTimestamp(): WorkoutTimestamp = WorkoutTimestamp(
+fun WorkoutTimestampUI.WorkoutTimestamp(): WorkoutTimestamp = WorkoutTimestamp(
     id = id,
     workoutId = workoutId,
     timestamp = LocalDateTime.now().atZone(ZoneId.systemDefault()).toEpochSecond()

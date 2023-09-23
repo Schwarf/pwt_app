@@ -207,7 +207,7 @@ fun ExistingTrainingDetails(
                 )
             )
             val lastPerformanceDateTime: String =
-                " (last: " + existingTraining.timestampUI.dateTimeString + ")"
+                " (last: " + existingTraining.workoutTimestampUI.dateTimeString + ")"
             ExistingTrainingRow(
                 labelResID = R.string.training_performances,
                 value = existingTraining.trainingUI.performances,
