@@ -20,4 +20,11 @@ interface IWorkoutDao {
 
     @Query("SELECT * from workouts WHERE id = :id")
     fun getWorkout(id: Int): Flow<Workout>
+
+    @Query(
+        "SELECT workouts.* FROM workouts" +
+                " INNER JOIN workout_timestamps ON workouts.id = workout_timestamps.workoutId " +
+                " WHERE workout_timestamps.timestamp >= :start AND workout_timestamps.timestamp < :end"
+    )
+    fun getWorkoutsByTimestampRange(start: Long, end: Long): Flow<List<Workout>>
 }

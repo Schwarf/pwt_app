@@ -20,4 +20,11 @@ interface ITrainingsDao {
 
     @Query("SELECT * from trainings WHERE id = :id")
     fun getTraining(id: Int): Flow<Training>
-} 
+
+    @Query(
+        "SELECT trainings.* FROM trainings" +
+                " INNER JOIN training_timestamps ON trainings.id = training_timestamps.trainingId " +
+                " WHERE training_timestamps.timestamp >= :start AND training_timestamps.timestamp < :end"
+    )
+    fun getTrainingsByTimestampRange(start: Long, end: Long): Flow<List<Training>>
+}
