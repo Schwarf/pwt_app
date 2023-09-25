@@ -1,6 +1,6 @@
 package abs.apps.personal_workout_tracker.data
 
-import abs.apps.personal_training_tracker.data.repositories.DBTrainingRepository
+import abs.apps.personal_workout_tracker.data.repositories.DBTrainingRepository
 import abs.apps.personal_training_tracker.data.repositories.ITrainingTimestampRepository
 import abs.apps.personal_workout_tracker.data.database.TrackerDatabase
 import abs.apps.personal_workout_tracker.data.repositories.DBTrainingTimestampRepository

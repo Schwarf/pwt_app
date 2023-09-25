@@ -1,8 +1,7 @@
-package abs.apps.personal_training_tracker.data.repositories
+package abs.apps.personal_workout_tracker.data.repositories
 
 import abs.apps.personal_training_tracker.data.database.dao.ITrainingsDao
 import abs.apps.personal_workout_tracker.data.database.Training
-import abs.apps.personal_workout_tracker.data.repositories.ITrainingRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.firstOrNull
 
