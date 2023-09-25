@@ -1,7 +1,7 @@
 package abs.apps.personal_workout_tracker.data.repositories
 
-import abs.apps.personal_workout_tracker.data.database.dao.IWorkoutDao
 import abs.apps.personal_workout_tracker.data.database.Workout
+import abs.apps.personal_workout_tracker.data.database.dao.IWorkoutDao
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.firstOrNull
 
@@ -21,4 +21,11 @@ class DBWorkoutRepository(private val workoutDao: IWorkoutDao) : IWorkoutReposit
             workoutDao.upsertWorkout(updatedWorkout)
         }
     }
+
+    override suspend fun getAllWorkoutsForTimestampRange(
+        start: Long,
+        end: Long
+    ): Flow<List<Workout>> =
+        workoutDao.getWorkoutsByTimestampRange(start, end)
+
 }

@@ -23,4 +23,7 @@ class DBTrainingRepository(private val trainingDao: ITrainingsDao) : ITrainingRe
         }
     }
 
+    override suspend fun getAllTrainingsForTimestampRange(start: Long, end: Long) =
+        trainingDao.getTrainingsByTimestampRange(start, end)
+
 }

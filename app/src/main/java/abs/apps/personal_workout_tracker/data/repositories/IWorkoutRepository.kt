@@ -13,4 +13,6 @@ interface IWorkoutRepository {
     suspend fun deleteWorkout(workout: Workout)
 
     suspend fun updateWorkoutPerformances(id: Int, performances: Int)
+
+    suspend fun getAllWorkoutsForTimestampRange(start: Long, end: Long) : Flow<List<Workout>>
 }
