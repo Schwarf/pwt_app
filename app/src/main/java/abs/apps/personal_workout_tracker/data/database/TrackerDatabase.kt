@@ -34,9 +34,6 @@ abstract class TrackerDatabase : RoomDatabase() {
                      * permanently deletes all data from the tables in your database when it
                      * attempts to perform a migration with no defined migration path.
                      */
-//                    .addMigrations(TrackerDatabase.migration2to3, TrackerDatabase.migration3to4)
-                    .fallbackToDestructiveMigration()
-//                    .createFromFile(File("/media/linux_data/projects/android/AndroidStudioProjects/pwt_app/device_database_files/workout_backup_2023_09_24.db"))
                     .build()
                     .also { Instance = it }
             }
