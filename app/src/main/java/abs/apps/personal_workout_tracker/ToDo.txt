@@ -1,10 +1,14 @@
+ToDo:
 - Some details how the navigation to single workouts works evades me. Needs a detailed study.
-- SEVERE DESIGN BUG: The one timestamp table uses one workoutid which is primary in EITHER
-                     trainings- or workout-table.
+- Learn DaggerHilt and use (if feasible) DI to reduce code duplication for viewmodels and screens
+  regarding workouts <--> trainings
 
-- Possible features:
+In preparation:
   - Add button that shows list of all performance-dates for one workout/training (PURE UI)
   - Search a workout/all workouts in a given time interval.
+
+
+Possible features:
   - Connect ROOM database with Desktop MS SQL database using RESTful API and sync user data.
   - Review use cases and data layer:
     - Introduce "Session" that has multiple workouts??? Unclear if needed.
