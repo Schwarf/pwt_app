@@ -24,7 +24,7 @@ interface ITrainingsDao {
         "SELECT trainings.* FROM trainings" +
                 " INNER JOIN training_timestamps ON trainings.id = training_timestamps.trainingId " +
                 " WHERE training_timestamps.timestamp >= :start AND training_timestamps.timestamp < :end " +
-                "AND isDeleted = 0"
+                "AND training_timestamps.isDeleted = 0"
     )
     fun getTrainingsByTimestampRange(start: Long, end: Long): Flow<List<Training>>
 }

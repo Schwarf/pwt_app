@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "852920feb87e507e54e002f8097a6b10",
+    "identityHash": "59a31e37d209ab0e962f58f88b6d90f9",
     "entities": [
       {
         "tableName": "workouts",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `sets` INTEGER NOT NULL, `totalRepetitions` INTEGER NOT NULL, `maxRepetitionsInSet` INTEGER NOT NULL, `performances` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `sets` INTEGER NOT NULL, `totalRepetitions` INTEGER NOT NULL, `maxRepetitionsInSet` INTEGER NOT NULL, `performances` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `lastModified` INTEGER NOT NULL, `isDeleted` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "name",
@@ -43,6 +43,18 @@
             "columnName": "id",
             "affinity": "INTEGER",
             "notNull": true
+          },
+          {
+            "fieldPath": "lastModified",
+            "columnName": "lastModified",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isDeleted",
+            "columnName": "isDeleted",
+            "affinity": "INTEGER",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -56,7 +68,7 @@
       },
       {
         "tableName": "workout_timestamps",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `workoutId` INTEGER NOT NULL, `timestamp` INTEGER NOT NULL, FOREIGN KEY(`workoutId`) REFERENCES `workouts`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `workoutId` INTEGER NOT NULL, `timestamp` INTEGER NOT NULL, `lastModified` INTEGER NOT NULL, `isDeleted` INTEGER NOT NULL, FOREIGN KEY(`workoutId`) REFERENCES `workouts`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "id",
@@ -73,6 +85,18 @@
           {
             "fieldPath": "timestamp",
             "columnName": "timestamp",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastModified",
+            "columnName": "lastModified",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isDeleted",
+            "columnName": "isDeleted",
             "affinity": "INTEGER",
             "notNull": true
           }
@@ -110,7 +134,7 @@
       },
       {
         "tableName": "trainings",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `durationMinutes` INTEGER NOT NULL, `performances` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `durationMinutes` INTEGER NOT NULL, `performances` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `lastModified` INTEGER NOT NULL, `isDeleted` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "name",
@@ -135,6 +159,18 @@
             "columnName": "id",
             "affinity": "INTEGER",
             "notNull": true
+          },
+          {
+            "fieldPath": "lastModified",
+            "columnName": "lastModified",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isDeleted",
+            "columnName": "isDeleted",
+            "affinity": "INTEGER",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -148,7 +184,7 @@
       },
       {
         "tableName": "training_timestamps",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `trainingId` INTEGER NOT NULL, `timestamp` INTEGER NOT NULL, FOREIGN KEY(`trainingId`) REFERENCES `trainings`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `trainingId` INTEGER NOT NULL, `timestamp` INTEGER NOT NULL, `lastModified` INTEGER NOT NULL, `isDeleted` INTEGER NOT NULL, FOREIGN KEY(`trainingId`) REFERENCES `trainings`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "id",
@@ -165,6 +201,18 @@
           {
             "fieldPath": "timestamp",
             "columnName": "timestamp",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastModified",
+            "columnName": "lastModified",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isDeleted",
+            "columnName": "isDeleted",
             "affinity": "INTEGER",
             "notNull": true
           }
@@ -204,7 +252,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '852920feb87e507e54e002f8097a6b10')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '59a31e37d209ab0e962f58f88b6d90f9')"
     ]
   }
 }

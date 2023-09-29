@@ -38,7 +38,9 @@ class WorkoutListScreenViewModel(
 
             val workoutTimestamp = WorkoutTimestamp(
                 workoutId = workoutId,
-                timestamp = LocalDateTime.now().atZone(ZoneId.systemDefault()).toEpochSecond()
+                timestamp = LocalDateTime.now().atZone(ZoneId.systemDefault()).toEpochSecond(),
+                isDeleted = false,
+                lastModified = System.currentTimeMillis()
             )
             timestampRepository.upsertTimestamp(workoutTimestamp)
         }

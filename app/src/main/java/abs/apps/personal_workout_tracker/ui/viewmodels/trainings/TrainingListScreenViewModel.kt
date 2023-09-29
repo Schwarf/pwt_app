@@ -41,7 +41,9 @@ class TrainingListScreenViewModel(
 
             val trainingTimestamp = TrainingTimestamp(
                 trainingId = trainingId,
-                timestamp = LocalDateTime.now().atZone(ZoneId.systemDefault()).toEpochSecond()
+                timestamp = LocalDateTime.now().atZone(ZoneId.systemDefault()).toEpochSecond(),
+                isDeleted = false,
+                lastModified = System.currentTimeMillis()
             )
             timestampRepository.upsertTimestamp(trainingTimestamp)
         }

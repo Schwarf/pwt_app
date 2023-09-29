@@ -24,7 +24,7 @@ interface IWorkoutDao {
         "SELECT workouts.* FROM workouts" +
                 " INNER JOIN workout_timestamps ON workouts.id = workout_timestamps.workoutId " +
                 " WHERE workout_timestamps.timestamp >= :start AND workout_timestamps.timestamp < :end " +
-                "AND isDeleted = 0"
+                "AND workout_timestamps.isDeleted = 0"
     )
     fun getWorkoutsByTimestampRange(start: Long, end: Long): Flow<List<Workout>>
 }

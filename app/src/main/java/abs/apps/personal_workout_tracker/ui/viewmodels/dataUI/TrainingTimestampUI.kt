@@ -15,5 +15,7 @@ data class TrainingTimestampUI(
 fun TrainingTimestampUI.TrainingTimestamp(): TrainingTimestamp = TrainingTimestamp(
     id = id,
     trainingId = trainingId,
-    timestamp = LocalDateTime.now().atZone(ZoneId.systemDefault()).toEpochSecond()
+    timestamp = LocalDateTime.now().atZone(ZoneId.systemDefault()).toEpochSecond(),
+    isDeleted = false,
+    lastModified = System.currentTimeMillis()
 )

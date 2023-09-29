@@ -14,5 +14,8 @@ data class WorkoutTimestampUI(
 fun WorkoutTimestampUI.WorkoutTimestamp(): WorkoutTimestamp = WorkoutTimestamp(
     id = id,
     workoutId = workoutId,
-    timestamp = LocalDateTime.now().atZone(ZoneId.systemDefault()).toEpochSecond()
+    timestamp = LocalDateTime.now().atZone(ZoneId.systemDefault()).toEpochSecond(),
+    isDeleted = false,
+    lastModified = System.currentTimeMillis()
+
 )
