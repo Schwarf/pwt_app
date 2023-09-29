@@ -2,6 +2,7 @@ package abs.apps.personal_workout_tracker.data.database
 
 import androidx.room.ColumnInfo
 import androidx.room.PrimaryKey
+import java.util.UUID
 
 data class Synchronization(
     @PrimaryKey(autoGenerate = true)
@@ -11,5 +12,7 @@ data class Synchronization(
     @ColumnInfo(name = "attempted")
     var attempted: Boolean,
     @ColumnInfo(name = "succeeded")
-    var succeeded: Boolean = false
+    var succeeded: Boolean = false,
+    @ColumnInfo(name = "sourceUUID")
+    val sourceUUID: String = UUID.randomUUID().toString(),
 )
