@@ -27,7 +27,11 @@ data class TrainingTimestamp(
     @ColumnInfo(name = "trainingId")
     val trainingId: Int,
     @ColumnInfo(name = "timestamp")
-    val timestamp: Long
+    val timestamp: Long,
+    @ColumnInfo(name = "lastModified")
+    var lastModified: Long,
+    @ColumnInfo(name = "isDeleted")
+    var isDeleted: Boolean = false
 )
 
 fun TrainingTimestamp.toTrainingTimestampUI(): TrainingTimestampUI = TrainingTimestampUI(

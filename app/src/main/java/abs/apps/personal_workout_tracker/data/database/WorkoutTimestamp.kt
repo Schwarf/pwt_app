@@ -29,6 +29,9 @@ data class WorkoutTimestamp(
     val workoutId: Int,
     @ColumnInfo(name = "timestamp")
     val timestamp: Long,
+    var lastModified: Long,
+    @ColumnInfo(name = "isDeleted")
+    var isDeleted: Boolean = false
 )
 
 fun WorkoutTimestamp.toWorkoutTimestampUI(): WorkoutTimestampUI = WorkoutTimestampUI(
