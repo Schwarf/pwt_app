@@ -12,7 +12,8 @@ class DBTrainingRepository(private val trainingDao: ITrainingsDao) : ITrainingRe
 
     override suspend fun upsertTraining(training: Training) = trainingDao.upsertTraining(training)
 
-    override suspend fun deleteTraining(training: Training) = trainingDao.deleteTraining(training)
+    override suspend fun deleteTraining(trainingId: Int) =
+        trainingDao.softDeleteTraining(trainingId, modifiedTimestamp = System.currentTimeMillis())
 
     override suspend fun updateTrainingPerformances(id: Int, performances: Int) {
         val training = trainingDao.getTraining(id).firstOrNull()

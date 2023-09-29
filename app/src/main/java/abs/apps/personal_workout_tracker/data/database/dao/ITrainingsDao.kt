@@ -12,8 +12,8 @@ interface ITrainingsDao {
     @Upsert
     suspend fun upsertTraining(training: Training)
 
-    @Delete
-    suspend fun deleteTraining(training: Training)
+    @Query("UPDATE trainings SET IsDeleted = 1, lastModified = :modifiedTimestamp WHERE id = :trainingId")
+    suspend fun softDeleteTraining(trainingId: Int, modifiedTimestamp: Long)
 
     @Query("SELECT * FROM trainings ORDER BY name ASC")
     fun getAllTrainings(): Flow<List<Training>>

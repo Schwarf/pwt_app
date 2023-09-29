@@ -9,7 +9,6 @@ import abs.apps.personal_workout_tracker.ui.screens.trainings.ExistingTrainingDe
 import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.TrainingTimestamp
 import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.TrainingTimestampUI
 import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.TrainingUI
-import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.WorkoutTimestampUI
 import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.toTraining
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -60,8 +59,8 @@ class ExistingTrainingViewModel(
 
     fun addOnePerformance() {
         viewModelScope.launch {
-            val currentWorkout = existingTrainingsState.value.trainingUI.toTraining()
-            trainingRepository.upsertTraining(currentWorkout.copy(performances = currentWorkout.performances + 1))
+            val currentTraining = existingTrainingsState.value.trainingUI.toTraining()
+            trainingRepository.upsertTraining(currentTraining.copy(performances = currentTraining.performances + 1))
             timestampRepository.upsertTimestamp(
                 TrainingTimestamp(
                     trainingId = existingTrainingsState.value.trainingUI.id,
@@ -85,7 +84,7 @@ class ExistingTrainingViewModel(
 
 
     suspend fun deleteTraining() {
-        trainingRepository.deleteTraining(existingTrainingsState.value.trainingUI.toTraining())
+        trainingRepository.deleteTraining(existingTrainingsState.value.trainingUI.id)
     }
 
     companion object {

@@ -8,7 +8,7 @@ data class WorkoutUI(
     val sets: String = "",
     val totalRepetitions: String = "",
     val maxRepetitionsInSet: String = "",
-    val performances: String=""
+    val performances: String="",
 )
 
 
@@ -19,6 +19,8 @@ fun WorkoutUI.toWorkout(): Workout = Workout(
     totalRepetitions = totalRepetitions.toIntOrNull() ?: 0,
     maxRepetitionsInSet = maxRepetitionsInSet.toIntOrNull() ?: 0,
     performances = performances.toIntOrNull() ?: 0,
+    isDeleted = false,
+    lastModified = System.currentTimeMillis()
 )
 
 fun validateWorkoutUI(workoutUI: WorkoutUI): Boolean {

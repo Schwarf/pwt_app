@@ -11,7 +11,7 @@ interface ITrainingRepository {
 
     suspend fun upsertTraining(training: Training)
 
-    suspend fun deleteTraining(training: Training)
+    suspend fun deleteTraining(trainingId: Int)
 
     suspend fun updateTrainingPerformances(id: Int, performances: Int)
     suspend fun getAllTrainingsForTimestampRange(start: Long, end: Long) : Flow<List<Training>>

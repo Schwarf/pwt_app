@@ -2,7 +2,6 @@ package abs.apps.personal_workout_tracker.data.database.dao
 
 import abs.apps.personal_workout_tracker.data.database.Workout
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Query
 import androidx.room.Upsert
 import kotlinx.coroutines.flow.Flow
@@ -12,8 +11,8 @@ interface IWorkoutDao {
     @Upsert
     suspend fun upsertWorkout(workout: Workout)
 
-    @Delete
-    suspend fun deleteWorkout(workout: Workout)
+    @Query("UPDATE workouts SET IsDeleted = 1, lastModified = :modifiedTimestamp WHERE id = :workoutId")
+    suspend fun softDeleteWorkout(workoutId: Int, modifiedTimestamp: Long)
 
     @Query("SELECT * FROM workouts ORDER BY name ASC")
     fun getAllWorkouts(): Flow<List<Workout>>

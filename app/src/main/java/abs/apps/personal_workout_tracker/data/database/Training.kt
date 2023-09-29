@@ -15,7 +15,11 @@ data class Training(
     @ColumnInfo(name = "performances")
     var performances: Int,
     @PrimaryKey(autoGenerate = true)
-    val id: Int = 0
+    val id: Int = 0,
+    @ColumnInfo(name = "lastModified")
+    var lastModified: Long,
+    @ColumnInfo(name = "isDeleted")
+    var isDeleted: Boolean = false
 )
 
 fun Training.toTrainingUI(): TrainingUI = TrainingUI(

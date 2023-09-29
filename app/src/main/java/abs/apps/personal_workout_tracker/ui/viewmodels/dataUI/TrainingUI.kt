@@ -6,7 +6,7 @@ data class TrainingUI(
     val id: Int = 0,
     val name: String = "",
     val durationInMinutes: String = "",
-    val performances: String = ""
+    val performances: String = "",
 )
 
 fun validateTrainingUI(trainingUI: TrainingUI): Boolean {
@@ -20,6 +20,8 @@ fun TrainingUI.toTraining(): Training = Training(
     name = name,
     durationMinutes = durationInMinutes.toIntOrNull() ?: 0,
     performances = performances.toIntOrNull() ?: 0,
+    isDeleted = false,
+    lastModified = System.currentTimeMillis()
 )
 
 

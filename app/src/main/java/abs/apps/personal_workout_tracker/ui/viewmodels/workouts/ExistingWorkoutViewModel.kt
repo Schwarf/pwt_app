@@ -83,7 +83,7 @@ class ExistingWorkoutViewModel(
 
 
     suspend fun deleteWorkout() {
-        workoutRepository.deleteWorkout(existingWorkoutsState.value.workoutUI.toWorkout())
+        workoutRepository.deleteWorkout(existingWorkoutsState.value.workoutUI.id)
     }
 
     companion object {
