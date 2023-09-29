@@ -76,7 +76,7 @@ class ExistingWorkoutViewModel(
             if (existingWorkoutsState.value.workoutUI.toWorkout().performances > 0) {
                 val currentWorkout = existingWorkoutsState.value.workoutUI.toWorkout()
                 workoutRepository.upsertWorkout(currentWorkout.copy(performances = currentWorkout.performances - 1))
-                timestampRepository.deleteTimestamp(existingWorkoutsState.value.workoutTimestampUI.WorkoutTimestamp())
+                timestampRepository.deleteTimestamp(existingWorkoutsState.value.workoutTimestampUI.id)
             }
         }
     }

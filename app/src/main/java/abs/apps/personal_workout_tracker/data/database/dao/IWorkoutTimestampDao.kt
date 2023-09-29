@@ -12,8 +12,8 @@ interface IWorkoutTimestampDao {
     @Upsert
     suspend fun upsertTimestamp(workoutTimestamp: WorkoutTimestamp)
 
-    @Delete
-    suspend fun deleteTimestamp(workoutTimestamp: WorkoutTimestamp)
+    @Query("UPDATE workout_timestamps SET IsDeleted = 1, lastModified = :lastModified WHERE id = :id")
+    suspend fun deleteTimestamp(id: Int, lastModified: Long)
 
     @Query("SELECT * FROM workout_timestamps")
     fun getAllTimestamps(): Flow<List<WorkoutTimestamp>>

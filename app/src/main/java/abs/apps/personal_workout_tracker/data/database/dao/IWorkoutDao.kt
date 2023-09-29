@@ -11,8 +11,8 @@ interface IWorkoutDao {
     @Upsert
     suspend fun upsertWorkout(workout: Workout)
 
-    @Query("UPDATE workouts SET IsDeleted = 1, lastModified = :modifiedTimestamp WHERE id = :workoutId")
-    suspend fun softDeleteWorkout(workoutId: Int, modifiedTimestamp: Long)
+    @Query("UPDATE workouts SET IsDeleted = 1, lastModified = :lastModified WHERE id = :workoutId")
+    suspend fun softDeleteWorkout(workoutId: Int, lastModified: Long)
 
     @Query("SELECT * FROM workouts WHERE isDeleted = 0 ORDER BY name ASC")
     fun getAllWorkouts(): Flow<List<Workout>>

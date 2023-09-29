@@ -13,7 +13,7 @@ class DBWorkoutRepository(private val workoutDao: IWorkoutDao) : IWorkoutReposit
     override suspend fun upsertWorkout(workout: Workout) = workoutDao.upsertWorkout(workout)
 
     override suspend fun deleteWorkout(workoutId: Int) =
-        workoutDao.softDeleteWorkout(workoutId, modifiedTimestamp = System.currentTimeMillis())
+        workoutDao.softDeleteWorkout(workoutId, lastModified = System.currentTimeMillis())
 
     override suspend fun updateWorkoutPerformances(id: Int, performances: Int) {
         val workout = workoutDao.getWorkout(id).firstOrNull()
