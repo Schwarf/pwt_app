@@ -12,7 +12,7 @@ interface ITrainingTimestampDao {
     suspend fun upsertTimestamp(timestamp: TrainingTimestamp)
 
     @Query("UPDATE training_timestamps SET IsDeleted = 1, lastModified = :lastModified WHERE id = :id")
-    suspend fun deleteTimestamp(id: Int, lastModified: Long)
+    suspend fun softDeleteTimestamp(id: Int, lastModified: Long)
 
     @Query("SELECT * FROM training_timestamps")
     fun getAllTimestamps(): Flow<List<TrainingTimestamp>>
