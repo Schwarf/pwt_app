@@ -17,7 +17,7 @@ interface ITrainingsDao {
     @Query("SELECT * FROM trainings WHERE isDeleted = 0 ORDER BY name ASC")
     fun getAllTrainings(): Flow<List<Training>>
 
-    @Query("SELECT * from trainings WHERE id = :id AND isDeleted = 0")
+    @Query("SELECT * from trainings WHERE id = :id ")
     fun getTraining(id: Int): Flow<Training>
 
     @Query(
