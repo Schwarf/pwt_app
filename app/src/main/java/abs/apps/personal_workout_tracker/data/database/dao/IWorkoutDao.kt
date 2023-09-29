@@ -14,7 +14,7 @@ interface IWorkoutDao {
     @Query("UPDATE workouts SET IsDeleted = 1, lastModified = :modifiedTimestamp WHERE id = :workoutId")
     suspend fun softDeleteWorkout(workoutId: Int, modifiedTimestamp: Long)
 
-    @Query("SELECT * FROM workouts ORDER BY name ASC")
+    @Query("SELECT * FROM workouts WHERE isDeleted = 0 ORDER BY name ASC")
     fun getAllWorkouts(): Flow<List<Workout>>
 
     @Query("SELECT * from workouts WHERE id = :id")
@@ -23,7 +23,8 @@ interface IWorkoutDao {
     @Query(
         "SELECT workouts.* FROM workouts" +
                 " INNER JOIN workout_timestamps ON workouts.id = workout_timestamps.workoutId " +
-                " WHERE workout_timestamps.timestamp >= :start AND workout_timestamps.timestamp < :end"
+                " WHERE workout_timestamps.timestamp >= :start AND workout_timestamps.timestamp < :end " +
+                "AND isDeleted = 0"
     )
     fun getWorkoutsByTimestampRange(start: Long, end: Long): Flow<List<Workout>>
 }

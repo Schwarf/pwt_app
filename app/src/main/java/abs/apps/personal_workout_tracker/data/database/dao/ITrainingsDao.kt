@@ -15,7 +15,7 @@ interface ITrainingsDao {
     @Query("UPDATE trainings SET IsDeleted = 1, lastModified = :modifiedTimestamp WHERE id = :trainingId")
     suspend fun softDeleteTraining(trainingId: Int, modifiedTimestamp: Long)
 
-    @Query("SELECT * FROM trainings ORDER BY name ASC")
+    @Query("SELECT * FROM trainings WHERE isDeleted = 0 ORDER BY name ASC")
     fun getAllTrainings(): Flow<List<Training>>
 
     @Query("SELECT * from trainings WHERE id = :id")
@@ -24,7 +24,8 @@ interface ITrainingsDao {
     @Query(
         "SELECT trainings.* FROM trainings" +
                 " INNER JOIN training_timestamps ON trainings.id = training_timestamps.trainingId " +
-                " WHERE training_timestamps.timestamp >= :start AND training_timestamps.timestamp < :end"
+                " WHERE training_timestamps.timestamp >= :start AND training_timestamps.timestamp < :end " +
+                "AND isDeleted = 0"
     )
     fun getTrainingsByTimestampRange(start: Long, end: Long): Flow<List<Training>>
 }
