@@ -1,6 +1,6 @@
 # Gradle files
 .gradle/
-database/
+tracker_database/
 build/
 app/src/main/res/drawable/sample.jpg
 app/src/main/res/drawable/sumocat.jpg
