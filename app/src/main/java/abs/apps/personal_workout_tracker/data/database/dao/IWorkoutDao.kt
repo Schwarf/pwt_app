@@ -17,7 +17,7 @@ interface IWorkoutDao {
     @Query("SELECT * FROM workouts WHERE isDeleted = 0 ORDER BY name ASC")
     fun getAllWorkouts(): Flow<List<Workout>>
 
-    @Query("SELECT * from workouts WHERE id = :id")
+    @Query("SELECT * from workouts WHERE id = :id AND isDeleted = 0")
     fun getWorkout(id: Int): Flow<Workout>
 
     @Query(

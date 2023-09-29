@@ -17,9 +17,9 @@ interface IWorkoutTimestampDao {
     @Query("SELECT * FROM workout_timestamps")
     fun getAllTimestamps(): Flow<List<WorkoutTimestamp>>
 
-    @Query("SELECT * FROM workout_timestamps WHERE workoutId = :workoutId")
+    @Query("SELECT * FROM workout_timestamps WHERE workoutId = :workoutId AND isDeleted = 0")
     fun getAllTimestampsForOneWorkout(workoutId: Int): Flow<List<WorkoutTimestamp>>
 
-    @Query("SELECT * FROM workout_timestamps WHERE workoutId = :workoutId ORDER BY timestamp DESC LIMIT 1")
+    @Query("SELECT * FROM workout_timestamps WHERE workoutId = :workoutId AND isDeleted = 0 ORDER BY timestamp DESC LIMIT 1")
     fun getLatestTimestampForOneWorkout(workoutId: Int): Flow<WorkoutTimestamp>
 }

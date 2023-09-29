@@ -17,10 +17,10 @@ interface ITrainingTimestampDao {
     @Query("SELECT * FROM training_timestamps")
     fun getAllTimestamps(): Flow<List<TrainingTimestamp>>
 
-    @Query("SELECT * FROM training_timestamps WHERE trainingId = :trainingId")
+    @Query("SELECT * FROM training_timestamps WHERE trainingId = :trainingId AND isDeleted = 0")
     fun getAllTimestampsForOneTraining(trainingId: Int): Flow<List<TrainingTimestamp>>
 
-    @Query("SELECT * FROM training_timestamps WHERE trainingId = :trainingId ORDER BY timestamp DESC LIMIT 1")
+    @Query("SELECT * FROM training_timestamps WHERE trainingId = :trainingId AND isDeleted = 0 ORDER BY timestamp DESC LIMIT 1")
     fun getLatestTimestampForOneTraining(trainingId: Int): Flow<TrainingTimestamp>
 
 }
