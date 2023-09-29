@@ -65,8 +65,10 @@ class ExistingTrainingViewModel(
                 TrainingTimestamp(
                     trainingId = existingTrainingsState.value.trainingUI.id,
                     timestamp = LocalDateTime.now().atZone(
-                        ZoneId.systemDefault()
-                    ).toEpochSecond()
+                        ZoneId.systemDefault(),
+                    ).toEpochSecond(),
+                    isDeleted = false,
+                    lastModified = System.currentTimeMillis()
                 )
             )
         }
@@ -77,7 +79,7 @@ class ExistingTrainingViewModel(
             if (existingTrainingsState.value.trainingUI.toTraining().performances > 0) {
                 val currentWorkout = existingTrainingsState.value.trainingUI.toTraining()
                 trainingRepository.upsertTraining(currentWorkout.copy(performances = currentWorkout.performances - 1))
-                timestampRepository.deleteTimestamp(existingTrainingsState.value.trainingTimestampUI.TrainingTimestamp())
+                timestampRepository.deleteTimestamp(existingTrainingsState.value.trainingTimestampUI.id)
             }
         }
     }

@@ -65,7 +65,9 @@ class ExistingWorkoutViewModel(
                     workoutId = existingWorkoutsState.value.workoutUI.id,
                     timestamp = LocalDateTime.now().atZone(
                         ZoneId.systemDefault()
-                    ).toEpochSecond()
+                    ).toEpochSecond(),
+                    isDeleted = false,
+                    lastModified = System.currentTimeMillis()
                 )
             )
         }

@@ -20,7 +20,7 @@ class DBTrainingTimestampRepository(private val trainingTimestampDao: ITrainingT
     override suspend fun upsertTimestamp(trainingTimestamp: TrainingTimestamp) =
         trainingTimestampDao.upsertTimestamp(trainingTimestamp)
 
-    override suspend fun deleteTimestamp(trainingTimestamp: TrainingTimestamp) =
-        trainingTimestampDao.deleteTimestamp(trainingTimestamp)
+    override suspend fun deleteTimestamp(id: Int) =
+        trainingTimestampDao.deleteTimestamp(id, lastModified = System.currentTimeMillis())
 
 }

@@ -2,7 +2,6 @@ package abs.apps.personal_workout_tracker.data.database.dao
 
 import abs.apps.personal_workout_tracker.data.database.TrainingTimestamp
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Query
 import androidx.room.Upsert
 import kotlinx.coroutines.flow.Flow
@@ -12,8 +11,8 @@ interface ITrainingTimestampDao {
     @Upsert
     suspend fun upsertTimestamp(timestamp: TrainingTimestamp)
 
-    @Delete
-    suspend fun deleteTimestamp(timestamp: TrainingTimestamp)
+    @Query("UPDATE training_timestamps SET IsDeleted = 1, lastModified = :lastModified WHERE id = :id")
+    suspend fun deleteTimestamp(id: Int, lastModified: Long)
 
     @Query("SELECT * FROM training_timestamps")
     fun getAllTimestamps(): Flow<List<TrainingTimestamp>>
