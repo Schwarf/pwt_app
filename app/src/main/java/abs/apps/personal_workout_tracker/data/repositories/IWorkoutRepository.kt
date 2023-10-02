@@ -1,5 +1,6 @@
 package abs.apps.personal_workout_tracker.data.repositories
 
+import abs.apps.personal_workout_tracker.data.database.Training
 import abs.apps.personal_workout_tracker.data.database.Workout
 import kotlinx.coroutines.flow.Flow
 
@@ -15,4 +16,5 @@ interface IWorkoutRepository {
     suspend fun updateWorkoutPerformances(id: Int, performances: Int)
 
     suspend fun getAllWorkoutsForTimestampRange(start: Long, end: Long) : Flow<List<Workout>>
+    suspend fun getUpdatesForSynchronization(lastSynchronizationTimestamp: Long) : Flow<List<Training>>
 }

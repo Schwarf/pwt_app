@@ -1,6 +1,7 @@
 package abs.apps.personal_workout_tracker.data.repositories
 
 import abs.apps.personal_training_tracker.data.repositories.ITrainingTimestampRepository
+import abs.apps.personal_workout_tracker.data.database.Training
 import abs.apps.personal_workout_tracker.data.database.TrainingTimestamp
 import abs.apps.personal_workout_tracker.data.database.dao.ITrainingTimestampDao
 import kotlinx.coroutines.flow.Flow
@@ -22,5 +23,8 @@ class DBTrainingTimestampRepository(private val trainingTimestampDao: ITrainingT
 
     override suspend fun deleteTimestamp(id: Int) =
         trainingTimestampDao.softDeleteTimestamp(id, lastModified = System.currentTimeMillis())
+
+    override suspend fun getUpdatesForSynchronization(lastSynchronizationTimestamp: Long): Flow<List<Training>> =
+        trainingTimestampDao.getUpdatesForSynchronization(lastSynchronizationTimestamp)
 
 }

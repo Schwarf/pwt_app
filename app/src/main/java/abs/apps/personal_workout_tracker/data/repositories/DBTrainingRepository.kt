@@ -26,4 +26,6 @@ class DBTrainingRepository(private val trainingDao: ITrainingsDao) : ITrainingRe
     override suspend fun getAllTrainingsForTimestampRange(start: Long, end: Long) =
         trainingDao.getTrainingsByTimestampRange(start, end)
 
+    override suspend fun getUpdatesForSynchronization(lastSynchronizationTimestamp: Long): Flow<List<Training>> =
+        trainingDao.getUpdatesForSynchronization(lastSynchronizationTimestamp)
 }

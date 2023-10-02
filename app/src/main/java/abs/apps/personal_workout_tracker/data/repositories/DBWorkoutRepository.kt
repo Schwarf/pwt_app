@@ -1,5 +1,6 @@
 package abs.apps.personal_workout_tracker.data.repositories
 
+import abs.apps.personal_workout_tracker.data.database.Training
 import abs.apps.personal_workout_tracker.data.database.Workout
 import abs.apps.personal_workout_tracker.data.database.dao.IWorkoutDao
 import kotlinx.coroutines.flow.Flow
@@ -29,4 +30,6 @@ class DBWorkoutRepository(private val workoutDao: IWorkoutDao) : IWorkoutReposit
     ): Flow<List<Workout>> =
         workoutDao.getWorkoutsByTimestampRange(start, end)
 
+    override suspend fun getUpdatesForSynchronization(lastSynchronizationTimestamp: Long): Flow<List<Training>> =
+        workoutDao.getUpdatesForSynchronization(lastSynchronizationTimestamp)
 }
