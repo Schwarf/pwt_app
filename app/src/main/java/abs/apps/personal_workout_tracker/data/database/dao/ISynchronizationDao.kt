@@ -10,8 +10,8 @@ import androidx.room.Upsert
 interface ISynchronizationDao {
     @Upsert
     suspend fun upsertSynchronization(synchronisation: Synchronization)
-    @Query("SELECT * FROM synchronization ORDER BY timestamp DESC LIMIT 1")
+    @Query("SELECT COALESCE(MAX(timestamp), 0) AS latest_timestamp FROM synchronization")
     suspend fun getLatestSynchronizationAttempt()
-    @Query("SELECT * FROM synchronization WHERE succeeded = 1 ORDER BY timestamp DESC LIMIT 1")
+    @Query("SELECT COALESCE((SELECT MAX(timestamp) FROM synchronization WHERE succeeded = 1), 0) AS latest_timestamp")
     suspend fun getLatestSuccessfulSynchronization()
 }

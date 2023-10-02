@@ -9,7 +9,7 @@ fun sendData() {
     // Set up FuelManager to allow HTTP connections if your FastAPI server uses HTTP.
     FuelManager.instance.baseHeaders = mapOf("Content-Type" to "application/json")
 
-    val url = "http://10.0.2.2:8000/insert_workout/"
+    val url = "http://192.168.0.227:8000/insert_workout/"
     val jsonData = """
         {
               "name": "SendFromAndroid",
