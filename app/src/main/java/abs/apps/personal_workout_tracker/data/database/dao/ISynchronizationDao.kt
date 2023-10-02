@@ -11,7 +11,7 @@ interface ISynchronizationDao {
     @Upsert
     suspend fun upsertSynchronization(synchronisation: Synchronization)
     @Query("SELECT COALESCE(MAX(timestamp), 0) AS latest_timestamp FROM synchronization")
-    suspend fun getLatestSynchronizationAttempt()
+    suspend fun getLatestSynchronizationAttempt() : Long
     @Query("SELECT COALESCE((SELECT MAX(timestamp) FROM synchronization WHERE succeeded = 1), 0) AS latest_timestamp")
-    suspend fun getLatestSuccessfulSynchronization()
+    suspend fun getLatestSuccessfulSynchronization() : Long
 }

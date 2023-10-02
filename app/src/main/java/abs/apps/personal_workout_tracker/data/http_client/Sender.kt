@@ -4,6 +4,10 @@ import abs.apps.personal_workout_tracker.data.database.Workout
 
 class Sender {
 
+    fun checkIsSynchronizationFeasible() : Boolean
+    {
+        return true;
+    }
     
     fun sendWorkout(workout: Workout)
     {
