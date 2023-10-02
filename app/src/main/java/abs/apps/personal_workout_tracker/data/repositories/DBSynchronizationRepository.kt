@@ -8,7 +8,6 @@ class DBSynchronizationRepository(private val synchronizationDao: ISynchronizati
     override suspend fun getLatestSynchronizationAttempt(): Long =
         synchronizationDao.getLatestSynchronizationAttempt()
 
-
     override suspend fun upsertSynchronization(synchronisation: Synchronization) =
         synchronizationDao.upsertSynchronization(synchronisation)
 
