@@ -12,5 +12,5 @@ interface IWorkoutTimestampRepository {
     fun getLatestTimestampStreamForOneWorkout(workoutId: Int): Flow<WorkoutTimestamp>
     suspend fun upsertTimestamp(workoutTimestamp: WorkoutTimestamp)
     suspend fun deleteTimestamp(id: Int)
-    suspend fun getUpdatesForSynchronization(lastSynchronizationTimestamp: Long): Flow<List<Training>>
+    suspend fun getUpdatesForSynchronization(lastSynchronizationTimestamp: Long): Flow<List<WorkoutTimestamp>>
 }

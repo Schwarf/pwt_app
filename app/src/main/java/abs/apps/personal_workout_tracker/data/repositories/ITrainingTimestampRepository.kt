@@ -12,6 +12,6 @@ interface ITrainingTimestampRepository {
     fun getLatestTimestampStreamForOneTraining(trainingId: Int): Flow<TrainingTimestamp>
     suspend fun upsertTimestamp(trainingTimestamp: TrainingTimestamp)
     suspend fun deleteTimestamp(id: Int)
-    suspend fun getUpdatesForSynchronization(lastSynchronizationTimestamp: Long) : Flow<List<Training>>
+    suspend fun getUpdatesForSynchronization(lastSynchronizationTimestamp: Long) : Flow<List<TrainingTimestamp>>
 
 }
