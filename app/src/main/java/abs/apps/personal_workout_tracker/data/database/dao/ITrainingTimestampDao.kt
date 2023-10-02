@@ -1,5 +1,6 @@
 package abs.apps.personal_workout_tracker.data.database.dao
 
+import abs.apps.personal_workout_tracker.data.database.Training
 import abs.apps.personal_workout_tracker.data.database.TrainingTimestamp
 import androidx.room.Dao
 import androidx.room.Query
@@ -23,4 +24,6 @@ interface ITrainingTimestampDao {
     @Query("SELECT * FROM training_timestamps WHERE trainingId = :trainingId AND isDeleted = 0 ORDER BY timestamp DESC LIMIT 1")
     fun getLatestTimestampForOneTraining(trainingId: Int): Flow<TrainingTimestamp>
 
+    @Query("SELECT training_timestamps.* FROM training_timestamps WHERE training_timestamps.lastModified > :lastSynchronizationTimestamp")
+    fun getUpdatesForSynchronization(lastSynchronizationTimestamp: Long): Flow<List<Training>>
 }

@@ -1,5 +1,6 @@
 package abs.apps.personal_training_tracker.data.database.dao
 
+import abs.apps.personal_workout_tracker.data.database.Synchronization
 import abs.apps.personal_workout_tracker.data.database.Training
 import androidx.room.Dao
 import androidx.room.Query
@@ -27,4 +28,7 @@ interface ITrainingsDao {
                 "AND training_timestamps.isDeleted = 0"
     )
     fun getTrainingsByTimestampRange(start: Long, end: Long): Flow<List<Training>>
+
+    @Query("SELECT trainings.* FROM trainings WHERE trainings.lastModified > :lastSynchronizationTimestamp")
+    fun getUpdatesForSynchronization(lastSynchronizationTimestamp: Long): Flow<List<Training>>
 }
