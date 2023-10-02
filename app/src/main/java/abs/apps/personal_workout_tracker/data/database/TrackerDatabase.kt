@@ -1,6 +1,7 @@
 package abs.apps.personal_workout_tracker.data.database
 
 import abs.apps.personal_training_tracker.data.database.dao.ITrainingsDao
+import abs.apps.personal_workout_tracker.data.database.dao.ISynchronizationDao
 import abs.apps.personal_workout_tracker.data.database.dao.IWorkoutTimestampDao
 import abs.apps.personal_workout_tracker.data.database.dao.ITrainingTimestampDao
 import abs.apps.personal_workout_tracker.data.database.dao.IWorkoutDao
@@ -11,7 +12,7 @@ import androidx.room.RoomDatabase
 import java.io.File
 
 @Database(
-    entities = [Workout::class, WorkoutTimestamp::class, Training::class, TrainingTimestamp::class],
+    entities = [Workout::class, WorkoutTimestamp::class, Training::class, TrainingTimestamp::class, Synchronization::class],
     version = 1,
     exportSchema = true,
 )
@@ -20,6 +21,7 @@ abstract class TrackerDatabase : RoomDatabase() {
     abstract val timestampDao: IWorkoutTimestampDao
     abstract val trainingDao: ITrainingsDao
     abstract val trainingTimestampDao: ITrainingTimestampDao
+    abstract val synchronizationDao: ISynchronizationDao
 
     companion object {
         @Volatile
