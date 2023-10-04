@@ -9,6 +9,7 @@ import abs.apps.personal_workout_tracker.data.repositories.ISynchronizationRepos
 import abs.apps.personal_workout_tracker.data.repositories.ITrainingRepository
 import abs.apps.personal_workout_tracker.data.repositories.IWorkoutRepository
 import abs.apps.personal_workout_tracker.data.repositories.IWorkoutTimestampRepository
+import com.google.gson.Gson
 
 class Sender(
     private val synchronizationRepository: ISynchronizationRepository,
@@ -22,14 +23,10 @@ class Sender(
     private val listOfWorkouts = mutableListOf<Workout>()
     private val listOfTrainings = mutableListOf<Training>()
     private val listOfWorkoutTimestamps = mutableListOf<WorkoutTimestamp>()
-    private val listOfTrainingTimestamp = mutableListOf<TrainingTimestamp>()
+    private val listOfTrainingTimestamps = mutableListOf<TrainingTimestamp>()
 
-    private val listOfWorkoutsDTO = mutableListOf<WorkoutDTO>()
-    private val listOfTrainingsDTO = mutableListOf<TrainingDTO>()
-    private val listOfWorkoutTimestampsDTO = mutableListOf<WorkoutTimestampDTO>()
-    private val listOfTrainingTimestampDTO = mutableListOf<TrainingTimestampDTO>()
 
-    suspend fun checkIsSynchronizationFeasible(): Boolean {
+    suspend fun isSynchronizationFeasible(): Boolean {
         val timestamp: Long = synchronizationRepository.getLatestSuccessfulSynchronization()
 
         workoutRepository.getUpdatesForSynchronization(timestamp)
@@ -39,13 +36,18 @@ class Sender(
         workoutTimestampRepository.getUpdatesForSynchronization(timestamp)
             .collect { workoutTimestamps -> listOfWorkoutTimestamps.addAll(workoutTimestamps) }
         trainingTimestampRepository.getUpdatesForSynchronization(timestamp)
-            .collect { trainingTimestamps -> listOfTrainingTimestamp.addAll(trainingTimestamps) }
+            .collect { trainingTimestamps -> listOfTrainingTimestamps.addAll(trainingTimestamps) }
         return listOfWorkouts.isNotEmpty() || listOfTrainings.isNotEmpty() ||
-                listOfTrainingTimestamp.isNotEmpty() ||
+                listOfTrainingTimestamps.isNotEmpty() ||
                 listOfWorkoutTimestamps.isNotEmpty()
     }
 
-    fun convert() {
+    fun convertAndSend() {
+        val listOfWorkoutsDTO = mutableListOf<WorkoutDTO>()
+        val listOfTrainingsDTO = mutableListOf<TrainingDTO>()
+        val listOfWorkoutTimestampsDTO = mutableListOf<WorkoutTimestampDTO>()
+        val listOfTrainingTimestampsDTO = mutableListOf<TrainingTimestampDTO>()
+
         val workoutConverter = DTOConverter(Workout::class, WorkoutDTO::class)
         listOfWorkouts.forEach{
             listOfWorkoutsDTO.add(workoutConverter.convert(it))
@@ -54,6 +56,22 @@ class Sender(
         listOfTrainings.forEach{
             listOfTrainingsDTO.add(trainingConverter.convert(it))
         }
+        val workoutTimestampConverter = DTOConverter(WorkoutTimestamp::class, WorkoutTimestampDTO::class)
+        listOfWorkoutTimestamps.forEach{
+            listOfWorkoutTimestampsDTO.add(workoutTimestampConverter.convert(it))
+        }
+        val trainingTimestampConverter = DTOConverter(TrainingTimestamp::class, TrainingTimestampDTO::class)
+        listOfTrainingTimestamps.forEach{
+            listOfTrainingTimestampsDTO.add(trainingTimestampConverter.convert(it))
+        }
 
+        val workoutWrapper = mapOf("workouts" to listOfWorkoutsDTO)
+        val trainingWrapper = mapOf("trainings" to listOfTrainingsDTO)
+        val workoutTimestampWrapper = mapOf("workout_timestamps" to listOfWorkoutTimestampsDTO)
+        val trainingTimestampWrapper = mapOf("training_timestamps" to listOfTrainingTimestampsDTO)
+        
     }
+
+
 }
+
