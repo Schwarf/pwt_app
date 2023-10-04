@@ -21,7 +21,7 @@ class DTOConverter<Input: Any, Output: Any> (
                 }
             }
         }
-
+        // use map to create outputParameterMap
         val outputParameterMap = outputMap.entries.associate { (key, value) ->
             val parameter = outputClass.constructors.first().parameters.find { it.name == key.name }
             parameter!! to value
