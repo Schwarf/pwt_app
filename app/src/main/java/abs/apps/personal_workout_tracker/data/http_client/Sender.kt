@@ -9,6 +9,10 @@ import abs.apps.personal_workout_tracker.data.repositories.ISynchronizationRepos
 import abs.apps.personal_workout_tracker.data.repositories.ITrainingRepository
 import abs.apps.personal_workout_tracker.data.repositories.IWorkoutRepository
 import abs.apps.personal_workout_tracker.data.repositories.IWorkoutTimestampRepository
+import com.github.kittinunf.fuel.Fuel
+import com.github.kittinunf.fuel.core.FuelManager
+import com.github.kittinunf.fuel.core.extensions.jsonBody
+import com.github.kittinunf.result.Result
 import com.google.gson.Gson
 
 class Sender(
@@ -49,19 +53,21 @@ class Sender(
         val listOfTrainingTimestampsDTO = mutableListOf<TrainingTimestampDTO>()
 
         val workoutConverter = DTOConverter(Workout::class, WorkoutDTO::class)
-        listOfWorkouts.forEach{
+        listOfWorkouts.forEach {
             listOfWorkoutsDTO.add(workoutConverter.convert(it))
         }
         val trainingConverter = DTOConverter(Training::class, TrainingDTO::class)
-        listOfTrainings.forEach{
+        listOfTrainings.forEach {
             listOfTrainingsDTO.add(trainingConverter.convert(it))
         }
-        val workoutTimestampConverter = DTOConverter(WorkoutTimestamp::class, WorkoutTimestampDTO::class)
-        listOfWorkoutTimestamps.forEach{
+        val workoutTimestampConverter =
+            DTOConverter(WorkoutTimestamp::class, WorkoutTimestampDTO::class)
+        listOfWorkoutTimestamps.forEach {
             listOfWorkoutTimestampsDTO.add(workoutTimestampConverter.convert(it))
         }
-        val trainingTimestampConverter = DTOConverter(TrainingTimestamp::class, TrainingTimestampDTO::class)
-        listOfTrainingTimestamps.forEach{
+        val trainingTimestampConverter =
+            DTOConverter(TrainingTimestamp::class, TrainingTimestampDTO::class)
+        listOfTrainingTimestamps.forEach {
             listOfTrainingTimestampsDTO.add(trainingTimestampConverter.convert(it))
         }
 
@@ -69,7 +75,27 @@ class Sender(
         val trainingWrapper = mapOf("trainings" to listOfTrainingsDTO)
         val workoutTimestampWrapper = mapOf("workout_timestamps" to listOfWorkoutTimestampsDTO)
         val trainingTimestampWrapper = mapOf("training_timestamps" to listOfTrainingTimestampsDTO)
-        
+        FuelManager.instance.baseHeaders = mapOf("Content-Type" to "application/json")
+
+        val urlWorkouts = "http://192.168.0.227:8000/insert_workouts/"
+        val urlTrainings = "http://192.168.0.227:8000/insert_trainings/"
+        val gson = Gson()
+        val jsonWorkouts = gson.toJson(workoutWrapper)
+        Fuel.post(urlWorkouts).jsonBody(jsonWorkouts).response { _, _, result ->
+            when (result) {
+                is Result.Failure -> {
+                    val ex = result.getException()
+                    println("Error: $ex")
+                }
+
+                is Result.Success -> {
+                    val data = result.get()
+                    println("Response: ${String(data)}")
+                }
+            }
+        }
+
+
     }
 
 
