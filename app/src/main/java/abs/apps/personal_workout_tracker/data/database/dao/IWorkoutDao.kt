@@ -22,13 +22,13 @@ interface IWorkoutDao {
     fun getWorkout(id: Int): Flow<Workout>
 
     @Query(
-        "SELECT workouts.* FROM workouts" +
+        "SELECT * FROM workouts" +
                 " INNER JOIN workout_timestamps ON workouts.id = workout_timestamps.workoutId " +
                 " WHERE workout_timestamps.timestamp >= :start AND workout_timestamps.timestamp < :end " +
                 "AND workout_timestamps.isDeleted = 0"
     )
     fun getWorkoutsByTimestampRange(start: Long, end: Long): Flow<List<Workout>>
 
-    @Query("SELECT workouts.* FROM workouts WHERE workouts.lastModified > :lastSynchronizationTimestamp")
+    @Query("SELECT * FROM workouts WHERE workouts.lastModified > :lastSynchronizationTimestamp")
     fun getUpdatesForSynchronization(lastSynchronizationTimestamp: Long): Flow<List<Workout>>
 }

@@ -15,6 +15,7 @@ import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.fuel.core.extensions.jsonBody
 import com.github.kittinunf.result.Result
 import com.google.gson.Gson
+import kotlinx.coroutines.flow.toList
 
 class Sender(
     private val synchronizationRepository: ISynchronizationRepository,
@@ -30,10 +31,9 @@ class Sender(
     private val listOfWorkoutTimestamps = mutableListOf<WorkoutTimestamp>()
     private val listOfTrainingTimestamps = mutableListOf<TrainingTimestamp>()
 
-
-    suspend fun isSynchronizationFeasible(): Boolean {
+    suspend fun convertAndSend() {
         val timestamp: Long = synchronizationRepository.getLatestSuccessfulSynchronization()
-
+        Log.d("Time ", "Value $timestamp")
         workoutRepository.getUpdatesForSynchronization(timestamp)
             .collect { workouts -> listOfWorkouts.addAll(workouts) }
         trainingRepository.getUpdatesForSynchronization(timestamp)
@@ -42,12 +42,7 @@ class Sender(
             .collect { workoutTimestamps -> listOfWorkoutTimestamps.addAll(workoutTimestamps) }
         trainingTimestampRepository.getUpdatesForSynchronization(timestamp)
             .collect { trainingTimestamps -> listOfTrainingTimestamps.addAll(trainingTimestamps) }
-        return listOfWorkouts.isNotEmpty() || listOfTrainings.isNotEmpty() ||
-                listOfTrainingTimestamps.isNotEmpty() ||
-                listOfWorkoutTimestamps.isNotEmpty()
-    }
 
-    fun convertAndSend() {
         val listOfWorkoutsDTO = mutableListOf<WorkoutDTO>()
         val listOfTrainingsDTO = mutableListOf<TrainingDTO>()
         val listOfWorkoutTimestampsDTO = mutableListOf<WorkoutTimestampDTO>()

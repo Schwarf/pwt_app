@@ -2,6 +2,8 @@ package abs.apps.personal_workout_tracker.ui
 
 import abs.apps.personal_training_tracker.ui.viewmodels.trainings.ExistingTrainingViewModel
 import abs.apps.personal_workout_tracker.WorkoutTrackerApplication
+import abs.apps.personal_workout_tracker.data.http_client.Sender
+import abs.apps.personal_workout_tracker.ui.viewmodels.synchronization.SynchronizationViewModel
 import abs.apps.personal_workout_tracker.ui.viewmodels.trainings.AddTrainingViewModel
 import abs.apps.personal_workout_tracker.ui.viewmodels.trainings.EditTrainingViewModel
 import abs.apps.personal_workout_tracker.ui.viewmodels.trainings.TrainingListScreenViewModel
@@ -18,6 +20,17 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 object AppViewModelProvider {
     val Factory = viewModelFactory {
         // Initializer for HomeViewModel
+        initializer {
+            SynchronizationViewModel(
+                Sender(
+                    workoutTrackerApplication().container.synchronizationRepository,
+                    workoutTrackerApplication().container.workoutRepository,
+                    workoutTrackerApplication().container.trainingRepository,
+                    workoutTrackerApplication().container.workoutTimestampRepository,
+                    workoutTrackerApplication().container.trainingTimestampRepository
+                )
+            )
+        }
         initializer {
             WorkoutListScreenViewModel(
                 workoutTrackerApplication().container.workoutRepository,
