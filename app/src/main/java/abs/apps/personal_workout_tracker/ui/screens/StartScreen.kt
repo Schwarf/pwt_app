@@ -37,7 +37,7 @@ object StartDestination : INavigationDestination {
 fun StartScreen(
     navigateToWorkouts: () -> Unit,
     navigateToTrainings: () -> Unit,
-    viewModel: SynchronizationViewModel = viewModel(factory = AppViewModelProvider.Factory)
+
 ) {
     Scaffold()
     { padding ->
@@ -54,9 +54,7 @@ fun StartScreen(
             LargeTileButton(text = "Show all trainings", onClick = navigateToTrainings)
             Spacer(modifier = Modifier.height(16.dp))
             LargeTileButton(text = "Synchronize",
-                onClick = {
-//                    sendData()
-                    viewModel.convertAndSend()
+                onClick = { sendData()
                 }
             )
         }
