@@ -9,6 +9,7 @@ import abs.apps.personal_workout_tracker.data.repositories.ISynchronizationRepos
 import abs.apps.personal_workout_tracker.data.repositories.ITrainingRepository
 import abs.apps.personal_workout_tracker.data.repositories.IWorkoutRepository
 import abs.apps.personal_workout_tracker.data.repositories.IWorkoutTimestampRepository
+import android.util.Log
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.fuel.core.extensions.jsonBody
@@ -77,10 +78,11 @@ class Sender(
         val trainingTimestampWrapper = mapOf("training_timestamps" to listOfTrainingTimestampsDTO)
         FuelManager.instance.baseHeaders = mapOf("Content-Type" to "application/json")
 
-        val urlWorkouts = "http://192.168.0.227:8000/insert_workouts/"
+        val urlWorkouts = "http://10.0.2.2:8000/insert_workouts/"
         val urlTrainings = "http://192.168.0.227:8000/insert_trainings/"
         val gson = Gson()
         val jsonWorkouts = gson.toJson(workoutWrapper)
+        Log.d("JsonWorkout", jsonWorkouts)
         Fuel.post(urlWorkouts).jsonBody(jsonWorkouts).response { _, _, result ->
             when (result) {
                 is Result.Failure -> {

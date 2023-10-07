@@ -30,5 +30,5 @@ interface IWorkoutDao {
     fun getWorkoutsByTimestampRange(start: Long, end: Long): Flow<List<Workout>>
 
     @Query("SELECT workouts.* FROM workouts WHERE workouts.lastModified > :lastSynchronizationTimestamp")
-    fun getUpdatesForSynchronization(lastSynchronizationTimestamp: Long): Flow<List<Training>>
+    fun getUpdatesForSynchronization(lastSynchronizationTimestamp: Long): Flow<List<Workout>>
 }

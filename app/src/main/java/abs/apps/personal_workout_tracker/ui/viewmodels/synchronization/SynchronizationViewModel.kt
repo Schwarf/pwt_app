@@ -1,7 +1,6 @@
 package abs.apps.personal_workout_tracker.ui.viewmodels.synchronization
 
 
-import com.github.kittinunf.fuel.gson.GsonDeserializer
 import abs.apps.personal_training_tracker.data.repositories.ITrainingTimestampRepository
 import abs.apps.personal_workout_tracker.data.database.Training
 import abs.apps.personal_workout_tracker.data.database.TrainingTimestamp
@@ -16,6 +15,7 @@ import abs.apps.personal_workout_tracker.data.repositories.ITrainingRepository
 import abs.apps.personal_workout_tracker.data.repositories.IWorkoutRepository
 import abs.apps.personal_workout_tracker.data.repositories.IWorkoutTimestampRepository
 import androidx.lifecycle.ViewModel
+import com.google.gson.Gson
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow

@@ -22,7 +22,7 @@ class DBWorkoutTimestampRepository(private val workoutTimestampDao: IWorkoutTime
     override suspend fun deleteTimestamp(id: Int) =
         workoutTimestampDao.softDeleteTimestamp(id, lastModified = System.currentTimeMillis())
 
-    override suspend fun getUpdatesForSynchronization(lastSynchronizationTimestamp: Long): Flow<List<Training>> =
+    override suspend fun getUpdatesForSynchronization(lastSynchronizationTimestamp: Long): Flow<List<WorkoutTimestamp>> =
         workoutTimestampDao.getUpdatesForSynchronization(lastSynchronizationTimestamp)
 
 }

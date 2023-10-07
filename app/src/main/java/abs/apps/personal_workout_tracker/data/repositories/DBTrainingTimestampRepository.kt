@@ -24,7 +24,7 @@ class DBTrainingTimestampRepository(private val trainingTimestampDao: ITrainingT
     override suspend fun deleteTimestamp(id: Int) =
         trainingTimestampDao.softDeleteTimestamp(id, lastModified = System.currentTimeMillis())
 
-    override suspend fun getUpdatesForSynchronization(lastSynchronizationTimestamp: Long): Flow<List<Training>> =
+    override suspend fun getUpdatesForSynchronization(lastSynchronizationTimestamp: Long): Flow<List<TrainingTimestamp>> =
         trainingTimestampDao.getUpdatesForSynchronization(lastSynchronizationTimestamp)
 
 }
