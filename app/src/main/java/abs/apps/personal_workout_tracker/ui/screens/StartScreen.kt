@@ -1,12 +1,7 @@
 package abs.apps.personal_workout_tracker.ui.screens
 
 import abs.apps.personal_workout_tracker.R
-import abs.apps.personal_workout_tracker.data.http_client.sendData
-import abs.apps.personal_workout_tracker.ui.AppViewModelProvider
-import androidx.lifecycle.viewModelScope
 import abs.apps.personal_workout_tracker.ui.navigation.INavigationDestination
-import abs.apps.personal_workout_tracker.ui.viewmodels.synchronization.SynchronizationViewModel
-import abs.apps.personal_workout_tracker.ui.viewmodels.trainings.AddTrainingViewModel
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -24,7 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
+
 
 object StartDestination : INavigationDestination {
     override val route = "start"
@@ -37,7 +32,7 @@ object StartDestination : INavigationDestination {
 fun StartScreen(
     navigateToWorkouts: () -> Unit,
     navigateToTrainings: () -> Unit,
-
+    navigateToSynchronization: () -> Unit
 ) {
     Scaffold()
     { padding ->
@@ -54,7 +49,7 @@ fun StartScreen(
             LargeTileButton(text = "Show all trainings", onClick = navigateToTrainings)
             Spacer(modifier = Modifier.height(16.dp))
             LargeTileButton(text = "Synchronize",
-                onClick = { sendData()
+                onClick = {
                 }
             )
         }
