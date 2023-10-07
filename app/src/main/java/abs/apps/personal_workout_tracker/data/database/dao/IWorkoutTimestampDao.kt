@@ -25,6 +25,6 @@ interface IWorkoutTimestampDao {
     fun getLatestTimestampForOneWorkout(workoutId: Int): Flow<WorkoutTimestamp>
 
     @Query("SELECT workout_timestamps.* FROM workout_timestamps WHERE workout_timestamps.lastModified > :lastSynchronizationTimestamp")
-    fun getUpdatesForSynchronization(lastSynchronizationTimestamp: Long): Flow<List<WorkoutTimestamp>>
+    fun getUpdatesForSynchronization(lastSynchronizationTimestamp: Long): List<WorkoutTimestamp>
 
 }

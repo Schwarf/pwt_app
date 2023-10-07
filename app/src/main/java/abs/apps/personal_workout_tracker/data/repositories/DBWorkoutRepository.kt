@@ -30,6 +30,6 @@ class DBWorkoutRepository(private val workoutDao: IWorkoutDao) : IWorkoutReposit
     ): Flow<List<Workout>> =
         workoutDao.getWorkoutsByTimestampRange(start, end)
 
-    override suspend fun getUpdatesForSynchronization(lastSynchronizationTimestamp: Long): Flow<List<Workout>> =
+    override suspend fun getUpdatesForSynchronization(lastSynchronizationTimestamp: Long): List<Workout> =
         workoutDao.getUpdatesForSynchronization(lastSynchronizationTimestamp)
 }

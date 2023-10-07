@@ -16,5 +16,5 @@ interface IWorkoutRepository {
     suspend fun updateWorkoutPerformances(id: Int, performances: Int)
 
     suspend fun getAllWorkoutsForTimestampRange(start: Long, end: Long) : Flow<List<Workout>>
-    suspend fun getUpdatesForSynchronization(lastSynchronizationTimestamp: Long) : Flow<List<Workout>>
+    suspend fun getUpdatesForSynchronization(lastSynchronizationTimestamp: Long) : List<Workout>
 }

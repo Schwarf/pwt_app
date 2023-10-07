@@ -15,5 +15,5 @@ interface ITrainingRepository {
 
     suspend fun updateTrainingPerformances(id: Int, performances: Int)
     suspend fun getAllTrainingsForTimestampRange(start: Long, end: Long) : Flow<List<Training>>
-    suspend fun getUpdatesForSynchronization(lastSynchronizationTimestamp: Long) : Flow<List<Training>>
+    suspend fun getUpdatesForSynchronization(lastSynchronizationTimestamp: Long) : List<Training>
 }

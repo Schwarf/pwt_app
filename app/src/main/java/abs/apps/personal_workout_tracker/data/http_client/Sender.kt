@@ -15,7 +15,10 @@ import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.fuel.core.extensions.jsonBody
 import com.github.kittinunf.result.Result
 import com.google.gson.Gson
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.toList
+import kotlinx.coroutines.flow.forEach
 
 class Sender(
     private val synchronizationRepository: ISynchronizationRepository,
@@ -25,23 +28,31 @@ class Sender(
     private val trainingTimestampRepository: ITrainingTimestampRepository,
 
     ) {
-    private val synchronizationNeeded = false
-    private val listOfWorkouts = mutableListOf<Workout>()
-    private val listOfTrainings = mutableListOf<Training>()
-    private val listOfWorkoutTimestamps = mutableListOf<WorkoutTimestamp>()
-    private val listOfTrainingTimestamps = mutableListOf<TrainingTimestamp>()
 
-    suspend fun convertAndSend() {
+    suspend fun convertAndSend() = coroutineScope{
         val timestamp: Long = synchronizationRepository.getLatestSuccessfulSynchronization()
         Log.d("Time ", "Value $timestamp")
-        workoutRepository.getUpdatesForSynchronization(timestamp)
-            .collect { workouts -> listOfWorkouts.addAll(workouts) }
-        trainingRepository.getUpdatesForSynchronization(timestamp)
-            .collect { trainings -> listOfTrainings.addAll(trainings) }
-        workoutTimestampRepository.getUpdatesForSynchronization(timestamp)
-            .collect { workoutTimestamps -> listOfWorkoutTimestamps.addAll(workoutTimestamps) }
-        trainingTimestampRepository.getUpdatesForSynchronization(timestamp)
-            .collect { trainingTimestamps -> listOfTrainingTimestamps.addAll(trainingTimestamps) }
+        val workoutsDeferred = async { workoutRepository.getUpdatesForSynchronization(timestamp).toList() }
+        Log.d("Hallo1 ", "Value $timestamp")
+        val trainingsDeferred = async { trainingRepository.getUpdatesForSynchronization(timestamp).toList() }
+        Log.d("Hallo2 ", "Value $timestamp")
+        val workoutTimestampsDeferred = async { workoutTimestampRepository.getUpdatesForSynchronization(timestamp).toList() }
+        Log.d("Hallo3 ", "Value $timestamp")
+        val trainingTimestampsDeferred = async { trainingTimestampRepository.getUpdatesForSynchronization(timestamp).toList() }
+        Log.d("Hallo4 ", "Value $timestamp")
+        // Wait for all data collections to finish
+        var listOfWorkouts: List<Workout> = mutableListOf()
+        try {
+            listOfWorkouts = workoutsDeferred.await().flatten()
+            Log.d("SIZE ", "Value ${listOfWorkouts.size}")
+        }
+        catch (e: Exception)
+        {
+            Log.e("ASYNC_ERROR", "Error in async operations", e)
+        }
+        val listOfTrainings = trainingsDeferred.await().flatten()
+        val listOfWorkoutTimestamps = workoutTimestampsDeferred.await().flatten()
+        val listOfTrainingTimestamps = trainingTimestampsDeferred.await().flatten()
 
         val listOfWorkoutsDTO = mutableListOf<WorkoutDTO>()
         val listOfTrainingsDTO = mutableListOf<TrainingDTO>()
