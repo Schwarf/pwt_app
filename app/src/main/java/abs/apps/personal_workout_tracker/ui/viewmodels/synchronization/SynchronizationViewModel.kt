@@ -2,6 +2,7 @@ package abs.apps.personal_workout_tracker.ui.viewmodels.synchronization
 
 
 import abs.apps.personal_training_tracker.data.repositories.ITrainingTimestampRepository
+import abs.apps.personal_workout_tracker.data.database.Synchronization
 import abs.apps.personal_workout_tracker.data.database.Training
 import abs.apps.personal_workout_tracker.data.database.TrainingTimestamp
 import abs.apps.personal_workout_tracker.data.database.Workout
@@ -45,13 +46,23 @@ class SynchronizationViewModel(
                 val workoutTimestamps = getWorkoutTimestamps(timestamp)
                 val trainingTimestamps = getTrainingTimestamps(timestamp)
                 convertAndSend(workouts, trainings, workoutTimestamps, trainingTimestamps)
-
+                updateSynchronizationTimestamp()
 
             } catch (e: Exception) {
                 Log.e("Error", "Error in SynchronisationViewModel initialization", e)
             }
         }
 
+    }
+
+    private suspend fun updateSynchronizationTimestamp() {
+        val synchronization = Synchronization(
+            id = 0,
+            attempted = true,
+            succeeded = true,
+            timestamp = System.currentTimeMillis()
+        )
+        synchronizationRepository.upsertSynchronization(synchronization)
     }
 
     private suspend fun getLatestTimestamp(): Long {
