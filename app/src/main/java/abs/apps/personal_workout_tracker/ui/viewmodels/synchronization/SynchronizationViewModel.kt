@@ -15,6 +15,7 @@ import abs.apps.personal_workout_tracker.data.repositories.ISynchronizationRepos
 import abs.apps.personal_workout_tracker.data.repositories.ITrainingRepository
 import abs.apps.personal_workout_tracker.data.repositories.IWorkoutRepository
 import abs.apps.personal_workout_tracker.data.repositories.IWorkoutTimestampRepository
+import abs.apps.personal_workout_tracker.ui.viewmodels.helpers.getBaseUrl
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -95,10 +96,12 @@ class SynchronizationViewModel(
         url: String,
         jsonName: String
     ) {
+        Log.d("URL", url)
         val listDTO = inputList.map { item -> converter.convert(item) }
         val wrapper = mapOf(jsonName to listDTO)
         val gson = Gson()
         val jsonString = gson.toJson(wrapper)
+        Log.d("JSON-STRING", jsonString)
         FuelManager.instance.baseHeaders = mapOf("Content-Type" to "application/json")
         withContext(Dispatchers.IO) {
             Fuel.post(url).jsonBody(jsonString).response { _, _, result ->
@@ -112,6 +115,7 @@ class SynchronizationViewModel(
                         val data = result.get()
                         println("Response: ${String(data)}")
                     }
+
                 }
             }
         }
@@ -122,35 +126,30 @@ class SynchronizationViewModel(
         workoutTimestamps: List<WorkoutTimestamp>, trainingTimestamps: List<TrainingTimestamp>
     ) {
         if (workouts.isNotEmpty()) {
+            val name = "workouts"
             val workoutConverter = DTOConverter(Workout::class, WorkoutDTO::class)
-            sendInsertionList(
-                workouts, workoutConverter, "http://10.0.2.2:8000/insert_workouts/", "workouts"
-            )
+            sendInsertionList(workouts, workoutConverter, getBaseUrl(name), name)
         }
         if (trainings.isNotEmpty()) {
+            val name = "trainings"
             val trainingConverter = DTOConverter(Training::class, TrainingDTO::class)
-            sendInsertionList(
-                trainings, trainingConverter, "http://10.0.2.2:8000/insert_trainings/", "trainings"
-            )
+            sendInsertionList(trainings, trainingConverter, getBaseUrl(name), name)
         }
         if (workoutTimestamps.isNotEmpty()) {
+            val name = "workout_timestamps"
             val workoutTimestampConverter =
                 DTOConverter(WorkoutTimestamp::class, WorkoutTimestampDTO::class)
-            sendInsertionList(
-                workoutTimestamps,
-                workoutTimestampConverter,
-                "http://10.0.2.2:8000/insert_workout_timestamps/",
-                "workout_timestamps"
-            )
+            sendInsertionList(workoutTimestamps, workoutTimestampConverter, getBaseUrl(name), name)
         }
         if (trainingTimestamps.isNotEmpty()) {
+            val name = "training_timestamps"
             val trainingTimestampConverter =
                 DTOConverter(TrainingTimestamp::class, TrainingTimestampDTO::class)
             sendInsertionList(
                 trainingTimestamps,
                 trainingTimestampConverter,
-                "http://10.0.2.2:8000/insert_training_timestamps/",
-                "training_timestamps"
+                getBaseUrl(name),
+                name
             )
         }
 
