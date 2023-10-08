@@ -12,6 +12,7 @@ import abs.apps.personal_workout_tracker.ui.screens.workouts.WorkoutListScreen
 import abs.apps.personal_workout_tracker.ui.screens.StartupDestination
 import abs.apps.personal_workout_tracker.ui.screens.StartupScreen
 import abs.apps.personal_workout_tracker.ui.screens.SynchronizationDestination
+import abs.apps.personal_workout_tracker.ui.screens.SynchronizationScreen
 import abs.apps.personal_workout_tracker.ui.screens.trainings.AddTrainingScreen
 import abs.apps.personal_workout_tracker.ui.screens.trainings.EditTrainingDestination
 import abs.apps.personal_workout_tracker.ui.screens.trainings.EditTrainingScreen
@@ -138,6 +139,12 @@ fun WorkoutTrackerNavHost(
                 navigateBack = { navController.popBackStack() },
                 onNavigateUp = { navController.navigateUp() })
         }
+        composable(route = SynchronizationDestination.route)
+        {
+            SynchronizationScreen()
+        }
+
+
 
     }
 }

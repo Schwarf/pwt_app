@@ -49,8 +49,7 @@ fun StartScreen(
             LargeTileButton(text = "Show all trainings", onClick = navigateToTrainings)
             Spacer(modifier = Modifier.height(16.dp))
             LargeTileButton(text = "Synchronize",
-                onClick = {
-                }
+                onClick = navigateToSynchronization
             )
         }
 

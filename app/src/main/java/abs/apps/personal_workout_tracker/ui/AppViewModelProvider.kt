@@ -22,13 +22,11 @@ object AppViewModelProvider {
         // Initializer for HomeViewModel
         initializer {
             SynchronizationViewModel(
-                Sender(
                     workoutTrackerApplication().container.synchronizationRepository,
                     workoutTrackerApplication().container.workoutRepository,
                     workoutTrackerApplication().container.trainingRepository,
                     workoutTrackerApplication().container.workoutTimestampRepository,
                     workoutTrackerApplication().container.trainingTimestampRepository
-                )
             )
         }
         initializer {
