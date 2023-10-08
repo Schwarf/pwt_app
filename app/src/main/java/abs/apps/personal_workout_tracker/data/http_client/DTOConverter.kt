@@ -1,5 +1,6 @@
 package abs.apps.personal_workout_tracker.data.http_client
 
+import abs.apps.personal_workout_tracker.data.database.Workout
 import kotlin.reflect.KClass
 import kotlin.reflect.KProperty1
 import kotlin.reflect.full.memberProperties
@@ -29,5 +30,6 @@ class DTOConverter<Input: Any, Output: Any> (
 
         return outputClass.constructors.first().callBy(outputParameterMap)
     }
+
 
 }
