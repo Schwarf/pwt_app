@@ -46,4 +46,6 @@
     <string name="back_button">Back</string>
     <string name="startup">Willkommen Ihr Dicken.</string>
     <string name="synchronization">Synchronization.</string>
+    <string name="emulator_base_url">http://10.0.2.2:8000/</string>
+    <string name="base_url">http://192.168.0.227:8000/</string>
 </resources>
