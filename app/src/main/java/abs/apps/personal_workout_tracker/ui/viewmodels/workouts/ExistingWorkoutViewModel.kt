@@ -59,7 +59,8 @@ class ExistingWorkoutViewModel(
     fun addOnePerformance() {
         viewModelScope.launch {
             val currentWorkout = existingWorkoutsState.value.workoutUI.toWorkout()
-            workoutRepository.upsertWorkout(currentWorkout.copy(performances = currentWorkout.performances + 1))
+            workoutRepository.upsertWorkout(currentWorkout.copy(performances = currentWorkout.performances + 1,
+                lastModified = System.currentTimeMillis()))
             timestampRepository.upsertTimestamp(
                 WorkoutTimestamp(
                     workoutId = existingWorkoutsState.value.workoutUI.id,
@@ -77,7 +78,8 @@ class ExistingWorkoutViewModel(
         viewModelScope.launch {
             if (existingWorkoutsState.value.workoutUI.toWorkout().performances > 0) {
                 val currentWorkout = existingWorkoutsState.value.workoutUI.toWorkout()
-                workoutRepository.upsertWorkout(currentWorkout.copy(performances = currentWorkout.performances - 1))
+                workoutRepository.upsertWorkout(currentWorkout.copy(performances = currentWorkout.performances - 1,
+                    lastModified = System.currentTimeMillis()))
                 timestampRepository.deleteTimestamp(existingWorkoutsState.value.workoutTimestampUI.id)
             }
         }

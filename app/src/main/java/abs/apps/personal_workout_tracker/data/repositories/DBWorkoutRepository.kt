@@ -19,7 +19,7 @@ class DBWorkoutRepository(private val workoutDao: IWorkoutDao) : IWorkoutReposit
     override suspend fun updateWorkoutPerformances(id: Int, performances: Int) {
         val workout = workoutDao.getWorkout(id).firstOrNull()
         workout?.let {
-            val updatedWorkout = it.copy(performances = performances)
+            val updatedWorkout = it.copy(performances = performances, lastModified = System.currentTimeMillis())
             workoutDao.upsertWorkout(updatedWorkout)
         }
     }

@@ -2,6 +2,10 @@ ToDo:
 - Some details how the navigation to single workouts works evades me. Needs a detailed study.
 - Learn DaggerHilt and use (if feasible) DI to reduce code duplication for viewmodels and screens
   regarding workouts <--> trainings
+- Updates of Trainings and Workouts are messy and done differently in different places:
+   'ExistingTrainingViewModel.kt', 'ExistingWorkoutViewModel.kt', 'DBTrainingRepository.kt',
+   'DBWorkoutRepository.kt'. In particular the 'lastModified' update had to be done manual alos in
+   'WorkoutUI.kt' and 'TrainingUI.kt'
 
 In preparation:
   - Add button that shows list of all performance-dates for one workout/training (PURE UI)

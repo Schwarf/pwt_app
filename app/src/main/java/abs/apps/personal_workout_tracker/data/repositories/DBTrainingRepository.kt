@@ -18,7 +18,7 @@ class DBTrainingRepository(private val trainingDao: ITrainingsDao) : ITrainingRe
     override suspend fun updateTrainingPerformances(id: Int, performances: Int) {
         val training = trainingDao.getTraining(id).firstOrNull()
         training?.let {
-            val updatedTraining = it.copy(performances = performances)
+            val updatedTraining = it.copy(performances = performances, lastModified = System.currentTimeMillis())
             trainingDao.upsertTraining(updatedTraining)
         }
     }

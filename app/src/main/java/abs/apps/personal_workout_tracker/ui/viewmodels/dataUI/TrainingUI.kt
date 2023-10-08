@@ -2,7 +2,7 @@ package abs.apps.personal_workout_tracker.ui.viewmodels.dataUI
 
 import abs.apps.personal_workout_tracker.data.database.Training
 
-data class TrainingUI(
+data class  TrainingUI(
     val id: Int = 0,
     val name: String = "",
     val durationInMinutes: String = "",
