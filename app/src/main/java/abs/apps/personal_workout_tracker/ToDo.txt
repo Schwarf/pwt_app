@@ -6,6 +6,8 @@ ToDo:
    'ExistingTrainingViewModel.kt', 'ExistingWorkoutViewModel.kt', 'DBTrainingRepository.kt',
    'DBWorkoutRepository.kt'. In particular the 'lastModified' update had to be done manual alos in
    'WorkoutUI.kt' and 'TrainingUI.kt'
+- Use ExpandableFloatingActionButton
+- Fix navigation after synchronisation and tell user how many entries have been synchronized
 
 In preparation:
   - Add button that shows list of all performance-dates for one workout/training (PURE UI)
