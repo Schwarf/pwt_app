@@ -10,6 +10,8 @@
     <string name="edit_training_title">Edit Training</string>
     <string name="add_performance">Performed once more</string>
     <string name="remove_performance">Remove one performance</string>
+    <string name="show_training_dates">Show training dates</string>
+    <string name="show_workout_dates">Show workout dates</string>
     <string name="app_name">Schwarf\'s personal workout tracker</string>
     <string name="add_workout">Add workout</string>
     <string name="add_training">Add training</string>

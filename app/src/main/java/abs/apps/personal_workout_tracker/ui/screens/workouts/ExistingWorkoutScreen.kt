@@ -131,6 +131,14 @@ private fun ExistingWorkoutBody(
         ) {
             Text(stringResource(R.string.remove_performance))
         }
+        Button(
+            onClick = { removePerformanceConfirmationRequired = true },
+            modifier = Modifier.fillMaxWidth(),
+            shape = MaterialTheme.shapes.small,
+            enabled = (existingWorkout.workoutUI.performances.toIntOrNull() ?: 0) > 0
+        ) {
+            Text(stringResource(R.string.show_workout_dates))
+        }
 
 
         OutlinedButton(
