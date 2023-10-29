@@ -98,9 +98,13 @@ fun WorkoutTrackerNavHost(
                 type = NavType.IntType
             })
         )
-        {
+        {it ->
+            val trainingId = it.arguments?.getInt(ExistingTrainingDestination.trainingIdArg)
+                ?: throw IllegalArgumentException("trainingId is required")
+
             ExistingTrainingScreen(
                 navigateToEditTraining = { navController.navigate("${EditTrainingDestination.route}/$it") },
+                navigateToDates = {navController.navigate("${TrainingDatesDestination.route}/$trainingId")},
                 navigateBack = { navController.popBackStack() })
         }
 
@@ -126,7 +130,7 @@ fun WorkoutTrackerNavHost(
                 type = NavType.IntType
             })
         )
-        {
+        { it ->
             val workoutId = it.arguments?.getInt(ExistingWorkoutDestination.workoutIdArg)
                 ?: throw IllegalArgumentException("workoutId is required")
             ExistingWorkoutScreen(

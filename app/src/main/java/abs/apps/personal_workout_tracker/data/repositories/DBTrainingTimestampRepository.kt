@@ -13,7 +13,7 @@ class DBTrainingTimestampRepository(private val trainingTimestampDao: ITrainingT
         trainingTimestampDao.getAllTimestamps();
 
     override fun getTimestampsStreamForOneTraining(trainingId: Int): Flow<List<TrainingTimestamp>> =
-        getTimestampsStreamForOneTraining(trainingId)
+        trainingTimestampDao.getAllTimestampsForOneTraining(trainingId)
 
     override fun getLatestTimestampStreamForOneTraining(trainingId: Int): Flow<TrainingTimestamp> =
         trainingTimestampDao.getLatestTimestampForOneTraining(trainingId)

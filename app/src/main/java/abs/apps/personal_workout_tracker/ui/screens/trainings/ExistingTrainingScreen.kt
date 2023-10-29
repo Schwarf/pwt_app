@@ -1,4 +1,4 @@
-package abs.apps.personal_workout_tracker.ui.screens.trainings
+    package abs.apps.personal_workout_tracker.ui.screens.trainings
 
 import abs.apps.personal_training_tracker.ui.viewmodels.trainings.ExistingTraining
 import abs.apps.personal_training_tracker.ui.viewmodels.trainings.ExistingTrainingViewModel
@@ -55,6 +55,7 @@ object ExistingTrainingDestination : INavigationDestination {
 @OptIn(ExperimentalMaterial3Api::class)
 fun ExistingTrainingScreen(
     navigateToEditTraining: (Int) -> Unit,
+    navigateToDates: () -> Unit,
     navigateBack: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: ExistingTrainingViewModel = viewModel(factory = AppViewModelProvider.Factory)
@@ -94,6 +95,7 @@ fun ExistingTrainingScreen(
                     navigateBack()
                 }
             },
+            navigateToDates = navigateToDates,
             modifier = Modifier
                 .padding(innerPadding)
                 .verticalScroll(rememberScrollState())
@@ -107,6 +109,7 @@ private fun ExistingTrainingBody(
     onAddPerformance: () -> Unit,
     onRemovePerformance: () -> Unit,
     onDelete: () -> Unit,
+    navigateToDates: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -133,7 +136,7 @@ private fun ExistingTrainingBody(
             Text(stringResource(R.string.remove_performance))
         }
         Button(
-            onClick = { removePerformanceConfirmationRequired = true },
+            onClick = { navigateToDates()},
             modifier = Modifier.fillMaxWidth(),
             shape = MaterialTheme.shapes.small,
             enabled = (existingTraining.trainingUI.performances.toIntOrNull() ?: 0) > 0
