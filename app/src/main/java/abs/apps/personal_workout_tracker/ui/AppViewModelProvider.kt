@@ -7,6 +7,7 @@ import abs.apps.personal_workout_tracker.ui.screens.workouts.WorkoutDatesScreen
 import abs.apps.personal_workout_tracker.ui.viewmodels.synchronization.SynchronizationViewModel
 import abs.apps.personal_workout_tracker.ui.viewmodels.trainings.AddTrainingViewModel
 import abs.apps.personal_workout_tracker.ui.viewmodels.trainings.EditTrainingViewModel
+import abs.apps.personal_workout_tracker.ui.viewmodels.trainings.TrainingDatesViewModel
 import abs.apps.personal_workout_tracker.ui.viewmodels.trainings.TrainingListScreenViewModel
 import abs.apps.personal_workout_tracker.ui.viewmodels.workouts.AddWorkoutViewModel
 import abs.apps.personal_workout_tracker.ui.viewmodels.workouts.EditWorkoutViewModel
@@ -83,6 +84,13 @@ object AppViewModelProvider {
             WorkoutDatesViewModel(
                 workoutTrackerApplication().container.workoutTimestampRepository,
                 workoutTrackerApplication().container.workoutRepository
+            )
+        }
+
+        initializer {
+            TrainingDatesViewModel(
+                workoutTrackerApplication().container.trainingTimestampRepository,
+                workoutTrackerApplication().container.trainingRepository
             )
         }
 
