@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class ListWorkoutDatesViewModel(private val workoutTimestampRepository: IWorkoutTimestampRepository) :
+class WorkoutDatesViewModel(private val workoutTimestampRepository: IWorkoutTimestampRepository) :
     ViewModel() {
     private val _timestamps = MutableStateFlow(listOf<WorkoutTimestamp>())
     val timestamps: StateFlow<List<WorkoutTimestamp>> = _timestamps
