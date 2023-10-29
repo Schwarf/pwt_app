@@ -144,7 +144,7 @@ private fun WorkoutList(
 private fun WorkoutItem(
     workout: Workout,
     modifier: Modifier = Modifier,
-    onAddPerformance: (Int) -> Unit
+    onAddPerformance: ((Int) -> Unit)? = null
 ) {
 
     Card(
@@ -181,16 +181,18 @@ private fun WorkoutItem(
                     )
                     // Space between Text and IconButton
                     Spacer(Modifier.width(8.dp))
-                    Surface(
-                        shape = CircleShape,
-                        color = Color.Gray,
-                        modifier = Modifier
-                            .size(48.dp)
-                    ) {
-                        IconButton(
-                            onClick = { onAddPerformance(workout.id) }
+                    if(onAddPerformance != null) {
+                        Surface(
+                            shape = CircleShape,
+                            color = Color.Gray,
+                            modifier = Modifier
+                                .size(48.dp)
                         ) {
-                            Icon(Icons.Default.Add, contentDescription = "Add")
+                            IconButton(
+                                onClick = { onAddPerformance(workout.id) }
+                            ) {
+                                Icon(Icons.Default.Add, contentDescription = "Add")
+                            }
                         }
                     }
                 }
