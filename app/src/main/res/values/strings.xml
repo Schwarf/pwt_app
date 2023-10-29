@@ -20,6 +20,7 @@
     <string name="save">Save </string>>
     <string name="delete">Delete </string>>
     <string name="no_workout_description">Oops!\nNo workouts yet.\nTap + to add.</string>
+    <string name="no_workout_timestamps">Oops!\n This workout has not been performed yet.</string>
     <string name="no_trainings_description">Oops!\nNo trainings yet.\nTap + to add.</string>
     <string name="workout_name_required">Workout Name*</string>>
     <string name="training_name_required">Training Name*</string>>

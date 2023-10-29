@@ -2,9 +2,11 @@ package abs.apps.personal_workout_tracker.ui.viewmodels.workouts
 
 import abs.apps.personal_workout_tracker.data.database.WorkoutTimestamp
 import abs.apps.personal_workout_tracker.data.database.toValidatedWorkoutUI
+import abs.apps.personal_workout_tracker.data.database.toWorkoutUI
 import abs.apps.personal_workout_tracker.data.repositories.IWorkoutRepository
 import abs.apps.personal_workout_tracker.data.repositories.IWorkoutTimestampRepository
 import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.ValidatedWorkoutUI
+import abs.apps.personal_workout_tracker.ui.viewmodels.dataUI.WorkoutUI
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -22,7 +24,7 @@ class WorkoutDatesViewModel(
 ) :
     ViewModel() {
     private val _timestamps = MutableStateFlow(listOf<WorkoutTimestamp>())
-    var workout by mutableStateOf(ValidatedWorkoutUI())
+    var workout by mutableStateOf(WorkoutUI())
         private set
 
     val timestamps: StateFlow<List<WorkoutTimestamp>> = _timestamps
@@ -41,7 +43,7 @@ class WorkoutDatesViewModel(
             workout = workoutRepository.getWorkoutStream(workoutId)
                 .filterNotNull()
                 .first()
-                .toValidatedWorkoutUI(true)
+                .toWorkoutUI()
         }
     }
 

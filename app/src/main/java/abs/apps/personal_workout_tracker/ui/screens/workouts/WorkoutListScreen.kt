@@ -141,7 +141,7 @@ private fun WorkoutList(
 }
 
 @Composable
-private fun WorkoutItem(
+fun WorkoutItem(
     workout: Workout,
     modifier: Modifier = Modifier,
     onAddPerformance: ((Int) -> Unit)? = null
