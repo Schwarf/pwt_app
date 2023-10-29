@@ -10,12 +10,10 @@ ToDo:
 - Fix navigation after synchronisation and tell user how many entries have been synchronized
 
 In preparation:
-  - Add button that shows list of all performance-dates for one workout/training (PURE UI)
   - Search a workout/all workouts in a given time interval.
 
 
 Possible features:
-  - Connect ROOM database with Desktop MS SQL database using RESTful API and sync user data.
   - Review use cases and data layer:
     - Introduce "Session" that has multiple workouts??? Unclear if needed.
     - Show all workouts or a "Session" of one day (calendar access)???
