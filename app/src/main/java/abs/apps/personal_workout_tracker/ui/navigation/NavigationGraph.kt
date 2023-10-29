@@ -2,28 +2,28 @@ package abs.apps.personal_workout_tracker.ui.navigation
 
 import abs.apps.personal_workout_tracker.ui.screens.StartDestination
 import abs.apps.personal_workout_tracker.ui.screens.StartScreen
-import abs.apps.personal_workout_tracker.ui.screens.workouts.AddWorkoutScreen
-import abs.apps.personal_workout_tracker.ui.screens.workouts.EditWorkoutDestination
-import abs.apps.personal_workout_tracker.ui.screens.workouts.EditWorkoutScreen
-import abs.apps.personal_workout_tracker.ui.screens.workouts.ExistingWorkoutDestination
-import abs.apps.personal_workout_tracker.ui.screens.workouts.ExistingWorkoutScreen
-import abs.apps.personal_workout_tracker.ui.screens.workouts.WorkoutListDestination
-import abs.apps.personal_workout_tracker.ui.screens.workouts.WorkoutListScreen
 import abs.apps.personal_workout_tracker.ui.screens.StartupDestination
 import abs.apps.personal_workout_tracker.ui.screens.StartupScreen
 import abs.apps.personal_workout_tracker.ui.screens.SynchronizationDestination
 import abs.apps.personal_workout_tracker.ui.screens.SynchronizationScreen
+import abs.apps.personal_workout_tracker.ui.screens.trainings.AddTrainingDestination
 import abs.apps.personal_workout_tracker.ui.screens.trainings.AddTrainingScreen
 import abs.apps.personal_workout_tracker.ui.screens.trainings.EditTrainingDestination
 import abs.apps.personal_workout_tracker.ui.screens.trainings.EditTrainingScreen
 import abs.apps.personal_workout_tracker.ui.screens.trainings.ExistingTrainingDestination
 import abs.apps.personal_workout_tracker.ui.screens.trainings.ExistingTrainingScreen
-import abs.apps.personal_workout_tracker.ui.screens.trainings.AddTrainingDestination
 import abs.apps.personal_workout_tracker.ui.screens.trainings.TrainingListDestination
 import abs.apps.personal_workout_tracker.ui.screens.trainings.TrainingListScreen
 import abs.apps.personal_workout_tracker.ui.screens.workouts.AddWorkoutDestination
+import abs.apps.personal_workout_tracker.ui.screens.workouts.AddWorkoutScreen
+import abs.apps.personal_workout_tracker.ui.screens.workouts.EditWorkoutDestination
+import abs.apps.personal_workout_tracker.ui.screens.workouts.EditWorkoutScreen
+import abs.apps.personal_workout_tracker.ui.screens.workouts.ExistingWorkoutDestination
+import abs.apps.personal_workout_tracker.ui.screens.workouts.ExistingWorkoutScreen
 import abs.apps.personal_workout_tracker.ui.screens.workouts.WorkoutDatesDestination
 import abs.apps.personal_workout_tracker.ui.screens.workouts.WorkoutDatesScreen
+import abs.apps.personal_workout_tracker.ui.screens.workouts.WorkoutListDestination
+import abs.apps.personal_workout_tracker.ui.screens.workouts.WorkoutListScreen
 import android.annotation.SuppressLint
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -59,9 +59,9 @@ fun WorkoutTrackerNavHost(
         }
 
         composable(route = StartDestination.route) {
-            StartScreen(navigateToWorkouts = { navController.navigate(WorkoutListDestination.route)},
-                navigateToTrainings = { navController.navigate(TrainingListDestination.route)},
-                navigateToSynchronization = {navController.navigate(SynchronizationDestination.route)})
+            StartScreen(navigateToWorkouts = { navController.navigate(WorkoutListDestination.route) },
+                navigateToTrainings = { navController.navigate(TrainingListDestination.route) },
+                navigateToSynchronization = { navController.navigate(SynchronizationDestination.route) })
         }
 
 
@@ -125,9 +125,11 @@ fun WorkoutTrackerNavHost(
             })
         )
         {
+            val workoutId = it.arguments?.getInt(ExistingWorkoutDestination.workoutIdArg)
+                ?: throw IllegalArgumentException("workoutId is required")
             ExistingWorkoutScreen(
                 navigateToEditWorkout = { navController.navigate("${EditWorkoutDestination.route}/$it") },
-                navigateToDates = {navController.navigate(WorkoutDatesDestination.route)},
+                navigateToDates = { navController.navigate("${WorkoutDatesDestination.route}/$workoutId")},
                 navigateBack = { navController.popBackStack() })
         }
 
@@ -144,19 +146,24 @@ fun WorkoutTrackerNavHost(
         }
 
         composable(
-            route = WorkoutDatesDestination.route
+            route = WorkoutDatesDestination.routeWithArgs,
+            arguments = listOf(navArgument(WorkoutDatesDestination.workoutIdArg) {
+            type = NavType.IntType})
         )
         {
-        WorkoutDatesScreen(
+            val workoutId = it.arguments?.getInt(WorkoutDatesDestination.workoutIdArg)
+                ?: throw IllegalArgumentException("workoutId is required")
+
+            WorkoutDatesScreen(
                 navigateBack = { navController.popBackStack() },
-                onNavigateUp = { navController.navigateUp() })
+                onNavigateUp = { navController.navigateUp() },
+                workoutId=workoutId)
         }
 
         composable(route = SynchronizationDestination.route)
         {
             SynchronizationScreen()
         }
-
 
 
     }
