@@ -54,6 +54,7 @@ object ExistingWorkoutDestination : INavigationDestination {
 @OptIn(ExperimentalMaterial3Api::class)
 fun ExistingWorkoutScreen(
     navigateToEditWorkout: (Int) -> Unit,
+    navigateToDates: () -> Unit,
     navigateBack: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: ExistingWorkoutViewModel = viewModel(factory = AppViewModelProvider.Factory)
@@ -93,6 +94,7 @@ fun ExistingWorkoutScreen(
                     navigateBack()
                 }
             },
+            navigateToDates= navigateToDates,
             modifier = Modifier
                 .padding(innerPadding)
                 .verticalScroll(rememberScrollState())
@@ -106,6 +108,7 @@ private fun ExistingWorkoutBody(
     onAddPerformance: () -> Unit,
     onRemovePerformance: () -> Unit,
     onDelete: () -> Unit,
+    navigateToDates: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -132,7 +135,7 @@ private fun ExistingWorkoutBody(
             Text(stringResource(R.string.remove_performance))
         }
         Button(
-            onClick = { removePerformanceConfirmationRequired = true },
+            onClick = { navigateToDates()},
             modifier = Modifier.fillMaxWidth(),
             shape = MaterialTheme.shapes.small,
             enabled = (existingWorkout.workoutUI.performances.toIntOrNull() ?: 0) > 0

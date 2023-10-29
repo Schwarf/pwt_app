@@ -22,6 +22,8 @@ import abs.apps.personal_workout_tracker.ui.screens.trainings.AddTrainingDestina
 import abs.apps.personal_workout_tracker.ui.screens.trainings.TrainingListDestination
 import abs.apps.personal_workout_tracker.ui.screens.trainings.TrainingListScreen
 import abs.apps.personal_workout_tracker.ui.screens.workouts.AddWorkoutDestination
+import abs.apps.personal_workout_tracker.ui.screens.workouts.WorkoutDatesDestination
+import abs.apps.personal_workout_tracker.ui.screens.workouts.WorkoutDatesScreen
 import android.annotation.SuppressLint
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -125,6 +127,7 @@ fun WorkoutTrackerNavHost(
         {
             ExistingWorkoutScreen(
                 navigateToEditWorkout = { navController.navigate("${EditWorkoutDestination.route}/$it") },
+                navigateToDates = {navController.navigate(WorkoutDatesDestination.route)},
                 navigateBack = { navController.popBackStack() })
         }
 
@@ -139,6 +142,16 @@ fun WorkoutTrackerNavHost(
                 navigateBack = { navController.popBackStack() },
                 onNavigateUp = { navController.navigateUp() })
         }
+
+        composable(
+            route = WorkoutDatesDestination.route
+        )
+        {
+        WorkoutDatesScreen(
+                navigateBack = { navController.popBackStack() },
+                onNavigateUp = { navController.navigateUp() })
+        }
+
         composable(route = SynchronizationDestination.route)
         {
             SynchronizationScreen()
