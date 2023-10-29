@@ -155,7 +155,6 @@ fun WorkoutTrackerNavHost(
                 ?: throw IllegalArgumentException("workoutId is required")
 
             WorkoutDatesScreen(
-                navigateBack = { navController.popBackStack() },
                 onNavigateUp = { navController.navigateUp() },
                 workoutId=workoutId)
         }

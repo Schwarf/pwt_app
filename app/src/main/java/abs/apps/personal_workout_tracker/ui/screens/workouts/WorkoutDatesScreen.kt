@@ -43,9 +43,7 @@ object WorkoutDatesDestination : INavigationDestination {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun WorkoutDatesScreen(
-    navigateBack: () -> Unit,
     onNavigateUp: () -> Unit,
-    canNavigateBack: Boolean = true,
     viewModel: WorkoutDatesViewModel = viewModel(factory = AppViewModelProvider.Factory),
     workoutId: Int
 ) {
