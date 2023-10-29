@@ -12,6 +12,8 @@ import abs.apps.personal_workout_tracker.ui.screens.trainings.EditTrainingDestin
 import abs.apps.personal_workout_tracker.ui.screens.trainings.EditTrainingScreen
 import abs.apps.personal_workout_tracker.ui.screens.trainings.ExistingTrainingDestination
 import abs.apps.personal_workout_tracker.ui.screens.trainings.ExistingTrainingScreen
+import abs.apps.personal_workout_tracker.ui.screens.trainings.TrainingDatesDestination
+import abs.apps.personal_workout_tracker.ui.screens.trainings.TrainingDatesScreen
 import abs.apps.personal_workout_tracker.ui.screens.trainings.TrainingListDestination
 import abs.apps.personal_workout_tracker.ui.screens.trainings.TrainingListScreen
 import abs.apps.personal_workout_tracker.ui.screens.workouts.AddWorkoutDestination
@@ -157,6 +159,20 @@ fun WorkoutTrackerNavHost(
             WorkoutDatesScreen(
                 onNavigateUp = { navController.navigateUp() },
                 workoutId=workoutId)
+        }
+
+        composable(
+            route = TrainingDatesDestination.routeWithArgs,
+            arguments = listOf(navArgument(TrainingDatesDestination.trainingIdArg) {
+                type = NavType.IntType})
+        )
+        {
+            val trainingId = it.arguments?.getInt(TrainingDatesDestination.trainingIdArg)
+                ?: throw IllegalArgumentException("trainingId is required")
+
+            TrainingDatesScreen(
+                onNavigateUp = { navController.navigateUp() },
+                trainingId = trainingId)
         }
 
         composable(route = SynchronizationDestination.route)
