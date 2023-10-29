@@ -30,8 +30,9 @@ fun WorkoutDatesScreen(
 ) {
     LaunchedEffect(workoutId) {
         viewModel.getDatesForOneWorkout(workoutId)
+        viewModel.getWorkout(workoutId)
     }
-    val state by viewModel.timestamps.collectAsState()
-    val coroutineScope = rememberCoroutineScope()
+    val timestamps by viewModel.timestamps.collectAsState()
+    val workout = viewModel.workout
 
 }

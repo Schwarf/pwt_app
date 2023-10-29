@@ -82,6 +82,7 @@ object AppViewModelProvider {
         initializer {
             WorkoutDatesViewModel(
                 workoutTrackerApplication().container.workoutTimestampRepository,
+                workoutTrackerApplication().container.workoutRepository
             )
         }
 
