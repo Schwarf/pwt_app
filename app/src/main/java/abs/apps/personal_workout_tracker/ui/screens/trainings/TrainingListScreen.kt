@@ -140,10 +140,10 @@ private fun TrainingList(
 }
 
 @Composable
-private fun TrainingItem(
+fun TrainingItem(
     training: Training,
     modifier: Modifier = Modifier,
-    onAddPerformance: (Int) -> Unit
+    onAddPerformance: ((Int) -> Unit)? = null
 ) {
 
     Card(
@@ -180,16 +180,18 @@ private fun TrainingItem(
                     )
                     // Space between Text and IconButton
                     Spacer(Modifier.width(8.dp))
-                    Surface(
-                        shape = CircleShape,
-                        color = Color.Gray,
-                        modifier = Modifier
-                            .size(48.dp)
-                    ) {
-                        IconButton(
-                            onClick = { onAddPerformance(training.id) }
+                    if(onAddPerformance != null) {
+                        Surface(
+                            shape = CircleShape,
+                            color = Color.Gray,
+                            modifier = Modifier
+                                .size(48.dp)
                         ) {
-                            Icon(Icons.Default.Add, contentDescription = "Add")
+                            IconButton(
+                                onClick = { onAddPerformance(training.id) }
+                            ) {
+                                Icon(Icons.Default.Add, contentDescription = "Add")
+                            }
                         }
                     }
                 }
