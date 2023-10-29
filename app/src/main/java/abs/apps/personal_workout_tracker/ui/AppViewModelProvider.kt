@@ -3,6 +3,7 @@ package abs.apps.personal_workout_tracker.ui
 import abs.apps.personal_training_tracker.ui.viewmodels.trainings.ExistingTrainingViewModel
 import abs.apps.personal_workout_tracker.WorkoutTrackerApplication
 import abs.apps.personal_workout_tracker.data.http_client.Sender
+import abs.apps.personal_workout_tracker.ui.screens.workouts.WorkoutDatesScreen
 import abs.apps.personal_workout_tracker.ui.viewmodels.synchronization.SynchronizationViewModel
 import abs.apps.personal_workout_tracker.ui.viewmodels.trainings.AddTrainingViewModel
 import abs.apps.personal_workout_tracker.ui.viewmodels.trainings.EditTrainingViewModel
@@ -10,6 +11,7 @@ import abs.apps.personal_workout_tracker.ui.viewmodels.trainings.TrainingListScr
 import abs.apps.personal_workout_tracker.ui.viewmodels.workouts.AddWorkoutViewModel
 import abs.apps.personal_workout_tracker.ui.viewmodels.workouts.EditWorkoutViewModel
 import abs.apps.personal_workout_tracker.ui.viewmodels.workouts.ExistingWorkoutViewModel
+import abs.apps.personal_workout_tracker.ui.viewmodels.workouts.WorkoutDatesViewModel
 import abs.apps.personal_workout_tracker.ui.viewmodels.workouts.WorkoutListScreenViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.createSavedStateHandle
@@ -74,6 +76,12 @@ object AppViewModelProvider {
             EditTrainingViewModel(
                 this.createSavedStateHandle(),
                 workoutTrackerApplication().container.trainingRepository,
+            )
+        }
+
+        initializer {
+            WorkoutDatesViewModel(
+                workoutTrackerApplication().container.workoutTimestampRepository,
             )
         }
 
