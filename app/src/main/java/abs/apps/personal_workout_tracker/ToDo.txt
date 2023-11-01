@@ -1,4 +1,5 @@
 ToDo:
+- Enable the items on the DatesScreen to be Buttons that allow to change the date/time or delete the item.
 - Some details how the navigation to single workouts works evades me. Needs a detailed study.
 - Learn DaggerHilt and use (if feasible) DI to reduce code duplication for viewmodels and screens
   regarding workouts <--> trainings
