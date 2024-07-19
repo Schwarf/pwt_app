@@ -41,6 +41,7 @@ class SynchronizationViewModel(
         viewModelScope.launch {
             try {
                 val timestamp = getLatestTimestamp()
+                Log.d("SynchronizationTimestamp",  timestamp.toString())
                 val workouts = getWorkouts(timestamp)
                 val trainings = getTrainings(timestamp)
                 val workoutTimestamps = getWorkoutTimestamps(timestamp)

@@ -65,7 +65,7 @@ class Sender(
         FuelManager.instance.baseHeaders = mapOf("Content-Type" to "application/json")
 
         val urlWorkouts = "http://10.0.2.2:8000/insert_workouts/"
-        val urlTrainings = "http://192.168.0.227:8000/insert_trainings/"
+//        val urlTrainings = "http://192.168.0.227:8000/insert_trainings/"
         val gson = Gson()
         val jsonWorkouts = gson.toJson(workoutWrapper)
         Log.d("JsonWorkout", jsonWorkouts)
